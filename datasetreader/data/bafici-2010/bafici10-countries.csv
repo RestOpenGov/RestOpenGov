@@ -1,0 +1,244 @@
+id_country,code_isonum,"code_iso2","code_iso3","name_es","name_en",isdefault
+1,4,"AF","AFG","Afganistán","Afghanistan",0
+2,248,"AX","ALA","Islas Gland","Aland Islands",0
+3,8,"AL","ALB","Albania","Albania",0
+4,276,"DE","DEU","Alemania","Germany",0
+5,20,"AD","AND","Andorra","Andorra",0
+6,24,"AO","AGO","Angola","Angola",0
+7,660,"AI","AIA","Anguilla","Anguilla",0
+8,10,"AQ","ATA","Antártida","Antarctica",0
+9,28,"AG","ATG","Antigua y Barbuda","Antigua And Barbuda",0
+10,530,"AN","ANT","Antillas Holandesas","Netherlands Antilles",0
+11,682,"SA","SAU","Arabia Saudí","Saudi Arabia",0
+12,12,"DZ","DZA","Argelia","Algeria",0
+13,32,"AR","ARG","Argentina","Argentina",1
+14,51,"AM","ARM","Armenia","Armenia",0
+15,533,"AW","ABW","Aruba","Aruba",0
+16,36,"AU","AUS","Australia","Australia",0
+17,40,"AT","AUT","Austria","Austria",0
+18,31,"AZ","AZE","Azerbaiyán","Azerbaijan",0
+19,44,"BS","BHS","Bahamas","Bahamas",0
+20,48,"BH","BHR","Bahréin","Bahrain",0
+21,50,"BD","BGD","Bangladesh","Bangladesh",0
+22,52,"BB","BRB","Barbados","Barbados",0
+23,112,"BY","BLR","Bielorrusia","Belarus",0
+24,56,"BE","BEL","Bélgica","Belgium",0
+25,84,"BZ","BLZ","Belice","Belize",0
+26,204,"BJ","BEN","Benin","Benin",0
+27,60,"BM","BMU","Bermudas","Bermuda",0
+28,64,"BT","BTN","Bhután","Bhutan",0
+29,68,"BO","BOL","Bolivia","Bolivia",0
+30,70,"BA","BIH","Bosnia y Herzegovina","Bosnia And Herzegovina",0
+31,72,"BW","BWA","Botsuana","Botswana",0
+32,74,"BV","BVT","Isla Bouvet","Bouvet Island",0
+33,76,"BR","BRA","Brasil","Brazil",0
+34,96,"BN","BRN","Brunéi","Brunei Darussalam",0
+35,100,"BG","BGR","Bulgaria","Bulgaria",0
+36,854,"BF","BFA","Burkina Faso","Burkina Faso",0
+37,108,"BI","BDI","Burundi","Burundi",0
+38,132,"CV","CPV","Cabo Verde","Cape Verde",0
+39,136,"KY","CYM","Islas Caimán","Cayman Islands",0
+40,116,"KH","KHM","Camboya","Cambodia",0
+41,120,"CM","CMR","Camerún","Cameroon",0
+42,124,"CA","CAN","Canadá","Canada",0
+43,140,"CF","CAF","República Centroafricana","Central African Republic",0
+44,148,"TD","TCD","Chad","Chad",0
+45,203,"CZ","CZE","República Checa","Czech Republic",0
+46,152,"CL","CHL","Chile","Chile",0
+47,156,"CN","CHN","China","China",0
+48,196,"CY","CYP","Chipre","Cyprus",0
+49,162,"CX","CXR","Isla de Navidad","Christmas Island",0
+50,336,"VA","VAT","Ciudad del Vaticano","Holy See (Vatican City State)",0
+51,166,"CC","CCK","Islas Cocos","Cocos (Keeling) Islands",0
+52,170,"CO","COL","Colombia","Colombia",0
+53,174,"KM","COM","Comoras","Comoros",0
+54,180,"CD","COD","República Democrática del Congo","Congo;The Democratic Republic Of The",0
+55,178,"CG","COG","Congo","Congo",0
+56,184,"CK","COK","Islas Cook","Cook Islands",0
+57,408,"KP","PRK","Corea del Norte","Korea; Democratic People's Republic Of",0
+58,410,"KR","KOR","Corea del Sur","Korea; Republic Of",0
+59,384,"CI","CIV","Costa de Marfil","C",0
+60,188,"CR","CRI","Costa Rica","Costa Rica",0
+61,191,"HR","HRV","Croacia","Croatia",0
+62,192,"CU","CUB","Cuba","Cuba",0
+63,208,"DK","DNK","Dinamarca","Denmark",0
+64,212,"DM","DMA","Dominica","Dominica",0
+65,214,"DO","DOM","República Dominicana","Dominican Republic",0
+66,218,"EC","ECU","Ecuador","Ecuador",0
+67,818,"EG","EGY","Egipto","Egypt",0
+68,222,"SV","SLV","El Salvador","El Salvador",0
+69,784,"AE","ARE","Emiratos Árabes Unidos","United Arab Emirates",0
+70,232,"ER","ERI","Eritrea","Eritrea",0
+71,703,"SK","SVK","Eslovaquia","Slovakia",0
+72,705,"SI","SVN","Eslovenia","Slovenia",0
+73,724,"ES","ESP","España","Spain",0
+74,581,"UM","UMI","Islas ultramarinas de Estados Unidos","United States Minor Outlying Islands",0
+75,840,"US","USA","Estados Unidos","United States",0
+76,233,"EE","EST","Estonia","Estonia",0
+77,231,"ET","ETH","Etiopía","Ethiopia",0
+78,234,"FO","FRO","Islas Feroe","Faroe Islands",0
+79,608,"PH","PHL","Filipinas","Philippines",0
+80,246,"FI","FIN","Finlandia","Finland",0
+81,242,"FJ","FJI","Fiyi","Fiji",0
+82,250,"FR","FRA","Francia","France",0
+83,266,"GA","GAB","Gabón","Gabon",0
+84,270,"GM","GMB","Gambia","Gambia",0
+85,268,"GE","GEO","Georgia","Georgia",0
+86,239,"GS","SGS","Islas Georgias del Sur y Sandwich del Sur","South Georgia And The South Sandwich Islands",0
+87,288,"GH","GHA","Ghana","Ghana",0
+88,292,"GI","GIB","Gibraltar","Gibraltar",0
+89,308,"GD","GRD","Granada","Grenada",0
+90,300,"GR","GRC","Grecia","Greece",0
+91,304,"GL","GRL","Groenlandia","Greenland",0
+92,312,"GP","GLP","Guadalupe","Guadeloupe",0
+93,316,"GU","GUM","Guam","Guam",0
+94,320,"GT","GTM","Guatemala","Guatemala",0
+95,254,"GF","GUF","Guayana Francesa","French Guiana",0
+96,324,"GN","GIN","Guinea","Guinea",0
+97,226,"GQ","GNQ","Guinea Ecuatorial","Equatorial Guinea",0
+98,624,"GW","GNB","Guinea-Bissau","Guinea-Bissau",0
+99,328,"GY","GUY","Guyana","Guyana",0
+100,332,"HT","HTI","Haití","Haiti",0
+101,334,"HM","HMD","Islas Heard y McDonald","Heard Island And Mcdonald Islands",0
+102,340,"HN","HND","Honduras","Honduras",0
+103,344,"HK","HKG","Hong Kong","Hong Kong",0
+104,348,"HU","HUN","Hungría","Hungary",0
+105,356,"IN","IND","India","India",0
+106,360,"ID","IDN","Indonesia","Indonesia",0
+107,364,"IR","IRN","Irán","Iran; Islamic Republic Of",0
+108,368,"IQ","IRQ","Iraq","Iraq",0
+109,372,"IE","IRL","Irlanda","Ireland",0
+110,352,"IS","ISL","Islandia","Iceland",0
+111,376,"IL","ISR","Israel","Israel",0
+112,380,"IT","ITA","Italia","Italy",0
+113,388,"JM","JAM","Jamaica","Jamaica",0
+114,392,"JP","JPN","Japón","Japan",0
+115,400,"JO","JOR","Jordania","Jordan",0
+116,398,"KZ","KAZ","Kazajstán","Kazakhstan",0
+117,404,"KE","KEN","Kenia","Kenya",0
+118,417,"KG","KGZ","Kirguistán","Kyrgyzstan",0
+119,296,"KI","KIR","Kiribati","Kiribati",0
+120,414,"KW","KWT","Kuwait","Kuwait",0
+121,418,"LA","LAO","Laos","Lao People's Democratic Republic",0
+122,426,"LS","LSO","Lesotho","Lesotho",0
+123,428,"LV","LVA","Letonia","Latvia",0
+124,422,"LB","LBN","Líbano","Lebanon",0
+125,430,"LR","LBR","Liberia","Liberia",0
+126,434,"LY","LBY","Libia","Libyan Arab Jamahiriya",0
+127,438,"LI","LIE","Liechtenstein","Liechtenstein",0
+128,440,"LT","LTU","Lituania","Lithuania",0
+129,442,"LU","LUX","Luxemburgo","Luxembourg",0
+130,446,"MO","MAC","Macao","Macao",0
+131,807,"MK","MKD","ARY Macedonia","Macedonia; The Former Yugoslav Republic Of",0
+132,450,"MG","MDG","Madagascar","Madagascar",0
+133,458,"MY","MYS","Malasia","Malaysia",0
+134,454,"MW","MWI","Malawi","Malawi",0
+135,462,"MV","MDV","Maldivas","Maldives",0
+136,466,"ML","MLI","Malí","Mali",0
+137,470,"MT","MLT","Malta","Malta",0
+138,238,"FK","FLK","Islas Malvinas","Falkland Islands (Malvinas)",0
+139,580,"MP","MNP","Islas Marianas del Norte","Northern Mariana Islands",0
+140,504,"MA","MAR","Marruecos","Morocco",0
+141,584,"MH","MHL","Islas Marshall","Marshall Islands",0
+142,474,"MQ","MTQ","Martinica","Martinique",0
+143,480,"MU","MUS","Mauricio","Mauritius",0
+144,478,"MR","MRT","Mauritania","Mauritania",0
+145,175,"YT","MYT","Mayotte","Mayotte",0
+146,484,"MX","MEX","México","Mexico",0
+147,583,"FM","FSM","Micronesia","Micronesia; Federated States Of",0
+148,498,"MD","MDA","Moldavia","Moldova; Republic Of",0
+149,492,"MC","MCO","Mónaco","Monaco",0
+150,496,"MN","MNG","Mongolia","Mongolia",0
+151,500,"MS","MSR","Montserrat","Montserrat",0
+152,508,"MZ","MOZ","Mozambique","Mozambique",0
+153,104,"MM","MMR","Myanmar","Myanmar",0
+154,516,"NA","NAM","Namibia","Namibia",0
+155,520,"NR","NRU","Nauru","Nauru",0
+156,524,"NP","NPL","Nepal","Nepal",0
+157,558,"NI","NIC","Nicaragua","Nicaragua",0
+158,562,"NE","NER","Níger","Niger",0
+159,566,"NG","NGA","Nigeria","Nigeria",0
+160,570,"NU","NIU","Niue","Niue",0
+161,574,"NF","NFK","Isla Norfolk","Norfolk Island",0
+162,578,"NO","NOR","Noruega","Norway",0
+163,540,"NC","NCL","Nueva Caledonia","New Caledonia",0
+164,554,"NZ","NZL","Nueva Zelanda","New Zealand",0
+165,512,"OM","OMN","Omán","Oman",0
+166,528,"NL","NLD","Holanda","Netherlands",0
+167,586,"PK","PAK","Pakistán","Pakistan",0
+168,585,"PW","PLW","Palau","Palau",0
+169,275,"PS","PSE","Palestina","Palestinian Territory; Occupied",0
+170,591,"PA","PAN","Panamá","Panama",0
+171,598,"PG","PNG","Papúa Nueva Guinea","Papua New Guinea",0
+172,600,"PY","PRY","Paraguay","Paraguay",0
+173,604,"PE","PER","Perú","Peru",0
+174,612,"PN","PCN","Islas Pitcairn","Pitcairn",0
+175,258,"PF","PYF","Polinesia Francesa","French Polynesia",0
+176,616,"PL","POL","Polonia","Poland",0
+177,620,"PT","PRT","Portugal","Portugal",0
+178,630,"PR","PRI","Puerto Rico","Puerto Rico",0
+179,634,"QA","QAT","Qatar","Qatar",0
+180,826,"GB","GBR","Reino Unido","United Kingdom",0
+181,638,"RE","REU","Reunión","Réunion",0
+182,646,"RW","RWA","Ruanda","Rwanda",0
+183,642,"RO","ROU","Rumania","Romania",0
+184,643,"RU","RUS","Rusia","Russian Federation",0
+185,732,"EH","ESH","Sahara Occidental","Western Sahara",0
+186,90,"SB","SLB","Islas Salomón","Solomon Islands",0
+187,882,"WS","WSM","Samoa","Samoa",0
+188,16,"AS","ASM","Samoa Americana","American Samoa",0
+189,659,"KN","KNA","San Cristóbal y Nevis","Saint Kitts And Nevis",0
+190,674,"SM","SMR","San Marino","San Marino",0
+191,666,"PM","SPM","San Pedro y Miquelón","Saint Pierre And Miquelon",0
+192,670,"VC","VCT","San Vicente y las Granadinas","Saint Vincent And The Grenadines",0
+193,654,"SH","SHN","Santa Helena","Saint Helena",0
+194,662,"LC","LCA","Santa Lucía","Saint Lucia",0
+195,678,"ST","STP","Santo Tomé y Príncipe","Sao Tome And Principe",0
+196,686,"SN","SEN","Senegal","Senegal",0
+198,690,"SC","SYC","Seychelles","Seychelles",0
+199,694,"SL","SLE","Sierra Leona","Sierra Leone",0
+200,702,"SG","SGP","Singapur","Singapore",0
+201,760,"SY","SYR","Siria","Syrian Arab Republic",0
+202,706,"SO","SOM","Somalia","Somalia",0
+203,144,"LK","LKA","Sri Lanka","Sri Lanka",0
+204,748,"SZ","SWZ","Suazilandia","Swaziland",0
+205,710,"ZA","ZAF","Sudáfrica","South Africa",0
+206,736,"SD","SDN","Sudán","Sudan",0
+207,752,"SE","SWE","Suecia","Sweden",0
+208,756,"CH","CHE","Suiza","Switzerland",0
+209,740,"SR","SUR","Surinam","Suriname",0
+210,744,"SJ","SJM","Svalbard y Jan Mayen","Svalbard And Jan Mayen",0
+211,764,"TH","THA","Tailandia","Thailand",0
+212,158,"TW","TWN","Taiwán","Taiwan; Province Of China",0
+213,834,"TZ","TZA","Tanzania","Tanzania; United Republic Of",0
+214,762,"TJ","TJK","Tayikistán","Tajikistan",0
+215,86,"IO","IOT","Territorio Británico del Océano Índico","British Indian Ocean Territory",0
+216,260,"TF","ATF","Territorios Australes Franceses","French Southern Territories",0
+217,626,"TL","TLS","Timor Oriental","Timor-Leste",0
+218,768,"TG","TGO","Togo","Togo",0
+219,772,"TK","TKL","Tokelau","Tokelau",0
+220,776,"TO","TON","Tonga","Tonga",0
+221,780,"TT","TTO","Trinidad y Tobago","Trinidad And Tobago",0
+222,788,"TN","TUN","Túnez","Tunisia",0
+223,796,"TC","TCA","Islas Turcas y Caicos","Turks And Caicos Islands",0
+224,795,"TM","TKM","Turkmenistán","Turkmenistan",0
+225,792,"TR","TUR","Turquía","Turkey",0
+226,798,"TV","TUV","Tuvalu","Tuvalu",0
+227,804,"UA","UKR","Ucrania","Ukraine",0
+228,800,"UG","UGA","Uganda","Uganda",0
+229,858,"UY","URY","Uruguay","Uruguay",0
+230,860,"UZ","UZB","Uzbekistán","Uzbekistan",0
+231,548,"VU","VUT","Vanuatu","Vanuatu",0
+232,862,"VE","VEN","Venezuela","Venezuela",0
+233,704,"VN","VNM","Vietnam","Viet Nam",0
+234,92,"VG","VGB","Islas Vírgenes Británicas","Virgin Islands; British",0
+235,850,"VI","VIR","Islas Vírgenes de los Estados Unidos","Virgin Islands; U.S.",0
+236,876,"WF","WLF","Wallis y Futuna","Wallis And Futuna",0
+237,887,"YE","YEM","Yemen","Yemen",0
+238,262,"DJ","DJI","Yibuti","Djibouti",0
+239,894,"ZM","ZMB","Zambia","Zambia",0
+240,716,"ZW","ZWE","Zimbabue","Zimbabwe",0
+241,NULL,"E_","ES_","Escocia","Scotland",0
+242,NULL,"U_","UR_","Unión Soviética","Union of Soviet Socialist Republics",0
+243,NULL,"K_","KO_","Kosovo","Kosovo",0
+244,NULL,"C_","CZ_","Checoslovaquia","Czechoslovakia",0
