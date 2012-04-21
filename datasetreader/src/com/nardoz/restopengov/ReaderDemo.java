@@ -1,11 +1,15 @@
+package com.nardoz.restopengov;
+
+import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
+
+import java.util.List;
+
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.node.Node;
 
-import java.util.List;
-import static org.elasticsearch.node.NodeBuilder.*;
-import static org.elasticsearch.common.xcontent.XContentFactory.*;
+import com.nardoz.restopengov.utils.DatasetReader;
 
 public class ReaderDemo {
 
@@ -16,6 +20,7 @@ public class ReaderDemo {
 
         List<String> events    = dataset.read("data/bafici-2010/bafici10-events.csv").getJSONList();
         List<String> countries = dataset.read("data/bafici-2010/bafici10-countries.csv").getJSONList();
+        List<String> obrasRegistradas = dataset.read("data/obras-registradas/obras-registradas.csv").getJSONList();
 
         // Elasticsearch magic
         Node node = nodeBuilder().client(true).node();
@@ -30,6 +35,12 @@ public class ReaderDemo {
         for(int i = 0; i < countries.size(); i++) {
             bulkRequest.add(client.prepareIndex("bafici-2010", "countries", String.valueOf(i)).setSource(countries.get(i)));
         }
+        
+        for(int i = 0; i < obrasRegistradas.size(); i++) {
+            bulkRequest.add(client.prepareIndex("obras-registradas", "obras", String.valueOf(i)).setSource(obrasRegistradas.get(i)));
+        }
+        
+        
 
         BulkResponse bulkResponse = bulkRequest.execute().actionGet();
 

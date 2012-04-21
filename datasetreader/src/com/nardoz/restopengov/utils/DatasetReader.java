@@ -1,3 +1,5 @@
+package com.nardoz.restopengov.utils;
+
 import au.com.bytecode.opencsv.CSVReader;
 
 import java.io.DataInputStream;
