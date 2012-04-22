@@ -1,0 +1,66 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.nardoz.restopengov</groupId>
+  <artifactId>crawler</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>crawler</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+	<repositories>
+	    <repository>
+            <id>typesafe</id>
+            <name>Typesafe Repository</name>
+            <url>http://repo.typesafe.com/typesafe/releases/</url>
+        </repository>
+    </repositories>
+        
+	<build>
+	        <plugins>
+	            <plugin>
+	                <groupId>org.codehaus.mojo</groupId>
+	                <artifactId>exec-maven-plugin</artifactId>
+	                <version>1.2.1</version>
+	                <configuration>
+	                    <mainClass>com.nardoz.restopengov.Crawler</mainClass>
+	                </configuration>
+	            </plugin>
+	        </plugins>
+	    </build>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>com.typesafe.akka</groupId>
+            <artifactId>akka-actor</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+		
+		<dependency>
+        	<groupId>us.monoid.web</groupId>
+        	<artifactId>resty</artifactId>
+        	<version>0.2.0</version>
+        </dependency>
+        
+        <dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.elasticsearch</groupId>
+			<artifactId>elasticsearch</artifactId>
+			<version>0.19.2</version>
+		</dependency>
+        
+	</dependencies>
+
+</project>
