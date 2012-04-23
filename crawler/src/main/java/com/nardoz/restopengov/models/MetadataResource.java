@@ -22,4 +22,6 @@ public class MetadataResource implements Serializable {
     public String id;
     public String resource_type;
     public String name;
+    public String file_path;
+    public String metadata_name;
 }
