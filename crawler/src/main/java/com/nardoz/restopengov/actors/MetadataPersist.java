@@ -1,35 +1,36 @@
 package com.nardoz.restopengov.actors;
 
-import akka.actor.ActorRef;
 import akka.actor.UntypedActor;
 import com.google.gson.Gson;
 import com.nardoz.restopengov.models.Metadata;
-import com.nardoz.restopengov.models.MetadataResource;
+import com.typesafe.config.ConfigFactory;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.action.bulk.BulkResponse;
-import org.elasticsearch.node.Node;
+import org.elasticsearch.client.Client;
 
 public class MetadataPersist extends UntypedActor {
 
-    private Node node;
+    private Client client;
 
-    public MetadataPersist(Node node) {
-        this.node = node;
+    public MetadataPersist(Client client) {
+        this.client = client;
     }
 
     public void onReceive(Object message) {
 
-        if(message instanceof Metadata) {
+        if (message instanceof Metadata) {
 
             Metadata metadata = (Metadata) message;
             String json = new Gson().toJson(metadata);
 
-            BulkRequestBuilder bulkRequest = node.client().prepareBulk();
-            bulkRequest.add(node.client().prepareIndex("gcba", "metadata", metadata.name).setSource(json));
+            String index = ConfigFactory.load().getString("restopengov.index");
+
+            BulkRequestBuilder bulkRequest = client.prepareBulk();
+            bulkRequest.add(client.prepareIndex(index, "metadata", metadata.name).setSource(json));
 
             BulkResponse bulkResponse = bulkRequest.execute().actionGet();
 
-            if(bulkResponse.hasFailures()) {
+            if (bulkResponse.hasFailures()) {
                 System.out.println(bulkResponse.buildFailureMessage());
             }
 

@@ -1,7 +1,6 @@
 package com.nardoz.restopengov.models;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class MetadataResource implements Serializable {
     public String mimetype;
@@ -16,7 +15,7 @@ public class MetadataResource implements Serializable {
     public String package_id;
     public String mimetype_inner;
     public String webstore_last_updated;
-    public Date last_modified;
+    public String last_modified;
     public String position;
     public String size;
     public String id;

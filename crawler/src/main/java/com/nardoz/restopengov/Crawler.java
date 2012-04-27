@@ -1,9 +1,14 @@
 package com.nardoz.restopengov;
 
 import akka.actor.*;
-import akka.routing.RoundRobinRouter;
-import com.nardoz.restopengov.actors.*;
-import org.elasticsearch.node.Node;
+import akka.routing.FromConfig;
+import com.nardoz.restopengov.actors.DatasetListFetcher;
+import com.nardoz.restopengov.actors.MetadataFetcher;
+import com.nardoz.restopengov.actors.MetadataPersist;
+import com.nardoz.restopengov.actors.ResourceFetcher;
+import com.typesafe.config.Config;
+import com.typesafe.config.ConfigFactory;
+import org.elasticsearch.client.Client;
 
 import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
 
@@ -11,25 +16,26 @@ public class Crawler {
 
     public static void main(String[] args) {
 
-        ActorSystem system = ActorSystem.create("crawler");
+        Config config = ConfigFactory.load();
+        ActorSystem system = ActorSystem.create("crawler", config);
 
         // Startup Elasticsearch connection
-        final Node node = nodeBuilder().client(true).node();
+        final Client client = nodeBuilder().client(true).node().client();
 
         // Metadata persistence actor
         final ActorRef metadataPersist = system.actorOf(new Props(new UntypedActorFactory() {
             public UntypedActor create() {
-                return new MetadataPersist(node);
+                return new MetadataPersist(client);
             }
-        }).withRouter(new RoundRobinRouter(5)), "metadataPersist");
+        }).withRouter(new FromConfig()), "metadataPersist");
 
 
         // Metadata persistence actor
         final ActorRef resourceFetcher = system.actorOf(new Props(new UntypedActorFactory() {
             public UntypedActor create() {
-                return new ResourceFetcher(node);
+                return new ResourceFetcher(client);
             }
-        }).withRouter(new RoundRobinRouter(5)), "resourceFetcher");
+        }).withRouter(new FromConfig()), "resourceFetcher");
 
 
         // Metadata fetcher actor
@@ -37,11 +43,11 @@ public class Crawler {
             public UntypedActor create() {
                 return new MetadataFetcher(metadataPersist, resourceFetcher);
             }
-        }).withRouter(new RoundRobinRouter(5)), "metadataFetcher");
+        }).withRouter(new FromConfig()), "metadataFetcher");
 
 
         // Dataset list fetcher actor
-        ActorRef datasetListFetcher = system.actorOf(new Props(new UntypedActorFactory() {
+        final ActorRef datasetListFetcher = system.actorOf(new Props(new UntypedActorFactory() {
             public UntypedActor create() {
                 return new DatasetListFetcher(metadataFetcher);
             }
@@ -50,6 +56,13 @@ public class Crawler {
 
         // Go, go, go!
         datasetListFetcher.tell(new DatasetListFetcher.Fetch());
+
+
+        system.registerOnTermination(new Runnable() {
+            public void run() {
+                nodeBuilder().client(true).node().close();
+            }
+        });
 
     }
 
