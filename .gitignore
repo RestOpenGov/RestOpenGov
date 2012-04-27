@@ -5,9 +5,9 @@ target
 ## generic files to ignore
 *~
 *.lock
-*.DS_Store
 *.swp
 *.out
+.DS_Store
 
 # IDEs
 .eclipse
