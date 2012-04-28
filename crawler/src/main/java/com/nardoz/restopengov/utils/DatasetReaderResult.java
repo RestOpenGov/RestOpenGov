@@ -1,32 +1,27 @@
 package com.nardoz.restopengov.utils;
 
-import com.google.gson.Gson;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+public class DatasetReaderResult implements IDatasetReaderResult {
 
-public class DatasetReaderResult {
+    private List<String> jsonList = new ArrayList<String>();
 
-    private Gson gson = new Gson();
-    private List<Map<String, String>> dataset = new ArrayList<Map<String, String>>();
-
-    public List<String> getJSONList() {
-
-        List<String> result = new ArrayList<String>();
-
-        for(Map<String, String> item : dataset) {
-            result.add(gson.toJson(item));
-        }
-
-        return result;
+    public List<String> getJsonList() {
+        return jsonList;
     }
 
-    public String getJSON() {
-        return gson.toJson(dataset);
+    @Override
+    public void onStart() {
+
     }
 
-    public void add(Map<String, String> obj) {
-        dataset.add(obj);
+    @Override
+    public void add(String id, String json) {
+        jsonList.add(json);
+    }
+
+    @Override
+    public void onEnd() {
+
     }
 }

@@ -4,6 +4,7 @@ import akka.actor.ActorRef;
 import akka.actor.UntypedActor;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.typesafe.config.ConfigFactory;
 import us.monoid.web.Resty;
 
 import java.lang.reflect.Type;
@@ -18,13 +19,14 @@ public class DatasetListFetcher extends UntypedActor {
         this.metadataFetcher = metadataFetcher;
     }
 
-    public static class Fetch {}
+    public static class FetchAll {}
+    public static class ListAll {}
 
     public void onReceive(Object message) {
 
-        if(message instanceof Fetch) {
+        if(message instanceof ListAll) {
 
-            final String url = "http://data.buenosaires.gob.ar/api/rest/dataset/";
+            final String url = ConfigFactory.load().getString("restopengov.dataset-list");
 
             try {
                 String response = new Resty().text(url).toString();
@@ -33,11 +35,37 @@ public class DatasetListFetcher extends UntypedActor {
                 List<String> datasetList = new Gson().fromJson(response, listType);
 
                 for(String dataset : datasetList) {
-                    metadataFetcher.tell(dataset, getSelf());
+                    System.out.println(dataset);
                 }
+
+                getContext().system().shutdown();
 
             } catch (Exception e) {
                 e.printStackTrace();
+            }
+
+        } else if(message instanceof FetchAll) {
+
+            final String url = ConfigFactory.load().getString("restopengov.dataset-list");
+
+            try {
+                String response = new Resty().text(url).toString();
+
+                Type listType = new TypeToken<ArrayList<String>>() {}.getType();
+                List<String> datasetList = new Gson().fromJson(response, listType);
+
+                getSelf().tell(datasetList);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        } else if (message instanceof List) {
+
+            List<String> datasetList = (List<String>) message;
+
+            for (String dataset : datasetList) {
+                metadataFetcher.tell(dataset, getSelf());
             }
 
             getContext().stop(getSelf());

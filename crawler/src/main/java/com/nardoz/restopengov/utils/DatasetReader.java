@@ -4,12 +4,12 @@ import com.nardoz.restopengov.models.MetadataResource;
 
 public class DatasetReader {
 
-    public static IDatasetReader factory(MetadataResource resource) throws Exception {
+    public static IDatasetReader factory(MetadataResource resource, IDatasetReaderResult callback) throws Exception {
 
-        if(resource.format.equals("CSV")) {
-            return new CSVDatasetReader();
+        if (resource.format.toLowerCase().matches("csv")) {
+            return new CSVDatasetReader(resource, callback);
         } else {
-            throw new Exception("DatasetReader: Unhandled format");
+            throw new Exception("DatasetReader: Unhandled format " + resource.format);
         }
 
     }

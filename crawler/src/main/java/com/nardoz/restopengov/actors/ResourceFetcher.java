@@ -1,72 +1,38 @@
 package com.nardoz.restopengov.actors;
 
-import akka.actor.ActorRef;
 import akka.actor.UntypedActor;
-import com.google.gson.Gson;
-import com.nardoz.restopengov.models.Metadata;
 import com.nardoz.restopengov.models.MetadataResource;
 import com.nardoz.restopengov.utils.DatasetReader;
+import com.nardoz.restopengov.utils.ElasticDatasetReaderResult;
 import com.nardoz.restopengov.utils.IDatasetReader;
-import org.elasticsearch.action.bulk.BulkRequestBuilder;
-import org.elasticsearch.action.bulk.BulkResponse;
-import org.elasticsearch.node.Node;
-import us.monoid.web.Resty;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.sql.Timestamp;
-import java.util.Date;
-import java.util.List;
+import org.elasticsearch.client.Client;
 
 public class ResourceFetcher extends UntypedActor {
 
-    private Node node;
+    private Client client;
 
-    public ResourceFetcher(Node node) {
-        this.node = node;
+    public ResourceFetcher(Client client) {
+        this.client = client;
     }
 
     public void onReceive(Object message) {
 
-        if(message instanceof MetadataResource) {
+        if (message instanceof MetadataResource) {
 
-            MetadataResource resource = (MetadataResource) message;
+            final MetadataResource resource = (MetadataResource) message;
 
-            List<String> result = null;
+            ElasticDatasetReaderResult callback = new ElasticDatasetReaderResult(resource, client);
 
             try {
-                URL url = new URL(resource.url.replace("https", "http"));
-                InputStream stream = url.openStream();
 
-                IDatasetReader datasetReader = DatasetReader.factory(resource);
+                IDatasetReader datasetReader = DatasetReader.factory(resource, callback);
 
-                if(datasetReader != null) {
-                    result = datasetReader.read(stream).getJSONList();
+                if (datasetReader != null) {
+                    datasetReader.read();
                 }
 
-            } catch(Exception e) {
-
-            }
-
-            if(result != null) {
-                BulkRequestBuilder bulkRequest = node.client().prepareBulk();
-
-
-                for(int i = 0; i < result.size(); i++) {
-
-                    String id = resource.id + "-" + i;
-
-                    System.out.println("Saving: gcba/" + resource.metadata_name + "/" + id);
-                    bulkRequest.add(node.client().prepareIndex("gcba", resource.metadata_name, id).setSource(result.get(i)));
-                }
-
-                BulkResponse bulkResponse = bulkRequest.execute().actionGet();
-
-                if(bulkResponse.hasFailures()) {
-                    System.out.println(bulkResponse.buildFailureMessage());
-                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
 
         } else {
