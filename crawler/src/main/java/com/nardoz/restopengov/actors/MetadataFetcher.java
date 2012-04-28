@@ -30,8 +30,7 @@ public class MetadataFetcher extends UntypedActor {
             try {
                 String response = new Resty().text(url).toString();
 
-                Type metadataType = new TypeToken<Metadata>() {
-                }.getType();
+                Type metadataType = new TypeToken<Metadata>() {}.getType();
                 Metadata metadata = new Gson().fromJson(response, metadataType);
 
                 metadataPersist.tell(metadata, getSelf());

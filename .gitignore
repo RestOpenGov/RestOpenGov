@@ -8,6 +8,7 @@ target
 *.swp
 *.out
 .DS_Store
+*.log
 
 # IDEs
 .eclipse
