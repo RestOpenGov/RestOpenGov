@@ -11,8 +11,8 @@ import java.util.Map;
 
 public class CSVDatasetReader implements IDatasetReader {
 
+    private MetadataResource resource;
     private IDatasetReaderResult callback;
-    private InputStream stream;
     private Gson gson = new Gson();
 
     public CSVDatasetReader(MetadataResource resource) {
@@ -20,6 +20,13 @@ public class CSVDatasetReader implements IDatasetReader {
     }
 
     public CSVDatasetReader(MetadataResource resource, IDatasetReaderResult callback) {
+        this.resource = resource;
+        this.callback = callback;
+    }
+
+    public IDatasetReaderResult read() {
+
+        InputStream stream = null;
 
         try {
 
@@ -30,12 +37,7 @@ public class CSVDatasetReader implements IDatasetReader {
             e.printStackTrace();
         }
 
-        this.callback = callback;
-
-    }
-
-    public IDatasetReaderResult read() {
-        return read(this.stream);
+        return read(stream);
     }
 
     public IDatasetReaderResult read(InputStream stream) {
@@ -48,12 +50,13 @@ public class CSVDatasetReader implements IDatasetReader {
             String[] keys = reader.readNext();
             String[] nextLine;
 
-            Integer i = 0;
+            Integer id = 0;
             while ((nextLine = reader.readNext()) != null) {
-                callback.add(i.toString(), buildJson(keys, nextLine));
-                i++;
+                callback.add(id.toString(), buildJson(keys, nextLine));
+                id++;
             }
 
+            reader.close();
             stream.close();
 
         } catch (IOException e) {
@@ -63,25 +66,6 @@ public class CSVDatasetReader implements IDatasetReader {
         callback.onEnd();
 
         return callback;
-    }
-
-    public IDatasetReaderResult read(String filename) {
-
-        File file = new File(filename);
-
-        IDatasetReaderResult result = null;
-
-        try {
-            FileInputStream fstream = new FileInputStream(file);
-            DataInputStream stream  = new DataInputStream(fstream);
-
-            result = read(stream);
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        return result;
     }
 
     public String buildJson(String[] keys, String[] dataLine) {

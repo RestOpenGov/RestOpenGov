@@ -32,7 +32,7 @@ public class ResourceFetcher extends UntypedActor {
                 }
 
             } catch (Exception e) {
-                System.out.println(resource.format + " is not supported");
+                System.out.println(e.getMessage());
             }
 
         } else {

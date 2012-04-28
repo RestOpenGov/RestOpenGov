@@ -24,7 +24,7 @@ public class Crawler {
             System.out.println("USAGE: crawler [command] <args>");
             System.out.println("Available commands:");
             System.out.println("list            Lists all datasets");
-            System.out.println("fetch           Fetches all datasets");
+            System.out.println("fetch-all       Fetches all datasets");
             System.out.println("fetch <args>    Fetches all specified datasets (space separated)");
             return;
         }
@@ -72,6 +72,8 @@ public class Crawler {
             }
         }), "datasetListFetcher");
 
+
+        datasetListFetcher.tell(new DatasetListFetcher.FetchAll());
 
         // Go, go, go!
         if(args[0].equals("list")) {

@@ -9,7 +9,7 @@ public class DatasetReader {
         if (resource.format.toLowerCase().matches("csv")) {
             return new CSVDatasetReader(resource, callback);
         } else {
-            throw new Exception("DatasetReader: Unhandled format");
+            throw new Exception("DatasetReader: Unhandled format " + resource.format);
         }
 
     }
