@@ -73,8 +73,6 @@ public class Crawler {
         }), "datasetListFetcher");
 
 
-        datasetListFetcher.tell(new DatasetListFetcher.FetchAll());
-
         // Go, go, go!
         if(args[0].equals("list")) {
             datasetListFetcher.tell(new DatasetListFetcher.ListAll());
