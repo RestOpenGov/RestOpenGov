@@ -1,12 +1,8 @@
 package ar.com.restba;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import ar.com.restba.connectors.RestBAConnector;
 import ar.com.restba.connectors.con.RestBAConnection;
 import ar.com.restba.json.JsonObject;
-import ar.com.restba.types.ObraRegistrada;
 
 /**
  * Es la implementación por default de {@link RestBAClient} Esta clase es una de
@@ -30,28 +26,6 @@ public class DefaultRestBAClient implements RestBAClient {
 	}
 
 	/**
-	 * Busca todas la obras registradas en la ciudad de Buenos Aires. Obras en
-	 * construcción, Obras en demolición, etc con sus respectivos datos como
-	 * dirección de la obra, nombre del responsable, etc.
-	 * 
-	 * @return Todas las obras registradas en la Ciudad de Buenos Aires
-	 */
-	@Override
-	public List<ObraRegistrada> fetchObrasRegistradas() {
-		String query = "obras-registradas/obras/_search?";
-		RestBAConnection<ObraRegistrada> fetchObjectRestFb = restFbConnector
-				.fetchConnectionRestBA(query, ObraRegistrada.class, 0);
-		List<ObraRegistrada> l = new ArrayList<ObraRegistrada>();
-		for (List<ObraRegistrada> list : fetchObjectRestFb) {
-			for (ObraRegistrada obraRegistrada : list) {
-				l.add(obraRegistrada);
-			}
-		}
-
-		return l;
-	}
-
-	/**
 	 * Accede a los datos de la Ciudad sin ningun tipo de procesamiento. Solo
 	 * devuelve jsons que hay que parsearos para darle algún sentido.
 	 * Recomendamos usar este metodo cuando no se encuentre una abstracción más
@@ -72,6 +46,14 @@ public class DefaultRestBAClient implements RestBAClient {
 		com.restfb.json.JsonObject fetchObject = restFbConnector.fetchObject(
 				dataset, com.restfb.json.JsonObject.class);
 		return new JsonObject(fetchObject.toString());
+	}
+
+	@Override
+	public <T> RestBAConnection<T> fetchConnectionRestBA(String query,
+			Class<T> connectionType, int page) {
+		RestBAConnection<T> fetchConnectionRestBA = restFbConnector
+				.fetchConnectionRestBA(query, connectionType, page);
+		return fetchConnectionRestBA;
 	}
 
 }
