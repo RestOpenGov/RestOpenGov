@@ -17,9 +17,9 @@ public class ListObrasRegistradas {
 		List<ObraRegistrada> fetchObrasRegistradas = dataBairesClient
 				.fetchObrasRegistradas(); //aca pide datos al server.
 
-//		for (ObraRegistrada obrasRegistradas : fetchObrasRegistradas) {
-//			System.out.println(obrasRegistradas.getDireccion());
-//		}
+		for (ObraRegistrada obrasRegistradas : fetchObrasRegistradas) {
+			System.out.println(obrasRegistradas.getDireccion());
+		}
 	}
 
 }

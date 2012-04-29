@@ -1,22 +1,12 @@
 package ar.com.restba;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import ar.com.restba.connectors.RestBAConnector;
-import ar.com.restba.connectors.con.RestBAIterator;
-import ar.com.restba.json.JsonArray;
+import ar.com.restba.connectors.con.RestBAConnection;
 import ar.com.restba.json.JsonObject;
 import ar.com.restba.types.ObraRegistrada;
-import ar.com.restba.utils.RestBAUtils;
-import au.com.bytecode.opencsv.CSVReader;
 
 /**
  * Es la implementación por default de {@link RestBAClient} Esta clase es una de
@@ -48,26 +38,17 @@ public class DefaultRestBAClient implements RestBAClient {
 	 */
 	@Override
 	public List<ObraRegistrada> fetchObrasRegistradas() {
-
-//		com.restfb.json.JsonObject fetchObjectRestFb = restFbConnector
-//				.fetchObject(
-//						"obras-registradas/obras/_search?q=ESTADO_TRAMITE:REGISTRADO",
-//						com.restfb.json.JsonObject.class);
-		
-		
-		String query = "gcba/obras-registradas/_search?q=ESTADO_TRAMITE:REGISTRADO";
-		RestBAIterator<com.restfb.json.JsonObject> fetchObjectRestFb = restFbConnector
-				.fetchConnectionRestBA(query, com.restfb.json.JsonObject.class,0);
-
-		for (List<com.restfb.json.JsonObject> list : fetchObjectRestFb) {
-			System.out.println(list.toString());
-			
+		String query = "obras-registradas/obras/_search?";
+		RestBAConnection<ObraRegistrada> fetchObjectRestFb = restFbConnector
+				.fetchConnectionRestBA(query, ObraRegistrada.class, 0);
+		List<ObraRegistrada> l = new ArrayList<ObraRegistrada>();
+		for (List<ObraRegistrada> list : fetchObjectRestFb) {
+			for (ObraRegistrada obraRegistrada : list) {
+				l.add(obraRegistrada);
+			}
 		}
-		
-		
-		
 
-		return null;
+		return l;
 	}
 
 	/**

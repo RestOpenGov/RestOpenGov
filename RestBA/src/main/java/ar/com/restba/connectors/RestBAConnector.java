@@ -24,7 +24,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import ar.com.restba.connectors.con.RestBAIterator;
+import ar.com.restba.connectors.con.RestBAConnection;
 import ar.com.restba.json.JsonArray;
 import ar.com.restba.json.JsonException;
 import ar.com.restba.json.JsonObject;
@@ -69,7 +69,7 @@ public class RestBAConnector extends BaseRestFbConnector implements FacebookClie
   /**
    * API endpoint URL.
    */
-  protected static final String FACEBOOK_GRAPH_ENDPOINT_URL = "http://betteradio.com:9200";
+  protected static final String FACEBOOK_GRAPH_ENDPOINT_URL = "http://localhost:9200";
 
   /**
    * Read-only API endpoint URL.
@@ -199,10 +199,11 @@ public class RestBAConnector extends BaseRestFbConnector implements FacebookClie
    * @see com.restfb.FacebookClient#fetchConnection(java.lang.String,
    *      java.lang.Class, com.restfb.Parameter[])
    */
-  public <T> RestBAIterator<T> fetchConnectionRestBA(String connection, Class<T> connectionType,int page,  Parameter... parameters) {
+  public <T> RestBAConnection<T> fetchConnectionRestBA(String connection, Class<T> connectionType,int page,  Parameter... parameters) {
     verifyParameterPresence("connection", connection);
     verifyParameterPresence("connectionType", connectionType);
-    return new RestBAIterator<T>(this, makeRequest(connection+ "&from=" + (page + 1) * 10, parameters), connectionType, connection, page);
+    String request = makeRequest(connection+ "&from=" + (page + 1) * 10, parameters);
+	return new RestBAConnection<T>(this, request, connectionType, connection, page);
   }
   
   
