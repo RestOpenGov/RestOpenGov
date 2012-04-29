@@ -799,7 +799,7 @@ public class RestBAConnector extends BaseRestBAConnector implements
 			Class<T> connectionType, int page) {
 		verifyParameterPresence("connection", connection);
 		verifyParameterPresence("connectionType", connectionType);
-		String request = makeRequest(connection + "&from=" + (page + 1) * 10);
+		String request = makeRequest(connection + "&from=" + page * 10);
 		return new RestBAConnection<T>(this, request, connectionType,
 				connection, page);
 	}
