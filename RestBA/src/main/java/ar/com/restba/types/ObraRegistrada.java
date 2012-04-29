@@ -1,6 +1,6 @@
 package ar.com.restba.types;
 
-import com.restfb.Facebook;
+import ar.com.restba.RestBA;
 
 /**
  * Representa cada obra registrada en la ciudad de Buenos Aires. 
@@ -17,19 +17,19 @@ public class ObraRegistrada {
 	/** ID del resource dentro de Buenos Aires Data. Identifica univocamente este recurso. */
 	public static final String OBRAS_REGISTRADAS_ID = "ce067ee1-1a4c-46c2-a269-d01e21a7fa4d";
 	
-	@Facebook("N_EXPEDIENTE")
+	@RestBA("N_EXPEDIENTE")
 	private String nExpediente;
-	@Facebook("DIRECCION")
+	@RestBA("DIRECCION")
 	private String direccion;
-	@Facebook("SMP")
+	@RestBA("SMP")
 	private String smp;
-	@Facebook("ESTADO_TRAMITE")
+	@RestBA("ESTADO_TRAMITE")
 	private String estadoTramite;
-	@Facebook("FECHA_ESTADO")
+	@RestBA("FECHA_ESTADO")
 	private String fechaEstado;
-	@Facebook("TIPO_OBRA")
+	@RestBA("TIPO_OBRA")
 	private String tipoObra;
-	@Facebook("NOMBRE_PROFESIONAL")
+	@RestBA("NOMBRE_PROFESIONAL")
 	private String nombreProfesional;
 
 	public ObraRegistrada() {
