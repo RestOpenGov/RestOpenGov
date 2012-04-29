@@ -50,9 +50,9 @@ public class DefaultRestBAClient implements RestBAClient {
 
 	@Override
 	public <T> RestBAConnection<T> fetchConnectionRestBA(String query,
-			Class<T> connectionType, int page) {
+			Class<T> connectionType, int fromPage) {
 		RestBAConnection<T> fetchConnectionRestBA = restFbConnector
-				.fetchConnectionRestBA(query, connectionType, page);
+				.fetchConnectionRestBA(query, connectionType, fromPage);
 		return fetchConnectionRestBA;
 	}
 

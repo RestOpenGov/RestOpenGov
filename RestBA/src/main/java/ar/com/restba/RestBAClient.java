@@ -1,12 +1,7 @@
 package ar.com.restba;
 
-import java.util.List;
-
-import com.restfb.Parameter;
-
 import ar.com.restba.connectors.con.RestBAConnection;
 import ar.com.restba.json.JsonObject;
-import ar.com.restba.types.ObraRegistrada;
 
 /**
  * Esta es la interfase principal de RestBA y define como el cliente debe
@@ -19,7 +14,7 @@ import ar.com.restba.types.ObraRegistrada;
 public interface RestBAClient {
 
 	public <T> RestBAConnection<T> fetchConnectionRestBA(String connection,
-			Class<T> connectionType, int page);
+			Class<T> connectionType, int fromPage);
 
 	/**
 	 * Accede a los datos de la Ciudad sin ningun tipo de procesamiento. Solo
