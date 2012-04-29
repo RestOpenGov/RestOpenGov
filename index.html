@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="RestOpenGov : " />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>RestOpenGov</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/Nardoz/RestOpenGov">Fork Me on GitHub</a>
+
+          <h1 id="project_title">RestOpenGov</h1>
+          <h2 id="project_tagline"></h2>
+
+          <section id="downloads">
+            <a class="zip_download_link" href="https://github.com/Nardoz/RestOpenGov/zipball/master">Download this project as a .zip file</a>
+            <a class="tar_download_link" href="https://github.com/Nardoz/RestOpenGov/tarball/master">Download this project as a tar.gz file</a>
+          </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>RestOpenGov</h1>
+
+<p>El proyecto RestOpenGov surge inicialmente para proveer acceso programático a la información que el Gobierno de la Ciudad de Buenos Aires expone a través de <a href="http://data.buenosaires.gob.ar/">http://data.buenosaires.gob.ar/</a></p>
+
+<p>Luego de una primera iteración el objetivo de RestOpenGov se ha vuelto más general, y se propone proveer una API pública de tipo REST, que permita acceder de una manera estándar a información que los gobiernos de diversos países y ciudades expongan a partir de fuentes heterogéneas de datos.</p>
+
+<p>Por lo tanto, RestOpenGov estará compuesto por una serie de proyectos que interactuarán para lograr este fin.</p>
+
+<h2>RestOpenGov Crawler</h2>
+
+<p>Es el encargado de acceder periódicamente a los diversos endpoints publicados por los gobiernos, extraer la información que allí publican, procesarla y almacenarla en un servidor elasticsearch para su posterior consulta.</p>
+
+<h3>Tecnologías</h3>
+
+<p>El procesamiento de los datasets es realizado utilizando la API Java de Akka (<a href="http://www.akka.io">www.akka.io</a>), un framework de procesamiento distribuído basado en Actores.
+Para la búsqueda e indexación de la información, utilizamos Elasticsearch (<a href="http://www.elasticsearch.org">www.elasticsearch.org</a>). </p>
+
+<h3>Setup</h3>
+
+<ol>
+<li>
+<p>Bajar las fuentes:</p>
+
+<pre><code>git clone git@github.com:Nardoz/RestOpenGov.git 
+cd RestOpenGov/crawler
+</code></pre>
+</li>
+<li>
+<p>Compilar y bajar dependencias:</p>
+
+<pre><code>mvn compile
+</code></pre>
+</li>
+<li>
+<p>Correr Elasticsearch:</p>
+
+<pre><code>../tools/elasticsearch-0.19.2/bin/elasticsearch
+</code></pre>
+</li>
+<li>
+<p>Ejecutar el crawler:</p>
+
+<pre><code>mvn exec:java -Dexec.args="fetch-all"
+</code></pre>
+</li>
+<li><p>Verlo en acción:</p></li>
+</ol><p>Abrir un explorador y navegar a http://localhost:9200/_plugin/head/ para verlo en acción.</p>
+
+<p>El crawler tiene 3 modos de ejecución por CLI:</p>
+
+<pre><code>list
+fetch-all
+fetch &lt;dataset1 dataset2 dataset3 ...&gt;
+</code></pre>
+
+<h3>Configuración</h3>
+
+<p>Es posible configurar tanto Akka como el crawler desde el mismo archivo de configuración:</p>
+
+<pre><code>src/main/java/resources/application.conf
+</code></pre>
+
+<p>En lo que respecta al crawler, podemos definir el entrypoint (actualmente sólo soporta uno) de la API REST de metadatos de CKAN (la que contiene el listado de datasets disponibles).
+Por otro lado, se puede setear el nombre del índice que va a utilizar el crawler y la cantidad máxima de elementos a indexar enviados en un sólo bulk.</p>
+
+<pre><code>restopengov {
+    dataset-list = "http://data.buenosaires.gob.ar/api/rest/dataset/"
+    index = "gcba"
+    maxPerBulk = 500
+}
+</code></pre>
+
+<p>Más detalles de cómo configurar Akka aquí:
+<a href="http://doc.akka.io/docs/akka/2.0.1/general/configuration.html">http://doc.akka.io/docs/akka/2.0.1/general/configuration.html</a></p>
+
+<h2>Actores</h2>
+
+<p><img src="http://f.cl.ly/items/042M1m1b320I1f2f0S3v/Image%202012.04.22%2011:10:38%20PM.png" alt="Actors"></p>
+
+<h2>Wiki</h2>
+
+<p><a href="https://github.com/Nardoz/RestOpenGov/wiki">https://github.com/Nardoz/RestOpenGov/wiki</a></p>
+
+<h2>Autores</h2>
+
+<ul>
+<li>Nicolás Melendez (@nfmelendez)</li>
+<li>Alan Reid (@alan_reid)</li>
+<li>Sebastián Scarano (@develsas)</li>
+<li>Marcos Della Pittima (<a href="https://github.com/mdellapittima" class="user-mention">@mdellapittima</a>)</li>
+</ul>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">RestOpenGov maintained by <a href="https://github.com/Nardoz">Nardoz</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
