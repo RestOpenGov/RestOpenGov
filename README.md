@@ -39,6 +39,11 @@ mvn compile
 mvn exec:java -Dexec.args="fetch-all"
 ```
 
+5. Verlo en acción:
+
+Abrir un explorador y navegar a http://localhost:9200/_plugin/head/ para verlo en acción.
+
+
 El crawler tiene 3 modos de ejecución por CLI:
 
 ```
