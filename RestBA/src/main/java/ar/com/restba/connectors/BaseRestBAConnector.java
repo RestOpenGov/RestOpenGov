@@ -31,7 +31,7 @@ import com.restfb.exception.FacebookResponseStatusException;
  * @author <a href="http://restfb.com">Mark Allen</a>
  * @since 1.5
  */
-public abstract class BaseRestFbConnector {
+public abstract class BaseRestBAConnector {
   /**
    * Handles {@code GET}s and {@code POST}s to the Facebook API endpoint.
    */
@@ -82,7 +82,7 @@ public abstract class BaseRestFbConnector {
   /**
    * Initializes this Facebook client.
    */
-  public BaseRestFbConnector() {
+  public BaseRestBAConnector() {
     initializeReadOnlyApiCalls();
     legacyFacebookExceptionMapper = createLegacyFacebookExceptionMapper();
   }

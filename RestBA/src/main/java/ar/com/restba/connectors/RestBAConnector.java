@@ -53,7 +53,7 @@ import com.restfb.exception.FacebookResponseStatusException;
  * 
  * @author <a href="http://restfb.com">Mark Allen</a>
  */
-public class RestBAConnector extends BaseRestFbConnector implements
+public class RestBAConnector extends BaseRestBAConnector implements
 		FacebookClient {
 	/**
 	 * Graph API access token.
