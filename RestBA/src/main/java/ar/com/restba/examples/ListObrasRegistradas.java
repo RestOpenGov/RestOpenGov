@@ -16,8 +16,8 @@ import ar.com.restba.types.ObraRegistrada;
 public class ListObrasRegistradas {
 
 	public static void main(String[] args) {
-		RestBAClient dataBairesClient = new DefaultRestBAClient();
-		String query = "obras-registradas/obras/_search?";
+		RestBAClient dataBairesClient = new DefaultRestBAClient("http://elastic.restopengov.org:9200/");
+		String query = "gcba/obras-registradas/_search?";
 
 		RestBAConnection<ObraRegistrada> fetchConnectionRestBA = dataBairesClient
 				.fetchConnectionRestBA(query, ObraRegistrada.class, 0);

@@ -21,8 +21,8 @@ public class DefaultRestBAClient implements RestBAClient {
 	 */
 	private RestBAConnector restFbConnector;
 
-	public DefaultRestBAClient() {
-		restFbConnector = new RestBAConnector();
+	public DefaultRestBAClient(String host) {
+		restFbConnector = new RestBAConnector(host);
 	}
 
 	/**

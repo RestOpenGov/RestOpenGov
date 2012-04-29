@@ -69,7 +69,7 @@ public class RestBAConnector extends BaseRestBAConnector implements
 	/**
 	 * API endpoint URL.
 	 */
-	protected static final String FACEBOOK_GRAPH_ENDPOINT_URL = "http://localhost:9200";
+	public static final String DEFAULT_HOST = "http://localhost:9200";
 
 	/**
 	 * Read-only API endpoint URL.
@@ -133,6 +133,8 @@ public class RestBAConnector extends BaseRestBAConnector implements
 	 */
 	protected static final String BATCH_ERROR_DESCRIPTION_ATTRIBUTE_NAME = "error_description";
 
+	private final String host;
+
 	/**
 	 * Creates a Facebook Graph API client with no access token.
 	 * <p>
@@ -140,7 +142,18 @@ public class RestBAConnector extends BaseRestBAConnector implements
 	 * can't do much else.
 	 */
 	public RestBAConnector() {
-		this(null, new DefaultWebRequestor(), new RestBAJsonMapper());
+		this(null, DEFAULT_HOST, new DefaultWebRequestor(),
+				new RestBAJsonMapper());
+	}
+
+	/**
+	 * Creates a Facebook Graph API client with no access token.
+	 * <p>
+	 * Without an access token, you can view and search public graph data but
+	 * can't do much else.
+	 */
+	public RestBAConnector(String host) {
+		this(null, host, new DefaultWebRequestor(), new RestBAJsonMapper());
 	}
 
 	/**
@@ -159,13 +172,14 @@ public class RestBAConnector extends BaseRestBAConnector implements
 	 *             If {@code jsonMapper} or {@code webRequestor} is {@code null}
 	 *             .
 	 */
-	public RestBAConnector(String accessToken, WebRequestor webRequestor,
-			JsonMapper jsonMapper) {
+	public RestBAConnector(String accessToken, String host,
+			WebRequestor webRequestor, JsonMapper jsonMapper) {
 		super();
 
 		verifyParameterPresence("jsonMapper", jsonMapper);
 		verifyParameterPresence("webRequestor", webRequestor);
 
+		this.host = host;
 		this.accessToken = trimToNull(accessToken);
 		this.webRequestor = webRequestor;
 		this.jsonMapper = jsonMapper;
@@ -769,7 +783,7 @@ public class RestBAConnector extends BaseRestBAConnector implements
 	 * @return The base endpoint URL for the Graph API.
 	 */
 	protected String getFacebookGraphEndpointUrl() {
-		return FACEBOOK_GRAPH_ENDPOINT_URL;
+		return host;
 	}
 
 	/**
