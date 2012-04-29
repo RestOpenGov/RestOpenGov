@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import ar.com.restba.RestBAJsonMapper;
 import ar.com.restba.connectors.con.RestBAConnection;
 import ar.com.restba.json.JsonArray;
 import ar.com.restba.json.JsonException;
@@ -139,7 +140,7 @@ public class RestBAConnector extends BaseRestBAConnector implements
 	 * can't do much else.
 	 */
 	public RestBAConnector() {
-		this(null, new DefaultWebRequestor(), new DefaultJsonMapper());
+		this(null, new DefaultWebRequestor(), new RestBAJsonMapper());
 	}
 
 	/**
