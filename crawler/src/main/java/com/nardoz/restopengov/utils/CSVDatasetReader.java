@@ -25,7 +25,7 @@ public class CSVDatasetReader implements IDatasetReader {
         this.callback = callback;
     }
 
-    public IDatasetReaderResult read() throws IOException {
+    public IDatasetReaderResult read() throws Exception {
 
         URL url = new URL(resource.url.replace("https", "http"));
         InputStream stream = url.openStream();
@@ -33,33 +33,33 @@ public class CSVDatasetReader implements IDatasetReader {
         return read(stream);
     }
 
-    public IDatasetReaderResult read(InputStream stream) throws IOException {
+    public IDatasetReaderResult read(InputStream stream) throws Exception {
 
-        CSVReader reader = new CSVReader(new InputStreamReader(stream), detectSeparator(stream));
+        BufferedReader br = new BufferedReader(new InputStreamReader(stream));
 
-        callback.onStart();
+        CSVReader reader = new CSVReader(br, detectSeparator(br));
 
         String[] keys = reader.readNext();
         String[] nextLine;
 
         Integer id = 0;
 
+        callback.onStart();
+
         while ((nextLine = reader.readNext()) != null) {
             callback.add(id.toString(), buildJson(keys, nextLine));
             id++;
         }
 
+        callback.onEnd();
+
         reader.close();
         stream.close();
-
-        callback.onEnd();
 
         return callback;
     }
 
-    private char detectSeparator(InputStream stream) {
-
-        BufferedReader isr = new BufferedReader(new InputStreamReader(stream));
+    private char detectSeparator(BufferedReader isr) {
 
         char separator = ',';
 
@@ -87,7 +87,11 @@ public class CSVDatasetReader implements IDatasetReader {
         return separator;
     }
 
-    public String buildJson(String[] keys, String[] dataLine) {
+    public String buildJson(String[] keys, String[] dataLine) throws Exception {
+
+        if(keys.length != dataLine.length) {
+            throw new Exception("There are not as much columns for the keys as for the rows");
+        }
 
         Map<String, String> result = new HashMap<String, String>();
 

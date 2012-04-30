@@ -4,6 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public interface IDatasetReader {
-    public IDatasetReaderResult read() throws IOException;
-    public IDatasetReaderResult read(InputStream stream) throws IOException;
+    public IDatasetReaderResult read() throws Exception;
+    public IDatasetReaderResult read(InputStream stream) throws Exception;
 }

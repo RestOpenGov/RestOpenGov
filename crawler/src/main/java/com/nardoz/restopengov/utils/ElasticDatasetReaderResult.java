@@ -42,7 +42,7 @@ public class ElasticDatasetReaderResult implements IDatasetReaderResult {
         bulkRequest.add(client.prepareIndex(index, resource.metadata_name, resource.id + "-" + id).setSource(json));
         itemCounter++;
 
-        Crawler.logger.info("Adding item #" + itemCounter + ": " + index + "/" + resource.metadata_name + "/" + resource.id + "-" + id);
+        Crawler.logger.debug("Adding item #" + itemCounter + ": " + index + "/" + resource.metadata_name + "/" + resource.id + "-" + id);
     }
 
     @Override
