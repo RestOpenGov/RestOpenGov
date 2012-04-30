@@ -33,8 +33,6 @@ public class Crawler {
             return;
         }
 
-        //PropertyConfigurator.configure("log4j.properties");
-
         Config config = ConfigFactory.load();
         ActorSystem system = ActorSystem.create("crawler", config);
 

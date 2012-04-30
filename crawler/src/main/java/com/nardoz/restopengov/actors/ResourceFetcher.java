@@ -8,6 +8,8 @@ import com.nardoz.restopengov.utils.ElasticDatasetReaderResult;
 import com.nardoz.restopengov.utils.IDatasetReader;
 import org.elasticsearch.client.Client;
 
+import java.io.IOException;
+
 public class ResourceFetcher extends UntypedActor {
 
     private Client client;
@@ -33,7 +35,8 @@ public class ResourceFetcher extends UntypedActor {
                 }
 
             } catch (Exception e) {
-                Crawler.logger.error("Format error: " + e.getMessage());
+                e.printStackTrace();
+                Crawler.logger.error(e.getMessage());
             }
 
         } else {
