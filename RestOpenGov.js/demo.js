@@ -1,7 +1,7 @@
 
-$(function() {
+var opengov = new RestOpenGov();
 
-	var opengov = new RestOpenGov();
+$(function() {
 
 	$('#form').submit(function(e) {
 		e.preventDefault();
@@ -9,8 +9,8 @@ $(function() {
 		$('#submit').val("Buscando...").attr("disabled", "disabled");
 
 		opengov.search($("#dataset").val(), $("#query").val(), showResults);
-
 	});
+	
 });
 
 
