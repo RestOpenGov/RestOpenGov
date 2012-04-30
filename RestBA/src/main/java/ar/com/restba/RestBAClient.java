@@ -8,30 +8,33 @@ import ar.com.restba.json.JsonObject;
  * operar. Usá una implementación de esta interfaz para pedir datos a Buenos
  * Aires Data. La clase por default es {@link DefaultRestBAClient}s
  * 
- * @author nfmelendez Mail: nfmelendez@gmail.com Twitter: @nfmelendezs
+ * @author nfmelendez
  * 
  */
 public interface RestBAClient {
 
-	public <T> RestBAConnection<T> fetchConnectionRestBA(String connection,
-			Class<T> connectionType, int fromPage);
-
 	/**
-	 * Accede a los datos de la Ciudad sin ningun tipo de procesamiento. Solo
-	 * devuelve jsons que hay que parsearos para darle algún sentido.
-	 * Recomendamos usar este metodo cuando no se encuentre una abstracción más
-	 * alta. Este es el metodo que usamos los desarrolladores de RestBA para
-	 * hacer abstracciones mas comodas de los datos de la Ciudad. Si vos los
-	 * estas usando, estamos casi seguro que tenes algo para colaborar a etsa
-	 * libreria :) Te esperamos, manda un mail a nfmelendez@gmail.com
-	 * 
-	 * @param dataset
-	 *            Es el nombre del dataset que se quiere acceder. No puede ser
-	 *            ni null, ni vacio. Los nombres estan en esta URL <a
-	 *            href="http://data.buenosaires.gob.ar/api/rest/dataset"
-	 *            >http://data.buenosaires.gob.ar/api/rest/dataset</a>
-	 * @return las obras registradas de la Ciudad de Buenos Aires.
+	 * Accede a los datos de la ciudad de Buenos Aires mediante una Query de tipo String, 
+	 * agnostica a este nivel de abstraccion de la tecnologia, pero es para el caso
+	 * de RestOpenGov una query de ElasticSEarch.
+	 *  
+	 * @param query Una query para traer datos, nunca nula  o null.
+	 * @param connectionType El Tipo de dato que va a tratar de Mapear RestBA.
+	 * Si se quiere json usar fetchConnectionRestBaAsJson. Nunca null.
+	 * @return Devuelve una puntero que trae paginas de a 10 elementos.
 	 */
-	public JsonObject fetchDataset(String dataset);
+	public <T> RestBAConnection<T> fetchConnectionRestBa(String query,
+			Class<T> connectionType);
+	
+	
+	/**
+	 * Accede a los datos de la ciudad de Buenos Aires mediante una Query de tipo String, 
+	 * agnostica a este nivel de abstraccion de la tecnologia, pero es para el caso
+	 * de RestOpenGov una query de ElasticSEarch.
+	 *  
+	 * @param query Una query para traer datos, nunca nula  o null.
+	 * @return Devuelve una puntero que trae paginas de a 10 elementos en formato Json.
+	 */
+	public RestBAConnection<JsonObject> fetchConnectionRestBaAsJson(String query);
 
 }

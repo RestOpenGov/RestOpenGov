@@ -24,13 +24,13 @@ import java.util.Map;
 
 import ar.com.restba.RestBAJsonMapper;
 import ar.com.restba.connectors.con.RestBAConnection;
+import ar.com.restba.exception.RestBANetworkException;
 import ar.com.restba.json.JsonArray;
 import ar.com.restba.json.JsonException;
 import ar.com.restba.json.JsonObject;
 
 import com.restfb.BinaryAttachment;
 import com.restfb.Connection;
-import com.restfb.DefaultJsonMapper;
 import com.restfb.DefaultWebRequestor;
 import com.restfb.FacebookClient;
 import com.restfb.JsonMapper;
@@ -43,7 +43,6 @@ import com.restfb.exception.FacebookException;
 import com.restfb.exception.FacebookExceptionMapper;
 import com.restfb.exception.FacebookGraphException;
 import com.restfb.exception.FacebookJsonMappingException;
-import com.restfb.exception.FacebookNetworkException;
 import com.restfb.exception.FacebookOAuthException;
 import com.restfb.exception.FacebookQueryParseException;
 import com.restfb.exception.FacebookResponseStatusException;
@@ -69,7 +68,7 @@ public class RestBAConnector extends BaseRestBAConnector implements
 	/**
 	 * API endpoint URL.
 	 */
-	public static final String DEFAULT_HOST = "http://localhost:9200";
+	public static final String DEFAULT_HOST = "http://elastic.restopengov.org";
 
 	/**
 	 * Read-only API endpoint URL.
@@ -538,7 +537,7 @@ public class RestBAConnector extends BaseRestBAConnector implements
 		try {
 			response = requestor.makeRequest();
 		} catch (Throwable t) {
-			throw new FacebookNetworkException("Facebook request failed", t);
+			throw new RestBANetworkException("RestBA request failed", t);
 		}
 
 		if (logger.isLoggable(INFO))
@@ -553,8 +552,9 @@ public class RestBAConnector extends BaseRestBAConnector implements
 				&& HTTP_UNAUTHORIZED != response.getStatusCode()
 				&& HTTP_INTERNAL_ERROR != response.getStatusCode()
 				&& HTTP_FORBIDDEN != response.getStatusCode())
-			throw new FacebookNetworkException("Facebook request failed",
-					response.getStatusCode());
+			throw new RestBANetworkException(
+					"RestBA request failed. HTTP code: "
+							+ response.getStatusCode());
 
 		String json = response.getBody();
 
@@ -565,8 +565,9 @@ public class RestBAConnector extends BaseRestBAConnector implements
 		// error, something weird happened on Facebook's end. Bail.
 		if (HTTP_INTERNAL_ERROR == response.getStatusCode()
 				|| HTTP_UNAUTHORIZED == response.getStatusCode())
-			throw new FacebookNetworkException("Facebook request failed",
-					response.getStatusCode());
+			throw new RestBANetworkException(
+					"RestBA request failed. HTTP code: "
+							+ response.getStatusCode());
 
 		return json;
 	}
