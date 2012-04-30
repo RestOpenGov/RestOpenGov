@@ -2,6 +2,7 @@ package com.nardoz.restopengov.actors;
 
 import akka.actor.UntypedActor;
 import com.google.gson.Gson;
+import com.nardoz.restopengov.Crawler;
 import com.nardoz.restopengov.models.Metadata;
 import com.typesafe.config.ConfigFactory;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
@@ -31,7 +32,7 @@ public class MetadataPersist extends UntypedActor {
             BulkResponse bulkResponse = bulkRequest.execute().actionGet();
 
             if (bulkResponse.hasFailures()) {
-                System.out.println(bulkResponse.buildFailureMessage());
+                Crawler.logger.error("Elastic Search Failure: " + bulkResponse.buildFailureMessage());
             }
 
         } else {

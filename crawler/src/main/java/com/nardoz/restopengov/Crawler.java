@@ -8,6 +8,8 @@ import com.nardoz.restopengov.actors.MetadataPersist;
 import com.nardoz.restopengov.actors.ResourceFetcher;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.elasticsearch.client.Client;
 
 import java.util.ArrayList;
@@ -17,6 +19,8 @@ import java.util.List;
 import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
 
 public class Crawler {
+
+    public static Logger logger = Logger.getLogger("restopengov");
 
     public static void main(String[] args) {
 
@@ -28,6 +32,8 @@ public class Crawler {
             System.out.println("fetch <args>    Fetches all specified datasets (space separated)");
             return;
         }
+
+        //PropertyConfigurator.configure("log4j.properties");
 
         Config config = ConfigFactory.load();
         ActorSystem system = ActorSystem.create("crawler", config);

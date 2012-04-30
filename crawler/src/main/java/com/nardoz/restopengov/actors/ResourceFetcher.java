@@ -1,6 +1,7 @@
 package com.nardoz.restopengov.actors;
 
 import akka.actor.UntypedActor;
+import com.nardoz.restopengov.Crawler;
 import com.nardoz.restopengov.models.MetadataResource;
 import com.nardoz.restopengov.utils.DatasetReader;
 import com.nardoz.restopengov.utils.ElasticDatasetReaderResult;
@@ -32,7 +33,7 @@ public class ResourceFetcher extends UntypedActor {
                 }
 
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                Crawler.logger.error("Format error: " + e.getMessage());
             }
 
         } else {

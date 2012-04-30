@@ -1,7 +1,9 @@
 package com.nardoz.restopengov.utils;
 
+import com.nardoz.restopengov.Crawler;
 import com.nardoz.restopengov.models.MetadataResource;
 import com.typesafe.config.ConfigFactory;
+import org.apache.log4j.Logger;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.client.Client;
@@ -19,14 +21,14 @@ public class ElasticDatasetReaderResult implements IDatasetReaderResult {
         this.resource = resource;
         this.client = client;
         this.index = ConfigFactory.load().getString("restopengov.index");
-        this.maxPerBulk = ConfigFactory.load().getInt("restopengov.maxPerBulk");
+        this.maxPerBulk = ConfigFactory.load().getInt("restopengov.max-per-bulk");
     }
 
     @Override
     public void onStart() {
         itemCounter = 0;
         bulkRequest = client.prepareBulk();
-        System.out.println("***** Started: " + index + "/" + resource.metadata_name + "/" + resource.id + " *****");
+        Crawler.logger.info("***** Started: " + index + "/" + resource.metadata_name + "/" + resource.id + " *****");
     }
 
     @Override
@@ -40,7 +42,7 @@ public class ElasticDatasetReaderResult implements IDatasetReaderResult {
         bulkRequest.add(client.prepareIndex(index, resource.metadata_name, resource.id + "-" + id).setSource(json));
         itemCounter++;
 
-        System.out.println("Adding item #" + itemCounter + ": " + index + "/" + resource.metadata_name + "/" + resource.id + "-" + id);
+        Crawler.logger.info("Adding item #" + itemCounter + ": " + index + "/" + resource.metadata_name + "/" + resource.id + "-" + id);
     }
 
     @Override
@@ -48,9 +50,9 @@ public class ElasticDatasetReaderResult implements IDatasetReaderResult {
         BulkResponse bulkResponse = bulkRequest.execute().actionGet();
 
         if(bulkResponse.hasFailures()) {
-            System.out.println(bulkResponse.buildFailureMessage());
+            Crawler.logger.error("Elasticsearch Failure: " + bulkResponse.buildFailureMessage());
         } else {
-            System.out.println("***** " + itemCounter + " items saved in: " + index + "/" + resource.metadata_name + "/" + resource.id + " *****");
+            Crawler.logger.info("***** " + itemCounter + " items saved in: " + index + "/" + resource.metadata_name + "/" + resource.id + " *****");
         }
     }
 
