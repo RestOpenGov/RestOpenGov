@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<title>RestOpenGov.js Demo</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
+	<script type="text/javascript" src="RestOpenGov.js"></script>
+	<script type="text/javascript" src="demo.js"></script>
+	<style type="text/css">
+	body { margin-top:30px }
+	table { text-align:left }
+	</style>
+</head>
+<body>
+
+	<div class="container">
+
+		<h1>RestOpenGov.js Demo</h1><hr />
+
+		<form method="post" action="#" id="form" class="form-stacked" >
+			<p>
+				<label for="dataset">Dataset:</label>
+				<select name="dataset" id="dataset">
+					<option value="metadata">Metadata</option>
+					<option value="mapa-comunas">mapa-comunas</option><option value="mapa-establecimientos-educativos-privados">mapa-establecimientos-educativos-privados</option><option value="mapa-manzanas">mapa-manzanas</option><option value="obras-registradas">obras-registradas</option><option value="registro-fabricantes-reparadores-recargadores-matafuegos">registro-fabricantes-reparadores-recargadores-matafuegos</option><option value="presupuesto-sancionado-2010">presupuesto-sancionado-2010</option><option value="empresas-seguridad-privada-habilitadas">empresas-seguridad-privada-habilitadas</option><option value="registro-inspectores-verificadores">registro-inspectores-verificadores</option><option value="mapa-parcelas">mapa-parcelas</option><option value="api-mapa-interactivo">api-mapa-interactivo</option><option value="relevamiento-usos-suelo-2008">relevamiento-usos-suelo-2008</option><option value="mapa-espacios-verdes">mapa-espacios-verdes</option><option value="mapa-mediciones-rni">mapa-mediciones-rni</option><option value="bafici">bafici</option><option value="niveles-contaminacion-aire">niveles-contaminacion-aire</option><option value="mapa-establecimientos-educativos-publicos">mapa-establecimientos-educativos-publicos</option><option value="mapa-areas-hospitalarias">mapa-areas-hospitalarias</option><option value="presupuesto-sancionado-2012">presupuesto-sancionado-2012</option><option value="mapa-bicisendas">mapa-bicisendas</option><option value="ejecucion-presupuestaria-2012">ejecucion-presupuestaria-2012</option><option value="mapa-transformadores-pcb">mapa-transformadores-pcb</option><option value="presupuesto-sancionado-2007">presupuesto-sancionado-2007</option><option value="presupuesto-sancionado-2011">presupuesto-sancionado-2011</option><option value="presupuesto-sancionado-2009">presupuesto-sancionado-2009</option><option value="mapa-calles">mapa-calles</option><option value="locales-bailables">locales-bailables</option><option value="bicicletas-publicas">bicicletas-publicas</option><option value="mapa-autopistas">mapa-autopistas</option><option value="mapa-codigo-planeamiento-urbano">mapa-codigo-planeamiento-urbano</option><option value="mapa-subterraneos">mapa-subterraneos</option><option value="mapa-linea-ferrocarril">mapa-linea-ferrocarril</option><option value="seguimiento-obras-adjudicadas-soa">seguimiento-obras-adjudicadas-soa</option><option value="visitas-web-gcba-2011">visitas-web-gcba-2011</option><option value="mapa-distritos-escolares">mapa-distritos-escolares</option><option value="mapa-barrios">mapa-barrios</option><option value="sueldos-funcionarios">sueldos-funcionarios</option><option value="areas-proteccion-historica">areas-proteccion-historica</option><option value="presupuesto-sancionado-2006">presupuesto-sancionado-2006</option><option value="presupuesto-sancionado-2005">presupuesto-sancionado-2005</option><option value="presupuesto-sancionado-2008">presupuesto-sancionado-2008</option><option value="mapa-comisarias">mapa-comisarias</option><option value="agenda-cultural">agenda-cultural</option><option value="mapa-secciones-policiales">mapa-secciones-policiales</option><option value="set-filmaciones">set-filmaciones</option><option value="niveles-contaminacion-ruido">niveles-contaminacion-ruido</option><option value="boletin-oficial">boletin-oficial</option>
+				</select>
+			</p>
+			<p>
+				<label for="query">Término de búsqueda:</label>
+				<input type="text" name="query" id="query" value="bafici" />
+			</p>
+			<p>
+				<input type="submit" id="submit" class="btn btn-primary" value="Buscar" />
+			</p>
+		</form>
+
+		<hr />
+
+		<div id="results"></div>
+	</div>
+
+</body>
+</html>
