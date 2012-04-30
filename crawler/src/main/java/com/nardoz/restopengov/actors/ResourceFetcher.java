@@ -8,8 +8,6 @@ import com.nardoz.restopengov.utils.ElasticDatasetReaderResult;
 import com.nardoz.restopengov.utils.IDatasetReader;
 import org.elasticsearch.client.Client;
 
-import java.io.IOException;
-
 public class ResourceFetcher extends UntypedActor {
 
     private Client client;
@@ -30,7 +28,7 @@ public class ResourceFetcher extends UntypedActor {
 
                 IDatasetReader datasetReader = DatasetReader.factory(resource, callback);
 
-                if (datasetReader != null) {
+                if(datasetReader != null) {
                     datasetReader.read();
                 }
 

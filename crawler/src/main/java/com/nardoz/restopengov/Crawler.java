@@ -2,14 +2,10 @@ package com.nardoz.restopengov;
 
 import akka.actor.*;
 import akka.routing.FromConfig;
-import com.nardoz.restopengov.actors.DatasetListFetcher;
-import com.nardoz.restopengov.actors.MetadataFetcher;
-import com.nardoz.restopengov.actors.MetadataPersist;
-import com.nardoz.restopengov.actors.ResourceFetcher;
+import com.nardoz.restopengov.actors.*;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.elasticsearch.client.Client;
 
 import java.util.ArrayList;
@@ -53,7 +49,7 @@ public class Crawler {
         }).withRouter(new FromConfig()), "metadataPersist");
 
 
-        // Metadata persistence actor
+        // Resource fetcher actor
         final ActorRef resourceFetcher = system.actorOf(new Props(new UntypedActorFactory() {
             public UntypedActor create() {
                 return new ResourceFetcher(client);
@@ -61,10 +57,18 @@ public class Crawler {
         }).withRouter(new FromConfig()), "resourceFetcher");
 
 
+        // ZIP Resource fetcher actor
+        final ActorRef zipResourceFetcher = system.actorOf(new Props(new UntypedActorFactory() {
+            public UntypedActor create() {
+                return new ZipResourceFetcher(client);
+            }
+        }).withRouter(new FromConfig()), "zipResourceFetcher");
+
+
         // Metadata fetcher actor
         final ActorRef metadataFetcher = system.actorOf(new Props(new UntypedActorFactory() {
             public UntypedActor create() {
-                return new MetadataFetcher(metadataPersist, resourceFetcher);
+                return new MetadataFetcher(metadataPersist, resourceFetcher, zipResourceFetcher);
             }
         }).withRouter(new FromConfig()), "metadataFetcher");
 
