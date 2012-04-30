@@ -2,6 +2,7 @@ package com.nardoz.restopengov.utils;
 
 import au.com.bytecode.opencsv.CSVReader;
 import com.google.gson.Gson;
+import com.nardoz.restopengov.Crawler;
 import com.nardoz.restopengov.models.MetadataResource;
 
 import java.io.*;
@@ -24,48 +25,66 @@ public class CSVDatasetReader implements IDatasetReader {
         this.callback = callback;
     }
 
-    public IDatasetReaderResult read() {
+    public IDatasetReaderResult read() throws IOException {
 
-        InputStream stream = null;
-
-        try {
-
-            URL url = new URL(resource.url.replace("https", "http"));
-            stream = url.openStream();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        URL url = new URL(resource.url.replace("https", "http"));
+        InputStream stream = url.openStream();
 
         return read(stream);
     }
 
-    public IDatasetReaderResult read(InputStream stream) {
+    public IDatasetReaderResult read(InputStream stream) throws IOException {
 
-        CSVReader reader = new CSVReader(new InputStreamReader(stream));
+        CSVReader reader = new CSVReader(new InputStreamReader(stream), detectSeparator(stream));
 
         callback.onStart();
 
-        try {
-            String[] keys = reader.readNext();
-            String[] nextLine;
+        String[] keys = reader.readNext();
+        String[] nextLine;
 
-            Integer id = 0;
-            while ((nextLine = reader.readNext()) != null) {
-                callback.add(id.toString(), buildJson(keys, nextLine));
-                id++;
+        Integer id = 0;
+
+        while ((nextLine = reader.readNext()) != null) {
+            callback.add(id.toString(), buildJson(keys, nextLine));
+            id++;
+        }
+
+        reader.close();
+        stream.close();
+
+        callback.onEnd();
+
+        return callback;
+    }
+
+    private char detectSeparator(InputStream stream) {
+
+        BufferedReader isr = new BufferedReader(new InputStreamReader(stream));
+
+        char separator = ',';
+
+        try {
+            String line = isr.readLine();
+
+            Integer len  = line.split(",").length;
+            Integer len2 = line.split(";").length;
+            Integer len3 = line.split("\\t").length;
+
+            if(len2 > len && len2 > len3) {
+                separator = ';';
             }
 
-            reader.close();
-            stream.close();
+            if(len3 > len2 && len3 > len) {
+                separator = '\t';
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        callback.onEnd();
+        Crawler.logger.debug("Detected separator: " + separator);
 
-        return callback;
+        return separator;
     }
 
     public String buildJson(String[] keys, String[] dataLine) {
