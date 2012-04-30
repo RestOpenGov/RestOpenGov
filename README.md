@@ -64,7 +64,7 @@ Por otro lado, se puede setear el nombre del índice que va a utilizar el crawle
 restopengov {
     dataset-list = "http://data.buenosaires.gob.ar/api/rest/dataset/"
     index = "gcba"
-    maxPerBulk = 500
+    max-per-bulk = 500
 }
 ```
 
