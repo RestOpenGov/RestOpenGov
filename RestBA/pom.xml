@@ -16,17 +16,6 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>net.homeip.yusuke</groupId>
-			<artifactId>twitter4j</artifactId>
-			<version>2.0.10</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>net.sf.opencsv</groupId>
-			<artifactId>opencsv</artifactId>
-			<version>2.3</version>
-		</dependency>
-		<dependency>
 			<groupId>com.restfb</groupId>
 			<artifactId>restfb</artifactId>
 			<version>1.6.9</version>

@@ -26,33 +26,47 @@ public class DefaultRestBAClient implements RestBAClient {
 	}
 
 	/**
-	 * Accede a los datos de la Ciudad sin ningun tipo de procesamiento. Solo
-	 * devuelve jsons que hay que parsearos para darle algún sentido.
-	 * Recomendamos usar este metodo cuando no se encuentre una abstracción más
-	 * alta. Este es el metodo que usamos los desarrolladores de RestBA para
-	 * hacer abstracciones mas comodas de los datos de la Ciudad. Si vos los
-	 * estas usando, estamos casi seguro que tenes algo para colaborar a etsa
-	 * libreria :) Te esperamos, manda un mail a nfmelendez@gmail.com
+	 * Accede a los datos de la ciudad de Buenos Aires mediante una Query.
+	 * Esta query tiene que ser como se describe en 
+	 * http://www.elasticsearch.org/guide/reference/api/search/uri-request.html
 	 * 
-	 * @param dataset
-	 *            Es el nombre del dataset que se quiere acceder. No puede ser
-	 *            ni null, ni vacio. Los nombres estan en esta URL <a
-	 *            href="http://data.buenosaires.gob.ar/api/rest/dataset"
-	 *            >http://data.buenosaires.gob.ar/api/rest/dataset</a>
-	 * @return las obras registradas de la Ciudad de Buenos Aires.
+	 * Y se tiene que evitar los parametros from y size en la URL, ya que son
+	 * manejados internamente por el Iterator.
+	 *  
+	 * @param query Una query para traer datos, nunca nula  o null. 
+	 * Que cumple con http://www.elasticsearch.org/guide/reference/api/search/uri-request.html
+	 * y no envie como parametro ni from y ni size. Ya que esto lo maneja internamente el iterator.
+	 * @param connectionType El Tipo de dato que va a tratar de Mapear RestBA.
+	 * Si se quiere json usar fetchConnectionRestBaAsJson. Nunca null.
+	 * @return Devuelve una puntero que trae paginas de a 10 elementos.
 	 */
 	@Override
-	public JsonObject fetchDataset(String dataset) {
-		com.restfb.json.JsonObject fetchObject = restFbConnector.fetchObject(
-				dataset, com.restfb.json.JsonObject.class);
-		return new JsonObject(fetchObject.toString());
-	}
-
-	@Override
-	public <T> RestBAConnection<T> fetchConnectionRestBA(String query,
-			Class<T> connectionType, int fromPage) {
+	public <T> RestBAConnection<T> fetchConnectionRestBa(String query,
+			Class<T> connectionType) {
 		RestBAConnection<T> fetchConnectionRestBA = restFbConnector
-				.fetchConnectionRestBA(query, connectionType, fromPage);
+				.fetchConnectionRestBA(query, connectionType, 0);
+		return fetchConnectionRestBA;
+	}
+	
+	
+	/**
+	 * Accede a los datos de la ciudad de Buenos Aires mediante una Query.
+	 * Esta query tiene que ser como se describe en 
+	 * http://www.elasticsearch.org/guide/reference/api/search/uri-request.html
+	 * 
+	 * Y se tiene que evitar los parametros from y size en la URL, ya que son
+	 * manejados internamente por el Iterator.
+	 *  
+	 * @param query Una query para traer datos, nunca nula  o null. 
+	 * Que cumple con http://www.elasticsearch.org/guide/reference/api/search/uri-request.html
+	 * y no envie como parametro ni from y ni size. Ya que esto lo maneja internamente el iterator.
+	 * @return Devuelve una puntero que trae paginas de a 10 elementos en formato Json
+	 */
+	@Override
+	public RestBAConnection<JsonObject> fetchConnectionRestBaAsJson(String query) {
+		RestBAConnection<JsonObject> fetchConnectionRestBA = restFbConnector
+				.fetchConnectionRestBA(query,
+						JsonObject.class, 0);
 		return fetchConnectionRestBA;
 	}
 

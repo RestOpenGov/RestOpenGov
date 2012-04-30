@@ -17,16 +17,16 @@ public class ListMetadatosJson {
 	public static void main(String[] args) {
 
 		RestBAClient dataBairesClient = new DefaultRestBAClient(
-				"http://elastic.restopengov.org:9200");
+				"http://elastic.restopengov.org");
 		String query = "gcba/metadata/_search?";
 
 		RestBAConnection<JsonObject> fetchConnectionRestBA = dataBairesClient
-				.fetchConnectionRestBA(query, JsonObject.class, 0);
+				.fetchConnectionRestBaAsJson(query);
 
 		for (List<JsonObject> page : fetchConnectionRestBA) {
 			for (JsonObject metadato : page) {
-				System.out.println( "Author: " + metadato.getString("author") + " Title: "
-						+ metadato.getString("title"));
+				System.out.println("Author: " + metadato.getString("author")
+						+ " Title: " + metadato.getString("title"));
 			}
 
 		}
