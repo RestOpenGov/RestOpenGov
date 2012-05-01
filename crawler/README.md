@@ -67,3 +67,5 @@ Hasta el momento, el crawler sólo soporta datasets en CSV (separados por coma, 
 ## Actores
 ![Actors](http://f.cl.ly/items/042M1m1b320I1f2f0S3v/Image%202012.04.22%2011:10:38%20PM.png)
 
+## Licencia
+Este software es distribuído bajo la licencia Apache 2.0: http://www.apache.org/licenses/LICENSE-2.0
