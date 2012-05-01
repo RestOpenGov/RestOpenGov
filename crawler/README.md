@@ -61,6 +61,9 @@ restopengov {
 Más detalles de cómo configurar Akka aquí:
 http://doc.akka.io/docs/akka/2.0.1/general/configuration.html
 
+### Formatos soportados
+Hasta el momento, el crawler sólo soporta datasets en CSV (separados por coma, punto y coma o tabs) o varios CSVs comprimidos en un ZIP.
+
 ## Actores
 ![Actors](http://f.cl.ly/items/042M1m1b320I1f2f0S3v/Image%202012.04.22%2011:10:38%20PM.png)
 
