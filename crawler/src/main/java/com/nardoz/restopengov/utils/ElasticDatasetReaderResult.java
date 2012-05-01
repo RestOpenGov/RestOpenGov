@@ -27,7 +27,7 @@ public class ElasticDatasetReaderResult implements IDatasetReaderResult {
     public void onStart() {
         itemCounter = 0;
         bulkRequest = client.prepareBulk();
-        Crawler.logger.info("***** Started: " + index + "/" + resource.metadata_name + "/" + resource.id + " *****");
+        Crawler.logger.info("***** Started: " + index + "/" + resource.metadata_name + "/" + resource.id + "-[..] *****");
     }
 
     @Override
@@ -51,7 +51,7 @@ public class ElasticDatasetReaderResult implements IDatasetReaderResult {
         if(bulkResponse.hasFailures()) {
             Crawler.logger.error("Elasticsearch Failure: " + bulkResponse.buildFailureMessage());
         } else {
-            Crawler.logger.info("***** " + itemCounter + " items saved in: " + index + "/" + resource.metadata_name + "/" + resource.id + " *****");
+            Crawler.logger.info("***** " + itemCounter + " items saved in: " + index + "/" + resource.metadata_name + "/" + resource.id + "-[..] *****");
         }
     }
 

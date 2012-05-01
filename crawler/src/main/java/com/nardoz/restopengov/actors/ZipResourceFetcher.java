@@ -54,9 +54,15 @@ public class ZipResourceFetcher extends UntypedActor {
                 ZipEntry entry;
                 zipinputstream = new ZipInputStream(stream);
 
+                Integer id = 0;
+
                 while((entry = zipinputstream.getNextEntry()) != null) {
+
+                    id++;
+
                     Crawler.logger.info("Extracting: " + entry);
 
+                    resource.id = resource.id + "-" + id;
                     resource.format = entry.getName().substring(entry.getName().lastIndexOf('.') + 1);
 
                     if(!DatasetReader.handles(resource.format)) {
