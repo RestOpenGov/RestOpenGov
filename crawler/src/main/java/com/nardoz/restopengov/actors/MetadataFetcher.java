@@ -5,8 +5,12 @@ import akka.actor.UntypedActor;
 import com.google.gson.Gson;
 import com.nardoz.restopengov.models.Metadata;
 import com.nardoz.restopengov.models.MetadataResource;
+import com.nardoz.restopengov.utils.DateChecker;
 import com.typesafe.config.ConfigFactory;
 import us.monoid.web.Resty;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MetadataFetcher extends UntypedActor {
 
@@ -22,7 +26,7 @@ public class MetadataFetcher extends UntypedActor {
 
     public void onReceive(Object message) {
 
-        if (message instanceof String) {
+        if(message instanceof String) {
 
             String url = ConfigFactory.load().getString("restopengov.dataset-list") + message;
 
@@ -32,7 +36,7 @@ public class MetadataFetcher extends UntypedActor {
 
                 metadataPersist.tell(metadata, getSelf());
 
-                for (MetadataResource resource : metadata.resources) {
+                for(MetadataResource resource : metadata.resources) {
                     resource.metadata_name = metadata.name;
 
                     if(resource.format.toLowerCase().equals("zip")) {

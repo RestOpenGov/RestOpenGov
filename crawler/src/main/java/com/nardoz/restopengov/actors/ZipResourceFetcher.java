@@ -7,6 +7,8 @@ import com.nardoz.restopengov.models.MetadataResource;
 import com.nardoz.restopengov.utils.DatasetReader;
 import com.nardoz.restopengov.utils.ElasticDatasetReaderResult;
 import com.nardoz.restopengov.utils.IDatasetReader;
+import com.typesafe.config.ConfigFactory;
+import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.client.Client;
 
 import java.io.FileInputStream;
@@ -27,9 +29,21 @@ public class ZipResourceFetcher extends UntypedActor {
 
     public void onReceive(Object message) {
 
-        if (message instanceof MetadataResource) {
+        if(message instanceof MetadataResource) {
 
             final MetadataResource resource = (MetadataResource) message;
+
+            String index = ConfigFactory.load().getString("restopengov.index");
+            GetResponse response = client.prepareGet(index, resource.metadata_name, resource.id).execute().actionGet();
+
+            if(response.getSource() != null) {
+                String hash = (String) response.getSource().get("hash");
+
+                if(resource.hash == hash) {
+                    Crawler.logger.info(resource.name + " didn't change, not crawling");
+                    return;
+                }
+            }
 
             try {
                 URL url = new URL(resource.url.replace("https", "http"));
