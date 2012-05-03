@@ -14,19 +14,13 @@ import java.util.Date;
 
 public class MetadataFetcher extends UntypedActor {
 
-    private ActorRef metadataPersist;
-    private ActorRef resourceFetcher;
-    private ActorRef zipResourceFetcher;
-
-    public MetadataFetcher(ActorRef metadataPersist, ActorRef resourceFetcher, ActorRef zipResourceFetcher) {
-        this.metadataPersist = metadataPersist;
-        this.resourceFetcher = resourceFetcher;
-        this.zipResourceFetcher = zipResourceFetcher;
-    }
-
     public void onReceive(Object message) {
 
         if(message instanceof String) {
+
+            ActorRef metadataPersist = getContext().actorFor("/user/metadataPersist");
+            ActorRef resourceFetcher = getContext().actorFor("/user/resourceFetcher");
+            ActorRef zipResourceFetcher = getContext().actorFor("/user/zipResourceFetcher");
 
             String url = ConfigFactory.load().getString("restopengov.dataset-list") + message;
 

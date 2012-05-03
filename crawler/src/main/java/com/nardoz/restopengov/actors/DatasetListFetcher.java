@@ -15,10 +15,6 @@ public class DatasetListFetcher extends UntypedActor {
 
     private ActorRef metadataFetcher;
 
-    public DatasetListFetcher(ActorRef metadataFetcher) {
-        this.metadataFetcher = metadataFetcher;
-    }
-
     public static class FetchAll {}
     public static class ListAll {}
 
@@ -63,6 +59,8 @@ public class DatasetListFetcher extends UntypedActor {
         } else if (message instanceof List) {
 
             List<String> datasetList = (List<String>) message;
+
+            ActorRef metadataFetcher = getContext().actorFor("/user/metadataFetcher");
 
             for (String dataset : datasetList) {
                 metadataFetcher.tell(dataset, getSelf());

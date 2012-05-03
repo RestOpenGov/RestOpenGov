@@ -66,19 +66,11 @@ public class Crawler {
 
 
         // Metadata fetcher actor
-        final ActorRef metadataFetcher = system.actorOf(new Props(new UntypedActorFactory() {
-            public UntypedActor create() {
-                return new MetadataFetcher(metadataPersist, resourceFetcher, zipResourceFetcher);
-            }
-        }).withRouter(new FromConfig()), "metadataFetcher");
+        final ActorRef metadataFetcher = system.actorOf(new Props(MetadataFetcher.class).withRouter(new FromConfig()), "metadataFetcher");
 
 
         // Dataset list fetcher actor
-        final ActorRef datasetListFetcher = system.actorOf(new Props(new UntypedActorFactory() {
-            public UntypedActor create() {
-                return new DatasetListFetcher(metadataFetcher);
-            }
-        }), "datasetListFetcher");
+        final ActorRef datasetListFetcher = system.actorOf(new Props(DatasetListFetcher.class), "datasetListFetcher");
 
 
         // Go, go, go!
