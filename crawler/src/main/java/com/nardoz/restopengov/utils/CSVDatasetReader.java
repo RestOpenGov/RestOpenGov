@@ -13,6 +13,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.regex.Pattern;
 
 public class CSVDatasetReader implements IDatasetReader {
 
@@ -69,15 +70,15 @@ public class CSVDatasetReader implements IDatasetReader {
 
         try {
             String line = br.readLine();
+            Crawler.logger.debug(line);
 
             // Quick & dirty
-
             TreeMap tm = new TreeMap();
 
-            tm.put(line.split(",").length, ",");
-            tm.put(line.split(";").length, ";");
-            tm.put(line.split("\\t").length, "\\t");
-            tm.put(line.split("|").length, "|");
+            tm.put(line.split(Pattern.quote(",")).length, ",");
+            tm.put(line.split(Pattern.quote(";")).length, ";");
+            tm.put(line.split(Pattern.quote("\t")).length, "\\t");
+            tm.put(line.split(Pattern.quote("|")).length, "|");
 
             separator = tm.lastEntry().getValue().toString().charAt(0);
 
