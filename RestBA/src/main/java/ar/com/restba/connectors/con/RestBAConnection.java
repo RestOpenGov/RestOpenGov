@@ -28,6 +28,7 @@ public class RestBAConnection<T> implements Iterable<List<T>> {
 	private String previousPageUrl;
 	private String nextPageUrl;
 	private final int page;
+	private int maxPages;
 
 	/**
 	 * @see java.lang.Iterable#iterator()
@@ -75,7 +76,7 @@ public class RestBAConnection<T> implements Iterable<List<T>> {
 		// Pull out data
 		JsonObject hits = jsonObject.getJsonObject("hits");
 		long total = hits.getLong("total");
-		int maxPages = (int) Math.ceil(total / 10.0);
+		maxPages =((int) Math.ceil(total / 10.0));
 
 		JsonArray jsonData = hits.getJsonArray("hits");
 
@@ -97,7 +98,7 @@ public class RestBAConnection<T> implements Iterable<List<T>> {
 		} else {
 			previousPageUrl = null;
 		}
-		if (page < maxPages) {
+		if (page < getMaxPages()) {
 			nextPageUrl = fullUrl;
 		} else {
 			nextPageUrl = null;
@@ -194,4 +195,9 @@ public class RestBAConnection<T> implements Iterable<List<T>> {
 	public boolean hasNext() {
 		return !isBlank(getNextPageUrl());
 	}
+
+	public int getMaxPages() {
+		return maxPages;
+	}
+
 }
