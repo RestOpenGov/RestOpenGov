@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class CSVDatasetReader implements IDatasetReader {
 
@@ -70,22 +71,15 @@ public class CSVDatasetReader implements IDatasetReader {
             String line = br.readLine();
 
             // Quick & dirty
-            Integer len  = line.split(",").length;
-            Integer len2 = line.split(";").length;
-            Integer len3 = line.split("\\t").length;
-            Integer len4 = line.split("|").length;
 
-            if(len2 > len && len2 > len3 && len2 > len4) {
-                separator = ';';
-            }
+            TreeMap tm = new TreeMap();
 
-            if(len3 > len && len3 > len2 && len3 > len4) {
-                separator = '\t';
-            }
+            tm.put(line.split(",").length, ",");
+            tm.put(line.split(";").length, ";");
+            tm.put(line.split("\\t").length, "\\t");
+            tm.put(line.split("|").length, "|");
 
-            if(len4 > len && len4 > len2 && len4 > len3) {
-                separator = '|';
-            }
+            separator = tm.lastEntry().getValue().toString().charAt(0);
 
         } catch (IOException e) {
             e.printStackTrace();
