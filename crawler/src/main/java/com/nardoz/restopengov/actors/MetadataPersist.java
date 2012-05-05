@@ -32,11 +32,16 @@ public class MetadataPersist extends UntypedActor {
             String index = ConfigFactory.load().getString("restopengov.index");
 
             GetResponse response = client.prepareGet(index, "metadata", metadata.name).execute().actionGet();
-            String modified = (String) response.getSource().get("metadata_modified");
 
-            if(DateChecker.compare(metadata.metadata_modified, modified) <= 0) {
-                Crawler.logger.info("Metadata for " + metadata.name + " didn't change, not crawling");
-                return;
+            String modified = null;
+
+            if(response.getSource() != null) {
+                modified = (String) response.getSource().get("metadata_modified");
+
+                if(DateChecker.compare(metadata.metadata_modified, modified) <= 0) {
+                    Crawler.logger.info("Metadata for " + metadata.name + " didn't change, not crawling");
+                    return;
+                }
             }
 
             String json = new Gson().toJson(metadata);
