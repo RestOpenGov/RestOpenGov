@@ -8,11 +8,7 @@ import com.nardoz.restopengov.utils.DateChecker;
 import com.typesafe.config.ConfigFactory;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.action.bulk.BulkResponse;
-import static org.elasticsearch.index.query.QueryBuilders.*;
-
 import org.elasticsearch.action.get.GetResponse;
-import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.client.Client;
 
 public class MetadataPersist extends UntypedActor {

@@ -5,12 +5,8 @@ import akka.actor.UntypedActor;
 import com.google.gson.Gson;
 import com.nardoz.restopengov.models.Metadata;
 import com.nardoz.restopengov.models.MetadataResource;
-import com.nardoz.restopengov.utils.DateChecker;
 import com.typesafe.config.ConfigFactory;
 import us.monoid.web.Resty;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class MetadataFetcher extends UntypedActor {
 

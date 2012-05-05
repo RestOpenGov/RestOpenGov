@@ -2,9 +2,6 @@ package com.nardoz.restopengov.utils;
 
 import com.nardoz.restopengov.models.MetadataResource;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class DatasetReader {
 
     private static String[] handledFormats = new String[] {

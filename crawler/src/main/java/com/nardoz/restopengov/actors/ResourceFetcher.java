@@ -4,7 +4,6 @@ import akka.actor.UntypedActor;
 import com.nardoz.restopengov.Crawler;
 import com.nardoz.restopengov.models.MetadataResource;
 import com.nardoz.restopengov.utils.DatasetReader;
-import com.nardoz.restopengov.utils.DateChecker;
 import com.nardoz.restopengov.utils.ElasticDatasetReaderResult;
 import com.nardoz.restopengov.utils.IDatasetReader;
 import com.typesafe.config.ConfigFactory;
