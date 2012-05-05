@@ -42,7 +42,9 @@ public class Crawler {
 
         // Startup Elasticsearch connection
         final Client client = new TransportClient()
-                .addTransportAddress(new InetSocketTransportAddress(config.getString("restopengov.elasticsearch-host"), 9300));
+                .addTransportAddress(new InetSocketTransportAddress(
+                        config.getString("restopengov.elasticsearch-host"),
+                        config.getInt("restopengov.elasticsearch-port")));
 
         // Metadata persistence actor
         final ActorRef metadataPersist = system.actorOf(new Props(new UntypedActorFactory() {
