@@ -62,23 +62,29 @@ public class CSVDatasetReader implements IDatasetReader {
         return callback;
     }
 
-    private char detectSeparator(BufferedReader isr) {
+    private char detectSeparator(BufferedReader br) {
 
         char separator = ',';
 
         try {
-            String line = isr.readLine();
+            String line = br.readLine();
 
+            // Quick & dirty
             Integer len  = line.split(",").length;
             Integer len2 = line.split(";").length;
             Integer len3 = line.split("\\t").length;
+            Integer len4 = line.split("|").length;
 
-            if(len2 > len && len2 > len3) {
+            if(len2 > len && len2 > len3 && len2 > len4) {
                 separator = ';';
             }
 
-            if(len3 > len2 && len3 > len) {
+            if(len3 > len && len3 > len2 && len3 > len4) {
                 separator = '\t';
+            }
+
+            if(len4 > len && len4 > len2 && len4 > len3) {
+                separator = '|';
             }
 
         } catch (IOException e) {
