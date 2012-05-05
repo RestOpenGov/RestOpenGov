@@ -27,7 +27,7 @@ public class RestBAConnection<T> implements Iterable<List<T>> {
 	private List<T> data;
 	private String previousPageUrl;
 	private String nextPageUrl;
-	private final int page;
+	private final long page;
 	private int maxPages;
 
 	/**
@@ -56,7 +56,7 @@ public class RestBAConnection<T> implements Iterable<List<T>> {
 	 */
 	@SuppressWarnings("unchecked")
 	public RestBAConnection(RestBAConnector restBaClient, String json,
-			Class<T> connectionType, String fullUrl, int page) {
+			Class<T> connectionType, String fullUrl, long page) {
 		this.page = page;
 		List<T> data = new ArrayList<T>();
 

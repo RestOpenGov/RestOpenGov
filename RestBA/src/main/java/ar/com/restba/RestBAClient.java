@@ -35,6 +35,6 @@ public interface RestBAClient {
 	 * @param query Una query para traer datos, nunca nula  o null.
 	 * @return Devuelve una puntero que trae paginas de a 10 elementos en formato Json.
 	 */
-	public RestBAConnection<JsonObject> fetchConnectionRestBaAsJson(String query, int page);
+	public RestBAConnection<JsonObject> fetchConnectionRestBaAsJson(String query, long page);
 
 }
