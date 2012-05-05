@@ -11,7 +11,6 @@ import com.typesafe.config.ConfigFactory;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.client.Client;
 
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.URL;
@@ -86,7 +85,7 @@ public class ZipResourceFetcher extends UntypedActor {
                     IDatasetReader datasetReader = DatasetReader.factory(resource, callback);
 
                     if(datasetReader != null) {
-                        datasetReader.read(new FileInputStream("tmp/" + entry.getName()));
+                        datasetReader.readFromFile("tmp/" + entry.getName());
                     }
 
                 }

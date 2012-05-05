@@ -5,10 +5,7 @@ import com.google.gson.Gson;
 import com.nardoz.restopengov.Crawler;
 import com.nardoz.restopengov.models.MetadataResource;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,6 +17,7 @@ public class CSVDatasetReader implements IDatasetReader {
     private MetadataResource resource;
     private IDatasetReaderResult callback;
     private Gson gson = new Gson();
+    private char separator = ',';
 
     public CSVDatasetReader(MetadataResource resource) {
         this(resource, new DatasetReaderResult());
@@ -30,27 +28,32 @@ public class CSVDatasetReader implements IDatasetReader {
         this.callback = callback;
     }
 
-    public IDatasetReaderResult read() throws Exception {
+    public IDatasetReaderResult readFromResourceURL() throws Exception {
 
         URL url = new URL(resource.url.replace("https", "http"));
-        InputStream stream = url.openStream();
+        separator = detectSeparator(url.openStream());
 
-        return read(stream);
+        return read(url.openStream());
+    }
+
+    public IDatasetReaderResult readFromFile(String path) throws Exception {
+
+        separator = detectSeparator(new FileInputStream(path));
+
+        return read(new FileInputStream(path));
     }
 
     public IDatasetReaderResult read(InputStream stream) throws Exception {
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(stream));
-
-        CSVReader reader = new CSVReader(br, detectSeparator(br));
+        CSVReader reader = new CSVReader(new InputStreamReader(stream), separator);
 
         String[] keys = reader.readNext();
         String[] nextLine;
 
-        Integer id = 0;
 
         callback.onStart();
 
+        Integer id = 0;
         while ((nextLine = reader.readNext()) != null) {
             callback.add(id.toString(), buildJson(keys, nextLine));
             id++;
@@ -59,39 +62,45 @@ public class CSVDatasetReader implements IDatasetReader {
         callback.onEnd();
 
         reader.close();
-        stream.close();
 
         return callback;
     }
 
-    private char detectSeparator(BufferedReader br) {
+    private char detectSeparator(InputStream stream) {
 
-        char separator = ',';
+        BufferedReader br = new BufferedReader(new InputStreamReader(stream));
+
+        String line = "";
 
         try {
-            String line = br.readLine();
-            Crawler.logger.debug(line);
-
-            // Quick & dirty
-            TreeMap tm = new TreeMap();
-
-            tm.put(line.split(Pattern.quote(",")).length, ",");
-            tm.put(line.split(Pattern.quote(";")).length, ";");
-            tm.put(line.split(Pattern.quote("\t")).length, "\\t");
-            tm.put(line.split(Pattern.quote("|")).length, "|");
-
-            separator = tm.lastEntry().getValue().toString().charAt(0);
-
+            line = br.readLine();
+            br.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return detectSeparator(line);
+    }
+
+    private char detectSeparator(String line) {
+
+        Crawler.logger.debug("CSV header: " + line);
+
+        String[] separators = new String[] { ",", ";", "\t", "|" };
+
+        TreeMap tm = new TreeMap();
+        for(String s : separators) {
+            tm.put(line.split(Pattern.quote(s)).length, s);
+        }
+
+        char separator = tm.lastEntry().getValue().toString().charAt(0);
 
         Crawler.logger.debug("Detected separator: " + separator);
 
         return separator;
     }
 
-    public String buildJson(String[] keys, String[] dataLine) throws Exception {
+    private String buildJson(String[] keys, String[] dataLine) throws Exception {
 
         if(keys.length != dataLine.length) {
             throw new Exception("There are not as much columns for the keys as for the rows");

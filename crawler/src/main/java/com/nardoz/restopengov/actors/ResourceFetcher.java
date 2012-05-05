@@ -43,7 +43,7 @@ public class ResourceFetcher extends UntypedActor {
                 IDatasetReader datasetReader = DatasetReader.factory(resource, callback);
 
                 if(datasetReader != null) {
-                    datasetReader.read();
+                    datasetReader.readFromResourceURL();
                 }
 
             } catch (Exception e) {
