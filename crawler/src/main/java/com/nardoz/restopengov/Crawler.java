@@ -7,6 +7,8 @@ import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import org.apache.log4j.Logger;
 import org.elasticsearch.client.Client;
+import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.common.transport.InetSocketTransportAddress;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,7 +41,8 @@ public class Crawler {
         });
 
         // Startup Elasticsearch connection
-        final Client client = nodeBuilder().client(true).node().client();
+        final Client client = new TransportClient()
+                .addTransportAddress(new InetSocketTransportAddress(config.getString("restopengov.elasticsearch-host"), 9300));
 
         // Metadata persistence actor
         final ActorRef metadataPersist = system.actorOf(new Props(new UntypedActorFactory() {
