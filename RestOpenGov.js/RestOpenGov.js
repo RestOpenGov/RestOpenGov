@@ -10,21 +10,37 @@ var RestOpenGov = function(args) {
 
 	var url = args.entryPointURL + args.dataSource;
 
-	this.search = function(dataset, query, callback) {
+	this.search = function(params, callback) {
+	    
+	    var defaultParams = { 
+            dataset: 'metadata',
+            query: '*:*',
+    		limit: 100,
+    		from: 0
+    	};
 
-		if(query.length == 0) {
-			query = "*:*";
+    	params = $.extend(defaultParams, params);
+
+		if(params.query.length == 0) {
+			params.query = "*:*";
 		}
 
-		$.getJSON(url + "/" + dataset + "/_search", { q: query }, function(obj) {
-			var result = obj.hits.hits;
+        $.getJSON(url + "/" + params.dataset + "/_search", { q: params.query, from: params.from, size: params.limit }, function(obj) {
+            var result = obj.hits.hits;
 
-			for(i in result) {
-				result[i].resourceURL = url + "/" + dataset + "/" + result[i]._id;
-			}
+            for(var i in result) {
+                result[i].resourceURL = url + "/" + params.dataset + "/" + result[i]._id;
+            }
 
-			callback(result);
-		});
+            callback(result);
+        });
+
 	};
 
 };
+
+jQuery.extend({
+   postJSON: function( url, data, callback) {
+      return jQuery.post(url, data, callback, "json");
+   }
+});

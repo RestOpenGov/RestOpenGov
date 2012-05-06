@@ -1,4 +1,3 @@
-
 var opengov = new RestOpenGov();
 
 $(function() {
@@ -8,7 +7,7 @@ $(function() {
 
 		$('#submit').val("Buscando...").attr("disabled", "disabled");
 
-		opengov.search($("#dataset").val(), $("#query").val(), showResults);
+		opengov.search({ dataset: $("#dataset").val(), query: $("#query").val() }, showResults);
 	});
 	
 });
