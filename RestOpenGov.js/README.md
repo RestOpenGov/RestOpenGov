@@ -26,7 +26,7 @@ RestOpenGov.search({ dataset: 'bafici', query: 'terror' }, function(results) {
 Para configurar otro endpoint u otro index, hay que instanciar RestOpenGov y pasarle esos datos al constructor:
 ```
 <script type="text/javascript">   
-var opengov = new RestOpenGov({ endpoint: 'http://urlpropia.com/', dataSource: 'miIndice' });
+var opengov = new RestOpenGov({ entryPointURL: 'http://urlpropia.com/', dataSource: 'miIndice' });
 opengov.search({ dataset: 'bafici', query: 'terror' }, function(results) {
     console.log(results);
 });
