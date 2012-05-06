@@ -1,0 +1,21 @@
+#java specific
+*.class
+target
+
+## generic files to ignore
+*~
+*.lock
+*.swp
+*.out
+.DS_Store
+*.log
+
+# IDEs
+.eclipse
+.settings
+.classpath
+.project
+*.ipr
+*.iws
+*.iml
+

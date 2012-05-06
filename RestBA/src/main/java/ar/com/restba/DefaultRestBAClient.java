@@ -1,0 +1,73 @@
+package ar.com.restba;
+
+import ar.com.restba.connectors.RestBAConnector;
+import ar.com.restba.connectors.con.RestBAConnection;
+import ar.com.restba.json.JsonObject;
+
+/**
+ * Es la implementación por default de {@link RestBAClient} Esta clase es una de
+ * las más importante de todas, porque es la que hay que instanciar para poder
+ * usar esta libreria.
+ * 
+ * 
+ * @author Nicolás Mélendez | Email: nfmelendez@gmail.com | Twitter: @nfmelendez
+ * 
+ */
+public class DefaultRestBAClient implements RestBAClient {
+
+	/**
+	 * Es el connector de RestFB que utilizamos para hacernos de todas las
+	 * bondades de esta excelente libreria.
+	 */
+	private RestBAConnector restFbConnector;
+
+	public DefaultRestBAClient(String host) {
+		restFbConnector = new RestBAConnector(host);
+	}
+
+	/**
+	 * Accede a los datos de la ciudad de Buenos Aires mediante una Query.
+	 * Esta query tiene que ser como se describe en 
+	 * http://www.elasticsearch.org/guide/reference/api/search/uri-request.html
+	 * 
+	 * Y se tiene que evitar los parametros from y size en la URL, ya que son
+	 * manejados internamente por el Iterator.
+	 *  
+	 * @param query Una query para traer datos, nunca nula  o null. 
+	 * Que cumple con http://www.elasticsearch.org/guide/reference/api/search/uri-request.html
+	 * y no envie como parametro ni from y ni size. Ya que esto lo maneja internamente el iterator.
+	 * @param connectionType El Tipo de dato que va a tratar de Mapear RestBA.
+	 * Si se quiere json usar fetchConnectionRestBaAsJson. Nunca null.
+	 * @return Devuelve una puntero que trae paginas de a 10 elementos.
+	 */
+	@Override
+	public <T> RestBAConnection<T> fetchConnectionRestBa(String query,
+			Class<T> connectionType) {
+		RestBAConnection<T> fetchConnectionRestBA = restFbConnector
+				.fetchConnectionRestBA(query, connectionType, 0);
+		return fetchConnectionRestBA;
+	}
+	
+	
+	/**
+	 * Accede a los datos de la ciudad de Buenos Aires mediante una Query.
+	 * Esta query tiene que ser como se describe en 
+	 * http://www.elasticsearch.org/guide/reference/api/search/uri-request.html
+	 * 
+	 * Y se tiene que evitar los parametros from y size en la URL, ya que son
+	 * manejados internamente por el Iterator.
+	 *  
+	 * @param query Una query para traer datos, nunca nula  o null. 
+	 * Que cumple con http://www.elasticsearch.org/guide/reference/api/search/uri-request.html
+	 * y no envie como parametro ni from y ni size. Ya que esto lo maneja internamente el iterator.
+	 * @return Devuelve una puntero que trae paginas de a 10 elementos en formato Json
+	 */
+	@Override
+	public RestBAConnection<JsonObject> fetchConnectionRestBaAsJson(String query) {
+		RestBAConnection<JsonObject> fetchConnectionRestBA = restFbConnector
+				.fetchConnectionRestBA(query,
+						JsonObject.class, 0);
+		return fetchConnectionRestBA;
+	}
+
+}
