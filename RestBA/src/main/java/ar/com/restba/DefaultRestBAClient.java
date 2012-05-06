@@ -63,10 +63,10 @@ public class DefaultRestBAClient implements RestBAClient {
 	 * @return Devuelve una puntero que trae paginas de a 10 elementos en formato Json
 	 */
 	@Override
-	public RestBAConnection<JsonObject> fetchConnectionRestBaAsJson(String query) {
+	public RestBAConnection<JsonObject> fetchConnectionRestBaAsJson(String query, long page) {
 		RestBAConnection<JsonObject> fetchConnectionRestBA = restFbConnector
 				.fetchConnectionRestBA(query,
-						JsonObject.class, 0);
+						JsonObject.class, page);
 		return fetchConnectionRestBA;
 	}
 
