@@ -22,5 +22,25 @@ RestOpenGov.search({ dataset: 'bafici', query: 'terror' }, function(results) {
 </script>
 ```
 
+Para configurar otro endpoint o con otro index, hay que instanciar RestOpenGov y pasarle esos datos al constructor:
+```
+<script type="text/javascript">   
+var opengov = new RestOpenGov({ endpoint: 'http://urlpropia.com/', dataSource: 'miIndice' });
+opengov.search({ dataset: 'bafici', query: 'terror' }, function(results) {
+    console.log(results);
+});
+</script>
+```
+
+Para paginar los resultados, no hay más que pasar el comienzo y la cantidad de resultados:
+```
+<script type="text/javascript">   
+var opengov = new RestOpenGov({ endpoint: 'http://urlpropia.com/', dataSource: 'miIndice' });
+opengov.search({ dataset: 'bafici', query: 'terror', from: 400, limit: 200 }, function(results) {
+    console.log(results);
+});
+</script>
+```
+
 ## Licencia
 Este software es distribuído bajo la licencia Apache 2.0: http://www.apache.org/licenses/LICENSE-2.0
