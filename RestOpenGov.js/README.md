@@ -1,6 +1,6 @@
 ## RestOpenGov.js
 
-RestOpenGov.js es un simple cliente en Javascript para correr consultas client-side a RestOpenGov. Dependencias: Necesita jQuery para funcionar.
+RestOpenGov.js es un simple cliente en Javascript para correr consultas client-side. Dependencias: Necesita jQuery para funcionar.
 
 ### Demos
 En la carpeta de demos se encuentran ejemplos de uso del cliente. Notar que sólo son para fines demostrativos y no pretenden ser aplicaciones para un usuario final.
