@@ -1,6 +1,6 @@
 ## RestOpenGov Crawler
 
- El Crawler encargado de acceder periódicamente a los diversos endpoints publicados por los gobiernos, extraer la información que allí publican, procesarla y almacenarla en un servidor elasticsearch para su posterior consulta.
+El Crawler es el encargado de acceder periódicamente a los diversos endpoints publicados por los gobiernos, extraer la información que allí publican, procesarla y almacenarla en un servidor elasticsearch para su posterior consulta.
 
 ### Tecnologías
 El procesamiento de los datasets es realizado utilizando la API Java de Akka (www.akka.io), un framework de procesamiento distribuído basado en Actores.
