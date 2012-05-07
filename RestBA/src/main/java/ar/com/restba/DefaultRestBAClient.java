@@ -2,6 +2,7 @@ package ar.com.restba;
 
 import ar.com.restba.connectors.RestBAConnector;
 import ar.com.restba.connectors.con.RestBAConnection;
+import ar.com.restba.exception.RestBAException;
 
 /**
  * Es la implementación por default de {@link RestBAClient} Esta clase es una de
@@ -23,7 +24,7 @@ public class DefaultRestBAClient implements RestBAClient {
 	public DefaultRestBAClient(String host) {
 		restFbConnector = new RestBAConnector(host);
 	}
-	
+
 	public DefaultRestBAClient() {
 		restFbConnector = new RestBAConnector();
 	}
@@ -49,6 +50,27 @@ public class DefaultRestBAClient implements RestBAClient {
 	@Override
 	public <T> RestBAConnection<T> fetchConnectionRestBA(String query,
 			Class<T> connectionType) {
+
+		if (null == query || "".equals(query)) {
+			throw new RestBAException("The query can't be null or empty");
+		}
+
+		if (null == connectionType) {
+			throw new RestBAException("The connectionType can't be null");
+		}
+
+		if (query.toLowerCase().contains("from=")) {
+			throw new RestBAException(
+					"From parameter should not be in the query"
+							+ " because connection pointer abstractions use that.");
+		}
+
+		if (query.toLowerCase().contains("size=")) {
+			throw new RestBAException(
+					"Size parameter should not be in the query"
+							+ " because connection pointer abstractions use that.");
+		}
+
 		RestBAConnection<T> fetchConnectionRestBA = restFbConnector
 				.fetchConnectionRestBA(query, connectionType, 0);
 		return fetchConnectionRestBA;
