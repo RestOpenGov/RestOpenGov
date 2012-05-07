@@ -819,4 +819,13 @@ public class RestBAConnector extends BaseRestBAConnector implements
 		return new RestBAConnection<T>(this, request, connectionType,
 				connection, page);
 	}
+	
+	
+
+	public <T> T executeQuery(String query, Class<T> objectType) {
+		verifyParameterPresence("object", query);
+		verifyParameterPresence("objectType", objectType);
+		return jsonMapper.toJavaObject(makeRequest(query),
+				objectType);
+	}
 }

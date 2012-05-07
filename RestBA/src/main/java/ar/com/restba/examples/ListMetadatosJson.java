@@ -21,7 +21,7 @@ public class ListMetadatosJson {
 		String query = "gcba/metadata/_search?";
 
 		RestBAConnection<JsonObject> fetchConnectionRestBA = dataBairesClient
-				.fetchConnectionRestBaAsJson(query, 0);
+				.fetchConnectionRestBA(query, JsonObject.class);
 
 		for (List<JsonObject> page : fetchConnectionRestBA) {
 			for (JsonObject metadato : page) {
