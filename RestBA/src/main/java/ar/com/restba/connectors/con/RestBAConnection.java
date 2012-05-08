@@ -91,7 +91,7 @@ public class RestBAConnection<T> implements Iterable<List<T>> {
 				t = (T) objectToMap;
 			} else if (connectionType.equals(com.restfb.json.JsonObject.class)) {
 				throw new RestBAException(
-						"The json Object Type is worng,"
+						"The json object Type is wrong,"
 								+ "please use instead ar.com.restba.json.JsonObject.class");
 			} else {
 				t = restBaClient.getJsonMapper().toJavaObject(

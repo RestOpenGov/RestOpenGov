@@ -20,7 +20,7 @@ public class ListObrasRegistradas {
 		String query = "gcba/obras-registradas/_search?";
 
 		RestBAConnection<ObraRegistrada> fetchConnectionRestBA = dataBairesClient
-				.fetchConnectionRestBa(query, ObraRegistrada.class);
+				.fetchConnectionRestBA(query, ObraRegistrada.class);
 
 		for (List<ObraRegistrada> page : fetchConnectionRestBA) {
 			for (ObraRegistrada obraRegistrada : page) {
