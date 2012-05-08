@@ -11,29 +11,84 @@ http://blog.melendez.com.ar/gobierno-abierto-accediendo-a-los-datos-de-la-ciudad
 
 Quick start
 ==========================
-Para empezar hay que descargar nuestra libreria y sus dependencias. Luego agregarlas al proyecto y listo.<br>
-<b>Libreria:</b><br>
-RestBA 1.0 :  https://github.com/melendeznicolas/RestBA/raw/master/download/lib/restba-1.0.jar <br>
-<b>Dependencias:</b><br>
-Open CSV 2.3: https://github.com/melendeznicolas/RestBA/raw/master/download/lib/opencsv-2.3.jar <br>
-Rest FB 1.6.9 https://github.com/melendeznicolas/RestBA/raw/master/download/lib/restfb-1.6.9.jar <br>
+
+Para bajarse la libreria y sus dependencias (pocas) usando <a href="http://maven.apache.org/">maven</a> se debe agregar adentro  del < dependecies > del pom.xml
+	
+	<dependency>
+	  <groupId>ar.com.restba</groupId>
+	  <artifactId>restba</artifactId>
+	  <version>1.0.4</version>
+	</dependency>
+	
+y luego debemos agregar el repositorio público de RestOpenGov,
+adentro del tag < repositories > poner:
+	
+	  <repository>
+	    <id>RestOpenGov</id>
+	    <url>http://maven.restopengov.org/nexus/content/repositories/RestOpenGov</url>
+	  </repository>
+	  
+<b>Si no queres usar maven</b> tambien te podes descargar la libreria con sus dependencias de github
+en la carpeta <a href="https://github.com/Nardoz/RestOpenGov/tree/develop/RestBA/download">download</a>
 
 *Ahora tu proyecto puede acceder a los datos de la ciudad de Buenos Aires y ser feliz como una lombriz :)*
 
 
-Ejemplos
-===========================
-*Lista todas las direcciones de todas las obras registradas en la Ciudad de Buenos Aires. En demolición, obra, ampliación parcial, etc...*
+Ejemplo 1 : Lista Obras Registradas con Mapping de json a objeto java.
+=========================================================================
 
+ *Ejemplo que lista la dirección de todas las obras registradas. Busca todas la obras registradas en la ciudad de Buenos Aires. Obras en construcción, Obras en demolición, etc con sus respectivos datos como dirección de la obra, nombre del responsable, etc.*
+  
 	public static void main(String[] args) {
 		RestBAClient dataBairesClient = new DefaultRestBAClient();
-		List<ObrasRegistradas> fetchObrasRegistradas = dataBairesClient
-				.fetchObrasRegistradas();
+		String query = "gcba/obras-registradas/_search?";
 
-		for (ObrasRegistradas obrasRegistradas : fetchObrasRegistradas) {
-			System.out.println(obrasRegistradas.getDireccion());
+		RestBAConnection<ObraRegistrada> fetchConnectionRestBA = dataBairesClient
+				.fetchConnectionRestBA(query, ObraRegistrada.class);
+
+		for (List<ObraRegistrada> page : fetchConnectionRestBA) {
+			for (ObraRegistrada obraRegistrada : page) {
+				System.out.println(obraRegistrada.getDireccion());
+			}
+
+		}
+	}
+
+
+Ejemplo 2 : Lista los metadatos pidiendo solamente json, sin mappear.
+=========================================================================
+*Imprime los autor, título de todos los datasets de la ciudad de buenos aires*
+
+public static void main(String[] args) {
+
+		RestBAClient dataBairesClient = new DefaultRestBAClient();
+		String query = "gcba/metadata/_search?";
+
+		RestBAConnection<JsonObject> fetchConnectionRestBA = dataBairesClient
+				.fetchConnectionRestBA(query, JsonObject.class);
+
+		for (List<JsonObject> page : fetchConnectionRestBA) {
+			for (JsonObject metadato : page) {
+				System.out.println("Author: " + metadato.getString("author")
+						+ " Title: " + metadato.getString("title") + " _id: "
+						+ metadato.getString("_id"));
+
+			}
+
 		}
 
 	}
 
 
+Ejemplo 3 : Pedido simple a elastic search y devuelve un json normal
+=========================================================================
+
+public static void main(String[] args) {
+
+		RestBAClient dataBairesClient = new DefaultRestBAClient();
+		String query = "gcba/metadata/_search?&from=0";
+
+		JsonObject q = dataBairesClient.executeQuery(query, JsonObject.class);
+		
+		System.out.println("JSON object: " + q.toString());
+	}

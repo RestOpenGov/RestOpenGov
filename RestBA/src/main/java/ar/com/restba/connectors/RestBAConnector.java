@@ -812,11 +812,20 @@ public class RestBAConnector extends BaseRestBAConnector implements
 	 *      java.lang.Class, com.restfb.Parameter[])
 	 */
 	public <T> RestBAConnection<T> fetchConnectionRestBA(String connection,
-			Class<T> connectionType, int page) {
+			Class<T> connectionType, long page) {
 		verifyParameterPresence("connection", connection);
 		verifyParameterPresence("connectionType", connectionType);
 		String request = makeRequest(connection + "&from=" + page * 10);
 		return new RestBAConnection<T>(this, request, connectionType,
 				connection, page);
+	}
+	
+	
+
+	public <T> T executeQuery(String query, Class<T> objectType) {
+		verifyParameterPresence("object", query);
+		verifyParameterPresence("objectType", objectType);
+		return jsonMapper.toJavaObject(makeRequest(query),
+				objectType);
 	}
 }

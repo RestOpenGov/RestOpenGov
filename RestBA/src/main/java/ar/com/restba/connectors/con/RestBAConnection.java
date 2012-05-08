@@ -8,11 +8,12 @@ import java.util.Iterator;
 import java.util.List;
 
 import ar.com.restba.connectors.RestBAConnector;
+import ar.com.restba.exception.RestBAException;
 
 import com.restfb.exception.FacebookJsonMappingException;
-import com.restfb.json.JsonArray;
-import com.restfb.json.JsonException;
-import com.restfb.json.JsonObject;
+import ar.com.restba.json.JsonArray;
+import ar.com.restba.json.JsonException;
+import ar.com.restba.json.JsonObject;
 import com.restfb.util.ReflectionUtils;
 
 /**
@@ -27,7 +28,8 @@ public class RestBAConnection<T> implements Iterable<List<T>> {
 	private List<T> data;
 	private String previousPageUrl;
 	private String nextPageUrl;
-	private final int page;
+	private final long page;
+	private int maxPages;
 
 	/**
 	 * @see java.lang.Iterable#iterator()
@@ -55,7 +57,7 @@ public class RestBAConnection<T> implements Iterable<List<T>> {
 	 */
 	@SuppressWarnings("unchecked")
 	public RestBAConnection(RestBAConnector restBaClient, String json,
-			Class<T> connectionType, String fullUrl, int page) {
+			Class<T> connectionType, String fullUrl, long page) {
 		this.page = page;
 		List<T> data = new ArrayList<T>();
 
@@ -75,15 +77,22 @@ public class RestBAConnection<T> implements Iterable<List<T>> {
 		// Pull out data
 		JsonObject hits = jsonObject.getJsonObject("hits");
 		long total = hits.getLong("total");
-		int maxPages = (int) Math.ceil(total / 10.0);
+		maxPages = ((int) Math.ceil(total / 10.0));
 
 		JsonArray jsonData = hits.getJsonArray("hits");
 
 		for (int i = 0; i < jsonData.length(); i++) {
 			T t;
-			JsonObject objectToMap = jsonData.getJsonObject(i).getJsonObject("_source");
-			if (connectionType.equals(JsonObject.class)) {
+			JsonObject objectToMap = jsonData.getJsonObject(i).getJsonObject(
+					"_source");
+			String id = jsonData.getJsonObject(i).getString("_id");
+			objectToMap.putOnce("_id", id);
+			if (connectionType.equals(ar.com.restba.json.JsonObject.class)) {
 				t = (T) objectToMap;
+			} else if (connectionType.equals(com.restfb.json.JsonObject.class)) {
+				throw new RestBAException(
+						"The json object Type is wrong,"
+								+ "please use instead ar.com.restba.json.JsonObject.class");
 			} else {
 				t = restBaClient.getJsonMapper().toJavaObject(
 						objectToMap.toString(), connectionType);
@@ -97,7 +106,7 @@ public class RestBAConnection<T> implements Iterable<List<T>> {
 		} else {
 			previousPageUrl = null;
 		}
-		if (page < maxPages) {
+		if (page < getMaxPages()) {
 			nextPageUrl = fullUrl;
 		} else {
 			nextPageUrl = null;
@@ -194,4 +203,9 @@ public class RestBAConnection<T> implements Iterable<List<T>> {
 	public boolean hasNext() {
 		return !isBlank(getNextPageUrl());
 	}
+
+	public int getMaxPages() {
+		return maxPages;
+	}
+
 }
