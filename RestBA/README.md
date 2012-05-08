@@ -20,7 +20,7 @@ Para bajarse la libreria y sus dependencias (pocas) usando <a href="http://maven
 	  <version>1.0.4</version>
 	</dependency>
 	
-y luego debemos agregar el repositorio púplico de RestOpenGov,
+y luego debemos agregar el repositorio público de RestOpenGov,
 adentro del tag < repositories > poner:
 	
 	  <repository>
