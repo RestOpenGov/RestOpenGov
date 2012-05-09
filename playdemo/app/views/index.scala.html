@@ -1,4 +1,4 @@
-@(q: String, films: Seq[Film])
+@(q: String, films: Seq[Film], elasticQuery: String)
 
 @main("Welcome to Play 2.0") {
 
@@ -14,8 +14,8 @@
 
   </form>
 
-  <h3>Filmes</h3>
-
+  <h3><a target="_blank" href="@elasticQuery">Filmes</a></h3>
+ 
   <table class="table">
   @for(film <- films) {
     <tr>

@@ -12,11 +12,11 @@ object Application extends Controller {
   
   def index(q: String = "") = Action {
 
-    val query = "http://elastic.restopengov.org/gcba/bafici/_search?fields=title_es," +
+    val elasticQuery = "http://elastic.restopengov.org/gcba/bafici/_search?fields=title_es," +
       "synopsis_es&q=synopsis_es:" + (if (q=="") "*" else "'" + URLEncoder.encode(q, "UTF-8") + "'")
 
     // read & parse json from web service
-    val json: JsValue = WS.url(query).get().await.get.json
+    val json: JsValue = WS.url(elasticQuery).get().await.get.json
 
     // get the hits array
     val hits = (json \ "hits" \ "hits").as[Seq[JsValue]]
@@ -30,7 +30,7 @@ object Application extends Controller {
       )
     }
 
-    Ok(views.html.index(q, films))
+    Ok(views.html.index(q, films, elasticQuery))
   }
   
 }
