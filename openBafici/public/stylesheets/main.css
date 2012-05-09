@@ -1,39 +1,37 @@
 body {
     padding-bottom: 40px;
-    padding-top: 60px;
 }
 
-#intro { margin:0; padding:0; background-color:#FFF }
-#intro #container { width:1400px; margin:0 auto }
-#intro #container span { height:100px; overflow:hidden; float:left }
-#intro #container span img { width:200px; opacity:0.7 }
-#intro #container span img.active, #container span img:hover { opacity:1; }
-#intro #screen { display:none; background-color:#000; width:100%; height:300px; opacity:0.8; position:absolute; top:200px; z-index:10 }
-#intro #title { display:none; position:absolute; top:280px; z-index:100; color:#FFF; text-align:right; right:50px }
+#intro { margin:0; padding:0; background-color:#222;overflow:hidden; }
+#intro #container { overflow:hidden; }
+#intro #container div { overflow:hidden; margin-left:0px !important;height:150px;width:150px; }
+#intro #container div img { opacity:0.7; height:150px !important;max-width:none !important;}
+#intro #container div img.active, #container div img:hover { opacity:1; }
+#intro #screen { display:none; background-color:#000; height:300px; opacity:0.8; z-index:10 }
+#intro #title { 
+position:absolute; display:none; z-index:100; color:#FFF; text-align:center; top:50px;width:100%; 
+
+}
 #intro #title h1, #intro #title p {  font-family: 'Arvo', serif }
 #intro #title p { font-size:16pt }
 #intro #title p { margin:10px 0 15px 0; font-size:12pt }
 #intro .button { width:150px; height:60px; background-color:#FF0000; color:#FFF; border:1px solid #DDD; border-radius:7px }
 
 .filmItem {
-	border-bottom: 1px solid #ccc;
-	padding: 20px;
 }
 
 .filmItem:hover {
-	background-color:#ccc;
 }
 
-.filmItem .key {
+.key {
 	min-height: 20px;
-	text-align: left;
-	padding-left: 20%;
-	font-weight: bold;
-	font-size: 20px;
+	text-align: right;
 }
 
-.filmItem .value {
-	min-height: 20px;
+.value {
+	min-height: 25px !important;
+	vertical-align: middle; 
+	padding-top:7px;
 }
 
 .value .thumb {
@@ -46,13 +44,18 @@ body {
 
 .en,
 .es {
-	display:none;
+	display:none !important;
 }
 
 .activeLang{
-	display:inline-block;
+	display:inline-block !important;
 }
 
 td.titulo { 
 	vertical-align: middle; 
+}
+
+.searchLabel{
+	vertical-align:middel;
+	text-align:right;
 }

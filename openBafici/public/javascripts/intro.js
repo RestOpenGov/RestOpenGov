@@ -1,16 +1,25 @@
 
 var opengov = new RestOpenGov();
 
-$(function() {
+$(document).ready(function() {
 
     if(typeof sessionStorage.getItem("imagesHtml") == 'undefined' || sessionStorage.getItem("imagesHtml") == null) {
-
         opengov.search({ dataset: 'bafici', query: '', limit: 100 }, function(obj) {
             var html = '';
+            
+            var x = 0, y = 0, counter=0;
+            
             for(var i in obj) {
                 if(typeof obj[i]._source.filepic1 != "undefined" && obj[i]._source.filepic1.length > 0) {
-                    html += '<span><img src="http://www.bafici.gov.ar/home11/photobase/films/' + obj[i]._source.filepic1 + '" /></span>';
+                	counter++;
+                    html += '<div style="position:absolute;top:'+y+'px;left:'+x+'px"><img id="'+i+'" height="150" src="http://www.bafici.gov.ar/home11/photobase/films/' + obj[i]._source.filepic1 + '" /></div>';
+                	x+=150;
+	            	if(counter%10==0){
+	   		            y+=150;
+	   		            x=0;
+	   		        }
                 }
+
             }
 
             sessionStorage.setItem("imagesHtml", html);

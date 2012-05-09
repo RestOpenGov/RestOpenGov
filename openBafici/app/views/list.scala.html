@@ -1,67 +1,103 @@
 @(page: Long = 1, sort: String = "", filter: String = "", films: Seq[Film] = Seq[Film]())
 
 @main("Open Bafici"){<p></p>}{
-<p class="row-fluid">
-	Ingrese un término:
-</p>
-<p class="row-fluid">
-	<form class="form-search">
-		<input id="filterText" type="text" class="search-query" />
-	</form>
-</p>
-<p class="row-fluid">
-	 <a id="buscar" class="btn btn-large">Buscar</a>
-</p>
-  
-<p class="row-fluid">
-  @if(films.size == 0) {
-    @if(filter == "") {
-    	<em>Busque algo</em>
-    } else {
-     	<em>0 Elementos</em>
-    }	
-  } else {
-     <em> @films.size Elementos</em>        
-  }
-</p>
-  
-  @if(films.size > 0) {
-  
-  @pager(page)
 
 <div class="row-fluid">
-	<div class="span12">
-		  <table class="table table-striped">
-		  <thead>
-		   	<tr>
-		  		<th>Título</th>
-		  		<th></th>
-		  	</tr>
-		  </thead>
-		  <tbody>
-		  	@for(film:Film <- films){
-		  		<tr>
-		  			<td class="titulo">@film.title</td>
-		  			<td><a href="@routes.Films.show(film.id)" class="btn btn-success pull-right">+ INFO</a></td>
-		  		</tr>	
-		  	}
-		  </tbody>        	    
-		  </table>
-  	</div>
-  </div>
+	<div class="span6 hidden-phone">
+		<div class="hero-unit">
+			<blockquote>
+			  <p>"La fotografía es verdad.<br/> Y el cine es verdad 24 veces por segundo"</p>
+			  <small>Jean Luc Godard</small>
+			</blockquote>
+		</div>
+	</div>
+	<!-- ver http://foro.elaleph.com/viewtopic.php?t=8365 y http://www.citasyproverbios.com/citas.aspx?tema=Cine -->
+	<div class="span3">
+		<br/>
+		<div class="span12">
+			<h3>Ingrese una palabra<span class="visible-desktop">:</span></h3>
+		</div>
+		<div class="span12">
+			<div class="row-fluid">
+				<form class="form-search">
+					<input type="text" class="filterText search-query visible-desktop" style="width:80%" />
+					<input type="text" class="filterText search-query hidden-desktop" style="width:90%" />
+					 <p class="help-block">Busca por título, género, actor, etc.</p>
+				</form>
+				<a class="buscar btn btn-large visible-desktop">Buscar</a>
+				<a class="buscar btn btn-large hidden-desktop">Buscar</a>
+			</div>
+		</div>
+	</div>
+	<div class="span3 hidden-phone hidden-tablet">
+		<div class="hero-unit">
+			<p>Buscando en más de ###.### de registros.</p>
+		</div>
+	</div>
+</div>
+  
+@if(films.size > 0) {
+  
+  	@pager(page)
+
+	<div class="row-fluid">
+		<div class="span12">
+			  <table class="table table-striped">
+			  <thead>
+			   	<tr>
+			  		<th>Título</th>
+			  		<th></th>
+			  	</tr>
+			  </thead>
+			  <tbody>
+			  	@for(film:Film <- films){
+			  		<tr>
+			  			<td class="titulo">@film.title</td>
+			  			<td><a href="@routes.Films.show(film.id)" class="btn btn-success pull-right">+ INFO</a></td>
+			  		</tr>	
+			  	}
+			  </tbody>        	    
+			  </table>
+	  	</div>
+	</div>
+  
+@pager(page)
+  
   }
 
-  @pager(page)
+
 
 }
 
 @pager(page: Long) = {
-<div class="row-fluid">
-	  @if(page>1) {
-	    <a href="@routes.Films.list(page-1, sort, filter)" class="btn btn-warning btn-large">prev</a></td>
-	  }else{
-	  	<a href="javascript:;" class="btn btn-warning btn-large active">prev</a></td>
-	  }
-	  <a href="@routes.Films.list(page+1, sort, filter)" class="btn btn-warning btn-large">next</a></td>
+<hr/>
+<div class="row-fluid controls">
+   <div class="span12">
+	   <ul class="pager">
+		  <li>
+		   @if(page>1) {
+			    <a href="@routes.Films.list(page-1, sort, filter)" class="btn-large">&larr; Anterior</a>
+		  	}else{
+			    <a href="javascript:;" class="btn-large disabled">&larr; Anterior</a>
+		  	}
+		  </li>
+		  <li>
+		  	|
+		  </li>
+		  <li>
+		    <a href="@routes.Films.list(page+1, sort, filter)" class="btn-large">Siguiente &rarr;</a>
+		  </li>
+		</ul>
+	</div>
+	@if(films.size == 0) {
+	    @if(filter == "") {
+	    	<em>Busque algo</em>
+	    } else {
+	     	<em>0 Elementos</em>
+	    }	
+	  } else {
+	     <em> @films.size Elementos</em>        
+	}
 </div>
+<hr/>
 }
