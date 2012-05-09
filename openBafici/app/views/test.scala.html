@@ -1,0 +1,13 @@
+@(films: Seq[Film])
+
+@main("Open Bafici"){<p></p>}{
+
+  <ul>
+  @for(film <- films) {
+    
+    <li>title: @film.title </li>
+
+  }
+  </ul>
+
+}

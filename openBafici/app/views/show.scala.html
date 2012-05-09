@@ -1,0 +1,103 @@
+@(film: Film)
+
+@main("Open Bafici") {
+<div id="langSelector" class="btn-group pull-right">
+	<a class="btn btn-warning" rel="en">Inglés</a>
+	<a class="btn btn-warning active" rel="es">Español</a>
+</div>
+} {
+
+<div class="filmItem">
+	<h2 class="en">@film.title</h2>
+	<h2 class="es activeLang">@film.title_es</h2>
+</div>	
+<div class="filmItem">		
+	<div class="value">
+		<img class="thumb" alt="" src="http://www.bafici.gov.ar/home11/photobase/films/@film.filepic1">
+	</div>
+</div>
+<div class="filmItem">
+	<div class="key">
+		Genero
+	</div>		
+	<div class="value">
+		@film.generes_list
+	</div>
+</div>		
+<div class="filmItem">
+	<div class="key">
+		Reparto
+	</div>		
+	<div class="value">
+		@film.cast
+	</div>
+</div>
+@if(film.id_youtube!=""){
+	<div class="filmItem">
+		<div class="key">
+			Trailer
+		</div>		
+		<div class="value">
+			<iframe class="trailer visible-desktop" width="560" height="315" src="http://www.youtube.com/embed/@film.id_youtube" frameborder="0" allowfullscreen></iframe>
+			<iframe class="trailer hidden-desktop" width="100%" height="200" src="http://www.youtube.com/embed/@film.id_youtube" frameborder="0" allowfullscreen></iframe>
+		</div>
+	</div>	
+}
+<div class="filmItem">
+	<div class="key">
+		Sinopsis
+	</div>		
+	<div class="value es activeLang">
+		@film.synopsis_es
+	</div>
+	<div class="value en">
+		@film.synopsis_en
+	</div>
+</div>
+<div class="filmItem">
+	<div class="key">
+		Director
+	</div>		
+	<div class="value">
+		@film.director
+	</div>
+</div>	
+<div class="filmItem">
+	<div class="key">
+		Duracion
+	</div>		
+	<div class="value">
+		@film.duration min.
+	</div>
+</div>
+<div class="filmItem">
+	<div class="key">
+		Año
+	</div>		
+	<div class="value">
+		@film.year
+	</div>
+</div>
+<div class="filmItem">
+	<div class="key">
+		Fecha
+	</div>		
+	<div class="value">
+		@film.updated_ts
+	</div>
+</div>
+<div class="filmItem">
+	<div class="key">
+		Productora
+	</div>		
+	<div class="value">
+		@film.prodteam
+	</div>
+</div>
+<div class="filmItem">
+	<div class="value">
+		<a class="btn btn-success btn-large" href="@film.url_ticket">COMPRAR TICKET</a>  
+	</div>
+</div>
+
+}

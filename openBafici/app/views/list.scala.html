@@ -1,0 +1,67 @@
+@(page: Long = 1, sort: String = "", filter: String = "", films: Seq[Film] = Seq[Film]())
+
+@main("Open Bafici"){<p></p>}{
+<p class="row-fluid">
+	Ingrese un término:
+</p>
+<p class="row-fluid">
+	<form class="form-search">
+		<input id="filterText" type="text" class="search-query" />
+	</form>
+</p>
+<p class="row-fluid">
+	 <a id="buscar" class="btn btn-large">Buscar</a>
+</p>
+  
+<p class="row-fluid">
+  @if(films.size == 0) {
+    @if(filter == "") {
+    	<em>Busque algo</em>
+    } else {
+     	<em>0 Elementos</em>
+    }	
+  } else {
+     <em> @films.size Elementos</em>        
+  }
+</p>
+  
+  @if(films.size > 0) {
+  
+  @pager(page)
+
+<div class="row-fluid">
+	<div class="span12">
+		  <table class="table table-striped">
+		  <thead>
+		   	<tr>
+		  		<th>Título</th>
+		  		<th></th>
+		  	</tr>
+		  </thead>
+		  <tbody>
+		  	@for(film:Film <- films){
+		  		<tr>
+		  			<td class="titulo">@film.title</td>
+		  			<td><a href="@routes.Films.show(film.id)" class="btn btn-success pull-right">+ INFO</a></td>
+		  		</tr>	
+		  	}
+		  </tbody>        	    
+		  </table>
+  	</div>
+  </div>
+  }
+
+  @pager(page)
+
+}
+
+@pager(page: Long) = {
+<div class="row-fluid">
+	  @if(page>1) {
+	    <a href="@routes.Films.list(page-1, sort, filter)" class="btn btn-warning btn-large">prev</a></td>
+	  }else{
+	  	<a href="javascript:;" class="btn btn-warning btn-large active">prev</a></td>
+	  }
+	  <a href="@routes.Films.list(page+1, sort, filter)" class="btn btn-warning btn-large">next</a></td>
+</div>
+}
