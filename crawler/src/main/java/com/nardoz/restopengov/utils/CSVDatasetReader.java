@@ -7,9 +7,7 @@ import com.nardoz.restopengov.models.MetadataResource;
 
 import java.io.*;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.regex.Pattern;
 
 public class CSVDatasetReader implements IDatasetReader {
@@ -45,7 +43,7 @@ public class CSVDatasetReader implements IDatasetReader {
 
     public IDatasetReaderResult read(InputStream stream) throws Exception {
 
-        CSVReader reader = new CSVReader(new InputStreamReader(stream), separator);
+        CSVReader reader = new CSVReader(new InputStreamReader(stream, getValidEncoding(resource.encoding)), separator);
 
         String[] keys = reader.readNext();
         String[] nextLine;
@@ -98,6 +96,23 @@ public class CSVDatasetReader implements IDatasetReader {
         Crawler.logger.debug("Detected separator: " + separator);
 
         return separator;
+    }
+
+    private String getValidEncoding(String encoding) {
+
+        String result = "UTF-8";
+
+        if(encoding != null) {
+
+            List<String> supportedEncodings = new ArrayList<String>();
+            supportedEncodings.add("UTF-8");
+
+            if(supportedEncodings.contains(encoding)) {
+                result = encoding;
+            }
+        }
+
+        return result;
     }
 
     private String buildJson(String[] keys, String[] dataLine) throws Exception {
