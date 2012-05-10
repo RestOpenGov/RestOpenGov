@@ -1,0 +1,61 @@
+body {
+    padding-bottom: 40px;
+}
+
+#intro { margin:0; padding:0; background-color:#222;overflow:hidden; }
+#intro #container { overflow:hidden; }
+#intro #container div { overflow:hidden; margin-left:0px !important;height:150px;width:150px; }
+#intro #container div img { opacity:0.7; height:150px !important;max-width:none !important;}
+#intro #container div img.active, #container div img:hover { opacity:1; }
+#intro #screen { display:none; background-color:#000; height:300px; opacity:0.8; z-index:10 }
+#intro #title { 
+position:absolute; display:none; z-index:100; color:#FFF; text-align:center; top:50px;width:100%; 
+
+}
+#intro #title h1, #intro #title p {  font-family: 'Arvo', serif }
+#intro #title p { font-size:16pt }
+#intro #title p { margin:10px 0 15px 0; font-size:12pt }
+#intro .button { width:150px; height:60px; background-color:#FF0000; color:#FFF; border:1px solid #DDD; border-radius:7px }
+
+.filmItem {
+}
+
+.filmItem:hover {
+}
+
+.key {
+	min-height: 20px;
+	text-align: right;
+}
+
+.value {
+	min-height: 25px !important;
+	vertical-align: middle; 
+	padding-top:7px;
+}
+
+.value .thumb {
+	max-width: 100%;
+}
+
+.trailer{
+	max-width:560px;
+}
+
+.en,
+.es {
+	display:none !important;
+}
+
+.activeLang{
+	display:inline-block !important;
+}
+
+td.titulo { 
+	vertical-align: middle; 
+}
+
+.searchLabel{
+	vertical-align:middel;
+	text-align:right;
+}
