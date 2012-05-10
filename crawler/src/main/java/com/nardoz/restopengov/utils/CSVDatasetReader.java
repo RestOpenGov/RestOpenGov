@@ -1,15 +1,14 @@
 package com.nardoz.restopengov.utils;
 
 import au.com.bytecode.opencsv.CSVReader;
+import com.glaforge.i18n.io.SmartEncodingInputStream;
 import com.google.gson.Gson;
 import com.nardoz.restopengov.Crawler;
 import com.nardoz.restopengov.models.MetadataResource;
 
 import java.io.*;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.regex.Pattern;
 
 public class CSVDatasetReader implements IDatasetReader {
@@ -45,7 +44,9 @@ public class CSVDatasetReader implements IDatasetReader {
 
     public IDatasetReaderResult read(InputStream stream) throws Exception {
 
-        CSVReader reader = new CSVReader(new InputStreamReader(stream), separator);
+        SmartEncodingInputStream smart = new SmartEncodingInputStream(stream);
+
+        CSVReader reader = new CSVReader(new InputStreamReader(smart), separator);
 
         String[] keys = reader.readNext();
         String[] nextLine;

@@ -8,6 +8,7 @@ public class MetadataResource implements Serializable {
     public String hash;
     public String description;
     public String format;
+    public String encoding;
     public String url;
     public String cache_url;
     public String webstore_url;

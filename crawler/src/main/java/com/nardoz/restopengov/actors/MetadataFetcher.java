@@ -29,6 +29,12 @@ public class MetadataFetcher extends UntypedActor {
                 for(MetadataResource resource : metadata.resources) {
                     resource.metadata_name = metadata.name;
 
+                    if(metadata.extras != null) {
+                        if(metadata.extras.containsKey("encoding")) {
+                            resource.encoding = metadata.extras.get("encoding");
+                        }
+                    }
+
                     if(resource.format.toLowerCase().equals("zip")) {
                         zipResourceFetcher.tell(resource, getSelf());
                     } else {
