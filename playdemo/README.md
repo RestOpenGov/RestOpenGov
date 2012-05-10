@@ -1,6 +1,9 @@
 # Desarrollando una aplicación mobile con restOpenGov usando Play Framework 2.0 y Scala
 
-Para mostrarles cómo pueden utilizar la API de restOpenGov, haremos un ejemplo completo, paso a paso, en el cual desarrollaremos una aplicación mobile usando Play Framework 2.0 y Scala, para luego desplegarla en Openshift, la plataforma cloud-computing libre (y gratuita) de Red Hat.
+Para mostrarles cómo pueden utilizar la API de restOpenGov, haremos un ejemplo completo, paso a paso, en el cual desarrollaremos una aplicación mobile usando [Play Framework 2.0](http://www.playframework.org/) y Scala, para luego desplegarla en Openshift, la plataforma cloud-computing libre (y gratuita) de Red Hat.
+
+Pueden ver y probar la aplicación en [https://playdemo-rog.rhcloud.com/](https://playdemo-rog.rhcloud.com/)
+
 
 ## Instalación de Play Framework
 
