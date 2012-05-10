@@ -1,13 +1,12 @@
 @(q: String, films: Seq[Film], elasticQuery: String)
 
-@main("Welcome to Play 2.0") {
-
+@main("Play 2.0 demo for restOpenGov") {
 
 <h1>Play Framework 2.0 simple demo for restOpenGov</h1><hr />
 
   <form method="get" action="@routes.Application.index()" id="form" class="form-inline" >
     <p>
-    <label for="query">Resumen:</label>
+    <label for="query">Buscar:</label>
     <input type="text" name="q" value="@q" />
 
     <input type="submit" id="submit" class="btn btn-primary" value="Buscar" />

@@ -9,6 +9,7 @@ target
 *.out
 .DS_Store
 *.log
+logs/*
 
 # IDEs
 .eclipse

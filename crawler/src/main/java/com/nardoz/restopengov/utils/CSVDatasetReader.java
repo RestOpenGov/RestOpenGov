@@ -1,6 +1,7 @@
 package com.nardoz.restopengov.utils;
 
 import au.com.bytecode.opencsv.CSVReader;
+import com.glaforge.i18n.io.SmartEncodingInputStream;
 import com.google.gson.Gson;
 import com.nardoz.restopengov.Crawler;
 import com.nardoz.restopengov.models.MetadataResource;
@@ -45,7 +46,9 @@ public class CSVDatasetReader implements IDatasetReader {
 
     public IDatasetReaderResult read(InputStream stream) throws Exception {
 
-        CSVReader reader = new CSVReader(new InputStreamReader(stream), separator);
+        SmartEncodingInputStream smart = new SmartEncodingInputStream(stream);
+
+        CSVReader reader = new CSVReader(new InputStreamReader(smart), separator);
 
         String[] keys = reader.readNext();
         String[] nextLine;
