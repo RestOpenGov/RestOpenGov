@@ -6,6 +6,8 @@ import play.Play.application
 import play.api.libs.ws.WS
 import play.api.Logger
 
+import java.net.URLEncoder
+
 object Bafici {
 
   val fields: String = 
@@ -24,8 +26,8 @@ object Bafici {
   // fj: b6f980d6-5070-48b7-aeea-41d945b34175-130
   // http://zenithsistemas.com:9200/gcba/bafici/b6f980d6-5070-48b7-aeea-41d945b34175-130
   def queryById(id: String): JsValue = {
-    val query = endpoint + id + "?fields=" + fields
-    getJson(query)
+    val url = endpoint + id + "?fields=" + fields
+    getJson(url)
   }
 
   // endpoint: bafici.endpoint="http://zenithsistemas.com:9200/gcba/bafici/"
@@ -35,7 +37,7 @@ object Bafici {
     val url = endpoint + "_search?" +
       "from=" + from + "&size=" + size + 
       "&fields=" + fields + 
-      (if (query != "") "&q=" + query else "")
+      (if (query != "") "&q=" + URLEncoder.encode(query, "UTF-8") else "")
 
     (getJson(url) \ "hits" \ "hits").as[JsValue]
 
