@@ -7,6 +7,8 @@ import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.client.Client;
 
+import java.net.URL;
+
 public class ElasticDatasetReaderResult implements IDatasetReaderResult {
 
     private String index;
@@ -38,10 +40,20 @@ public class ElasticDatasetReaderResult implements IDatasetReaderResult {
             onStart();
         }
 
-        bulkRequest.add(client.prepareIndex(index, resource.metadata_name, resource.id + "-" + id).setSource(json));
+        String resourceId = resource.id + "-" + id;
+
+        try {
+            URL url = new URL(resource.url);
+            resourceId = url.getFile().split("\\.")[0] + "-" + id;
+
+        } catch (Exception e) {
+
+        }
+
+        bulkRequest.add(client.prepareIndex(index, resource.metadata_name, resourceId).setSource(json));
         itemCounter++;
 
-        Crawler.logger.debug("Adding item #" + itemCounter + ": " + index + "/" + resource.metadata_name + "/" + resource.id + "-" + id);
+        Crawler.logger.debug("Adding item #" + itemCounter + ": " + index + "/" + resource.metadata_name + "/" + resourceId);
     }
 
     @Override
