@@ -1,7 +1,9 @@
-
 # Desarrollando una aplicación mobile con restOpenGov usando Play Framework 2.0 y Scala
 
-Para mostrarles cómo pueden utilizar la API de restOpenGov, haremos un ejemplo completo, paso a paso, en el cual desarrollaremos una aplicación mobile usando Play Framework 2.0 y Scala, para luego desplegarla en Openshift, la plataforma cloud-computing libre (y gratuita) de Red Hat.
+Para mostrarles cómo pueden utilizar la API de restOpenGov, haremos un ejemplo completo, paso a paso, en el cual desarrollaremos una aplicación mobile usando [Play Framework 2.0](http://www.playframework.org/) y Scala, para luego desplegarla en Openshift, la plataforma cloud-computing libre (y gratuita) de Red Hat.
+
+Pueden ver y probar la aplicación en [https://playdemo-rog.rhcloud.com/](https://playdemo-rog.rhcloud.com/)
+
 
 ## Instalación de Play Framework
 
@@ -22,7 +24,7 @@ Luego escriban
 
 ```
 play new playdemo
-`` 
+``` 
 
 Como nombre de aplicación ingresen 'playdemo' y elijan crear una aplicación simple con scala. Luego deben iniciar la aplicación:
 
@@ -34,11 +36,6 @@ play
 Con esa orden ingresarán a la consola de play.
 
 ```
-       _            _ 
- _ __ | | __ _ _  _| |
-| '_ \| |/ _' | || |_|
-|  __/|_|\____|\__ (_)
-|_|            |__/ 
              
 play! 2.0.1, http://www.playframework.org
 
@@ -54,14 +51,16 @@ Para iniciar la aplicación, desde la consola de play, escribimos "~ run"
 ``` 
 [playdemo] $ ~ run
 
-[info] Updating {file:/home/sas/dev/apps/tmp/playdemo/}playdemo...--- (Running the application from SBT, auto-reloading is enabled) ---
+[info] Updating {file:/home/sas/dev/apps/tmp/playdemo/}playdemo...
+
+--- (Running the application from SBT, auto-reloading is enabled) ---
 
 [info] play - Listening for HTTP on port 9000...
 
 (Server started, use Ctrl+D to stop and go back to the console...)
 ```
 
-Abran un explorador en 'http://localhost:9000/' y verán la página de bienvenida de Play Framework. En esta página nos dan una brevísima introducción al funcionamiento del framework, explicando cómo interactúan el archivo de rutas, los controladores y las vistas para mostrarnos la página de bienvenida.
+Abran un explorador en [http://localhost:9000/](http://localhost:9000/) y verán la página de bienvenida de Play Framework. En esta página nos dan una brevísima introducción al funcionamiento del framework, explicando cómo interactúan el archivo de rutas, los controladores y las vistas para mostrarnos la página de bienvenida.
 
 Desde cualquier editor de texto, abran el archivo 'app/views/index.scala.html' y cambien `@play20.welcome(message)` por algo como '¡Hola desde restOpenGov!'. Vuelvan al explorador y refrequen la página.
 
@@ -81,7 +80,7 @@ En nuestro archivo de rutas, especificaremos el parámetro que llegará a nuestr
 ```
 # Home page
 GET     /                           controllers.Application.index(q: String ?= "")
-`` 
+``` 
 
 Para acceder a la informacion precisaremos armar un url como el siguiente:
 
