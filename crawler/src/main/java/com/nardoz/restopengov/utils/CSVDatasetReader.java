@@ -1,6 +1,7 @@
 package com.nardoz.restopengov.utils;
 
 import au.com.bytecode.opencsv.CSVReader;
+import com.glaforge.i18n.io.SmartEncodingInputStream;
 import com.google.gson.Gson;
 import com.nardoz.restopengov.Crawler;
 import com.nardoz.restopengov.models.MetadataResource;
@@ -43,7 +44,9 @@ public class CSVDatasetReader implements IDatasetReader {
 
     public IDatasetReaderResult read(InputStream stream) throws Exception {
 
-        CSVReader reader = new CSVReader(new InputStreamReader(stream, getValidEncoding(resource.encoding)), separator);
+        SmartEncodingInputStream smart = new SmartEncodingInputStream(stream);
+
+        CSVReader reader = new CSVReader(new InputStreamReader(smart), separator);
 
         String[] keys = reader.readNext();
         String[] nextLine;
@@ -96,23 +99,6 @@ public class CSVDatasetReader implements IDatasetReader {
         Crawler.logger.debug("Detected separator: " + separator);
 
         return separator;
-    }
-
-    private String getValidEncoding(String encoding) {
-
-        String result = "UTF-8";
-
-        if(encoding != null) {
-
-            List<String> supportedEncodings = new ArrayList<String>();
-            supportedEncodings.add("UTF-8");
-
-            if(supportedEncodings.contains(encoding)) {
-                result = encoding;
-            }
-        }
-
-        return result;
     }
 
     private String buildJson(String[] keys, String[] dataLine) throws Exception {
