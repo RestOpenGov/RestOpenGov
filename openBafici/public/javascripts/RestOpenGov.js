@@ -2,7 +2,7 @@
 var RestOpenGov = function(args) {
 	
 	var defaultArgs = { 
-		entryPointURL: "http://zenithsistemas.com:9200/",
+		entryPointURL: "http://elastic.restopengov.org/",
 		dataSource: "gcba"
 	};
 
