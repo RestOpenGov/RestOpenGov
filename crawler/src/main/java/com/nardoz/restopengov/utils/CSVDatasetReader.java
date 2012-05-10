@@ -8,7 +8,9 @@ import com.nardoz.restopengov.models.MetadataResource;
 
 import java.io.*;
 import java.net.URL;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.regex.Pattern;
 
 public class CSVDatasetReader implements IDatasetReader {

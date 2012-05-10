@@ -38,10 +38,14 @@ public class ElasticDatasetReaderResult implements IDatasetReaderResult {
             onStart();
         }
 
-        bulkRequest.add(client.prepareIndex(index, resource.metadata_name, resource.id + "-" + id).setSource(json));
+        String resourceId = resource.url.substring(
+                resource.url.lastIndexOf('/') + 1, resource.url.lastIndexOf('.'))
+                + "-" + id;
+
+        bulkRequest.add(client.prepareIndex(index, resource.metadata_name, resourceId).setSource(json));
         itemCounter++;
 
-        Crawler.logger.debug("Adding item #" + itemCounter + ": " + index + "/" + resource.metadata_name + "/" + resource.id + "-" + id);
+        Crawler.logger.debug("Adding item #" + itemCounter + ": " + index + "/" + resource.metadata_name + "/" + resourceId);
     }
 
     @Override
