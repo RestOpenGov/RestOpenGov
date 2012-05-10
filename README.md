@@ -17,10 +17,11 @@ API java que brinda acceso programático a la información expuesta por el Gobie
 
 ## Aplicaciones de ejemplo
 
-#### [openBafici](https://openbafici-rog.rhcloud.com/) Una aplicación web mobile, desarrollada con restOpenGov, Play Framework 2.0 y Scala, desplegada en Openshift, para que puedas consultar toda la información del BAFICI desde tu celular. (fork me at [github](https://github.com/Nardoz/RestOpenGov/tree/master/openBafici))
+#### [openBafici](https://openbafici-rog.rhcloud.com/) 
+Una aplicación web mobile, desarrollada con restOpenGov, Play Framework 2.0 y Scala, desplegada en Openshift, para que puedas consultar toda la información del BAFICI desde tu celular. (fork me at [github](https://github.com/Nardoz/RestOpenGov/tree/master/openBafici))
 
-#### [play](https://playdemo-rog.rhcloud.com/) Tutorial paso a paso que que muestra cómo utilizar el servicio de restOpenGov, creando una aplicación Play 2.0 desde cero y poniéndola en línea en Openshift. Consultá el [tutorial](https://github.com/Nardoz/RestOpenGov/blob/master/playdemo/README.md)
-
+#### [play](https://playdemo-rog.rhcloud.com/) 
+Tutorial paso a paso que que muestra cómo utilizar el servicio de restOpenGov, creando una aplicación Play 2.0 desde cero y poniéndola en línea en Openshift. Consultá el [tutorial](https://github.com/Nardoz/RestOpenGov/blob/master/playdemo/README.md)
 
 #### [RestOpenGov.js](https://github.com/Nardoz/RestOpenGov/tree/master/RestOpenGov.js)
 Es un simple cliente de RestOpenGov escrito en Javascript. Permite explorar los datos y realizar búsquedas.
