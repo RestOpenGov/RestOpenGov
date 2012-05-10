@@ -28,6 +28,8 @@ Es un simple cliente de RestOpenGov escrito en Javascript. Permite explorar los 
 * Alan Reid ([@alan_reid](http://twitter.com/alan_reid))
 * Sebastián Scarano ([@develsas](http://twitter.com/develsas))
 * Marcos Della Pittima ([@mdellapittima](http://twitter.com/mdellapittima))
+* Pablo Paladino ([@palamago](http://twitter.com/palamago))
+* Walter J. Franck ([@wfranck](http://twitter.com/wfranck))
 
 ## Licencia
 Este software es distribuído bajo la licencia Apache 2.0: http://www.apache.org/licenses/LICENSE-2.0
