@@ -83,10 +83,11 @@
         </dependency>
 
         <dependency>
-            <groupId>org.codehaus.guessencoding</groupId>
-            <artifactId>guessencoding</artifactId>
-            <version>1.4</version>
+            <groupId>org.apache.tika</groupId>
+            <artifactId>tika</artifactId>
+            <version>0.3</version>
         </dependency>
+
 
     </dependencies>
 
