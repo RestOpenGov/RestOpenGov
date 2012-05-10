@@ -5,12 +5,12 @@ $(function() {
 
     if(typeof sessionStorage.getItem("imagesHtml") == 'undefined' || sessionStorage.getItem("imagesHtml") == null) {
 
-        opengov.search({ dataset: 'bafici', query: '', limit: 100 }, function(obj) {
+        opengov.search({ dataset: 'bafici', query: '_id:bafici11-films-* AND filepic1:* AND id_film:*', limit: 100 }, function(obj) {
+
             var html = '';
+            
             for(var i in obj) {
-                if(typeof obj[i]._source.filepic1 != "undefined" && obj[i]._source.filepic1.length > 0) {
-                    html += '<span><img src="http://www.bafici.gov.ar/home11/photobase/films/' + obj[i]._source.filepic1 + '" /></span>';
-                }
+                html += '<span><img src="http://www.bafici.gov.ar/home11/photobase/films/' + obj[i]._source.filepic1 + '" /></span>';
             }
 
             sessionStorage.setItem("imagesHtml", html);

@@ -17,7 +17,7 @@ object Films extends Controller {
   }
 
   def list(page: Long = 1, sort: String = "", filter: String = "") = Action {
-    val films = Film.findAll(page = page, size = FILMS_PAGE_LEN)
+    val films = Film.findAll(query = "_id:bafici12-films-*", page = page, size = FILMS_PAGE_LEN)
     Ok(views.html.list(page, sort, filter, films))
   }
 
