@@ -61,7 +61,7 @@
 			  </thead>
 			  <tbody>
 			  	@for(film:Film <- films){
-			  		<tr>
+			  		<tr class="filmItem">
 			  			<td class="titulo">@film.title</td>
 			  			<td><a href="@routes.Films.show(film.id)" class="btn btn-success pull-right">+ INFO</a></td>
 			  		</tr>	
