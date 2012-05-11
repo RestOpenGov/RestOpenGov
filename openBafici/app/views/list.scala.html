@@ -1,4 +1,12 @@
-@(page: Long = 1, sort: String = "", filter: String = "", films: Seq[Film] = Seq[Film]())
+@(
+	page: Long = 1, 
+	sort: String = "", 
+	filter: String = "", 
+	year: String = "2012", 
+	found: Long, 
+	total: Long, 
+	films: Seq[Film] = Seq[Film]()
+)
 
 @main("Open Bafici"){<p></p>}{
 
@@ -19,26 +27,36 @@
 		</div>
 		<div class="span12">
 			<div class="row-fluid">
-				<form class="form-search">
-					<input type="text" class="filterText search-query visible-desktop" style="width:80%" />
-					<input type="text" class="filterText search-query hidden-desktop" style="width:90%" />
-					 <p class="help-block">Busca por título, género, actor, etc.</p>
+
+				<form class="form-search" id="search">
+					<input type="text" value="@filter" class="filterText search-query visible-desktop" style="width:80%" />
+					<input type="text" value="@filter" class="filterText search-query hidden-desktop" style="width:90%" />
+					<p class="help-block">Busca por título, género, actor, etc.</p>
+
+					<p>
+					<input type="radio" name="year" value="2010" class="yearText" @(if(year=="2010") " checked")/>&nbsp;2010&nbsp;&nbsp;
+					<input type="radio" name="year" value="2011" class="yearText" @(if(year=="2011") " checked")/>&nbsp;2011&nbsp;&nbsp;
+					<input type="radio" name="year" value="2012" class="yearText" @(if(year=="2012") " checked")/>&nbsp;2012
+					</p>
+
+					<input type="submit" class="buscar btn btn-large visible-desktop" value="Buscar" />
+					<input type="submit" class="buscar btn btn-large hidden-desktop" value="Buscar" />
+
 				</form>
-				<a class="buscar btn btn-large visible-desktop">Buscar</a>
-				<a class="buscar btn btn-large hidden-desktop">Buscar</a>
+				
 			</div>
 		</div>
 	</div>
 	<div class="span3 hidden-phone hidden-tablet">
 		<div class="hero-unit">
-			<p>Buscando en más de ###.### de registros.</p>
+			<p>Buscando en más de @total películas.</p>
 		</div>
 	</div>
 </div>
   
 @if(films.size > 0) {
   
-  	@pager(page)
+  	@pager(page, found)
 
 	<div class="row-fluid">
 		<div class="span12">
@@ -51,7 +69,7 @@
 			  </thead>
 			  <tbody>
 			  	@for(film:Film <- films){
-			  		<tr>
+			  		<tr class="filmItem">
 			  			<td class="titulo">@film.title</td>
 			  			<td><a href="@routes.Films.show(film.id)" class="btn btn-success pull-right">+ INFO</a></td>
 			  		</tr>	
@@ -61,15 +79,13 @@
 	  	</div>
 	</div>
   
-@pager(page)
+@pager(page, found)
   
   }
 
-
-
 }
 
-@pager(page: Long) = {
+@pager(page: Long, found: Long) = {
 <hr/>
 <div class="row-fluid controls">
    <div class="span12">
@@ -96,7 +112,7 @@
 	     	<em>0 Elementos</em>
 	    }	
 	  } else {
-	     <em> @films.size Elementos</em>        
+	     <em> @films.size elementos de @found</em>        
 	}
 </div>
 <hr/>

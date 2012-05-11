@@ -6,6 +6,8 @@ import play.Play.application
 import play.api.libs.ws.WS
 import play.api.Logger
 
+import java.net.URLEncoder
+
 object Bafici {
 
   val fields: String = 
@@ -14,6 +16,8 @@ object Bafici {
     "name_en,name_es,description_en,description_es"
 
   val endpoint = isNull(application.configuration.getString("bafici.endpoint"), "")  
+
+  val defaultYear = isNull(application.configuration.getString("bafici.year"), "2012")
 
   private def getJson(url: String): JsValue = {
     Logger.info("about to run: '%s'".format(url))
@@ -24,21 +28,42 @@ object Bafici {
   // fj: b6f980d6-5070-48b7-aeea-41d945b34175-130
   // http://zenithsistemas.com:9200/gcba/bafici/b6f980d6-5070-48b7-aeea-41d945b34175-130
   def queryById(id: String): JsValue = {
-    val query = endpoint + id + "?fields=" + fields
-    getJson(query)
+    val url = endpoint + id + "?fields=" + fields
+    getJson(url)
   }
 
   // endpoint: bafici.endpoint="http://zenithsistemas.com:9200/gcba/bafici/"
   // http://zenithsistemas.com:9200/gcba/bafici/_search?q=synopsis_es:'buenos%20aires'&from=1&size=4&fields=title
-  def query(query: String = "", from: Long = 0, size: Int = 10): JsValue = {
+  def query(query: String = "", from: Long = 0, size: Int = 10, year: String = ""): JsValue = {
+
+    val q = buildQuery(query, year)
 
     val url = endpoint + "_search?" +
       "from=" + from + "&size=" + size + 
       "&fields=" + fields + 
-      (if (query != "") "&q=" + query else "")
+      (if (q != "") "&q=" + URLEncoder.encode(q, "UTF-8") else "")
 
     (getJson(url) \ "hits" \ "hits").as[JsValue]
 
+  }
+
+  def count(query: String = "", year: String = ""): Long = {
+    val q = buildQuery(query, year)
+
+    val url = endpoint + "_search?" +
+      "from=0&size=1" + 
+      "&fields=id" + fields + 
+      (if (q != "") "&q=" + URLEncoder.encode(q, "UTF-8") else "")
+
+    (getJson(url) \ "hits" \ "total").as[Long]
+  }
+
+  private def buildQuery(query: String = "", year: String = ""):String = {
+    "" + (
+      if (year!="") "_id:bafici%s-films-* AND ".format(year.takeRight(2)) else ""
+    ) + (
+      if (query!="") query  + " AND " else ""
+    ).stripSuffix(" AND ")
   }
 
 }
