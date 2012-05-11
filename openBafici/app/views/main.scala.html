@@ -56,7 +56,9 @@ $(document).ready(function(){
     $('.'+lang).addClass('activeLang');
   });
   
-  $(".buscar").on("click",function(e){
+  $("#search").on("submit",function(e){
+     e.preventDefault();
+
      var filter = $(".filterText").val();
      var page = 1;
      var sort = "";
