@@ -18,6 +18,7 @@ position:absolute; display:none; z-index:100; color:#FFF; text-align:center; top
 #intro .button { width:150px; height:60px; background-color:#FF0000; color:#FFF; border:1px solid #DDD; border-radius:7px }
 
 .filmItem {
+	cursor:pointer
 }
 
 .filmItem:hover {
@@ -59,3 +60,5 @@ td.titulo {
 	vertical-align:middel;
 	text-align:right;
 }
+	
+.buscar { margin:0 auto; width:40% !important }
