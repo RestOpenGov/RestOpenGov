@@ -19,18 +19,23 @@
 		</div>
 		<div class="span12">
 			<div class="row-fluid">
-				<form class="form-search">
+
+				<form class="form-search" id="search">
 					<input type="text" value="@filter" class="filterText search-query visible-desktop" style="width:80%" />
 					<input type="text" value="@filter" class="filterText search-query hidden-desktop" style="width:90%" />
 					<p class="help-block">Busca por título, género, actor, etc.</p>
 
+					<p>
 					<input type="radio" name="year" value="2010" class="yearText" @(if(year=="2010") " checked")/>&nbsp;2010&nbsp;&nbsp;
 					<input type="radio" name="year" value="2011" class="yearText" @(if(year=="2011") " checked")/>&nbsp;2011&nbsp;&nbsp;
 					<input type="radio" name="year" value="2012" class="yearText" @(if(year=="2012") " checked")/>&nbsp;2012
+					</p>
+
+					<input type="submit" class="buscar btn btn-large visible-desktop" value="Buscar" />
+					<input type="submit" class="buscar btn btn-large hidden-desktop" value="Buscar" />
 
 				</form>
-				<a class="buscar btn btn-large visible-desktop">Buscar</a>
-				<a class="buscar btn btn-large hidden-desktop">Buscar</a>
+				
 			</div>
 		</div>
 	</div>
