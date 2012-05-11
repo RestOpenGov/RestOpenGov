@@ -45,7 +45,7 @@ object Film {
   // ej: b6f980d6-5070-48b7-aeea-41d945b34175-96
   // fj: b6f980d6-5070-48b7-aeea-41d945b34175-130
   def findById(id: String): Option[Film] = {
-    return Bafici.queryById(id).asOpt[Film]
+    Bafici.queryById(id).asOpt[Film]
   }
 
   private def elasticQuery(q: String = ""): String = {
