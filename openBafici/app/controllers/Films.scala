@@ -18,7 +18,12 @@ object Films extends Controller {
 
   def list(page: Long = 1, sort: String = "", filter: String = "", year: String = "2012") = Action {
     val films = Film.findAll(query = filter, year = year, page = page, size = FILMS_PAGE_LEN)
-    Ok(views.html.list(page, sort, filter, year, films))
+    Ok(views.html.list(
+      page, sort, filter, year, 
+      Film.count(filter, year),     // found
+      Film.count(year=""),          // total
+      films)
+    )
   }
 
   def show(id: String) = Action {

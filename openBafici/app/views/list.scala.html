@@ -1,4 +1,12 @@
-@(page: Long = 1, sort: String = "", filter: String = "", year: String = "2012", films: Seq[Film] = Seq[Film]())
+@(
+	page: Long = 1, 
+	sort: String = "", 
+	filter: String = "", 
+	year: String = "2012", 
+	found: Long, 
+	total: Long, 
+	films: Seq[Film] = Seq[Film]()
+)
 
 @main("Open Bafici"){<p></p>}{
 
@@ -41,14 +49,14 @@
 	</div>
 	<div class="span3 hidden-phone hidden-tablet">
 		<div class="hero-unit">
-			<p>Buscando en más de ###.### de registros.</p>
+			<p>Buscando en más de @total películas.</p>
 		</div>
 	</div>
 </div>
   
 @if(films.size > 0) {
   
-  	@pager(page)
+  	@pager(page, found)
 
 	<div class="row-fluid">
 		<div class="span12">
@@ -71,13 +79,13 @@
 	  	</div>
 	</div>
   
-@pager(page)
+@pager(page, found)
   
   }
 
 }
 
-@pager(page: Long) = {
+@pager(page: Long, found: Long) = {
 <hr/>
 <div class="row-fluid controls">
    <div class="span12">
@@ -104,7 +112,7 @@
 	     	<em>0 Elementos</em>
 	    }	
 	  } else {
-	     <em> @films.size Elementos</em>        
+	     <em> @films.size elementos de @found</em>        
 	}
 </div>
 <hr/>
