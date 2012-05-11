@@ -47,6 +47,17 @@ object Bafici {
 
   }
 
+  def count(query: String = "", year: String = ""): Long = {
+    val q = buildQuery(query, year)
+
+    val url = endpoint + "_search?" +
+      "from=0&size=1" + 
+      "&fields=id" + fields + 
+      (if (q != "") "&q=" + URLEncoder.encode(q, "UTF-8") else "")
+
+    (getJson(url) \ "hits" \ "total").as[Long]
+  }
+
   private def buildQuery(query: String = "", year: String = ""):String = {
     "" + (
       if (year!="") "_id:bafici%s-films-* AND ".format(year.takeRight(2)) else ""
