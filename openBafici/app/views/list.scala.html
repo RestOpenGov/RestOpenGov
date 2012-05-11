@@ -1,4 +1,4 @@
-@(page: Long = 1, sort: String = "", filter: String = "", films: Seq[Film] = Seq[Film]())
+@(page: Long = 1, sort: String = "", filter: String = "", year: String = "2012", films: Seq[Film] = Seq[Film]())
 
 @main("Open Bafici"){<p></p>}{
 
@@ -22,7 +22,12 @@
 				<form class="form-search">
 					<input type="text" value="@filter" class="filterText search-query visible-desktop" style="width:80%" />
 					<input type="text" value="@filter" class="filterText search-query hidden-desktop" style="width:90%" />
-					 <p class="help-block">Busca por título, género, actor, etc.</p>
+					<p class="help-block">Busca por título, género, actor, etc.</p>
+
+					<input type="radio" name="year" value="2010" class="yearText" @(if(year=="2010") " checked")/>&nbsp;2010&nbsp;&nbsp;
+					<input type="radio" name="year" value="2011" class="yearText" @(if(year=="2011") " checked")/>&nbsp;2011&nbsp;&nbsp;
+					<input type="radio" name="year" value="2012" class="yearText" @(if(year=="2012") " checked")/>&nbsp;2012
+
 				</form>
 				<a class="buscar btn btn-large visible-desktop">Buscar</a>
 				<a class="buscar btn btn-large hidden-desktop">Buscar</a>
@@ -64,8 +69,6 @@
 @pager(page)
   
   }
-
-
 
 }
 

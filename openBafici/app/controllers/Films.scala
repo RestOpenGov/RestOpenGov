@@ -16,9 +16,9 @@ object Films extends Controller {
     Ok(views.html.index())
   }
 
-  def list(page: Long = 1, sort: String = "", filter: String = "") = Action {
-    val films = Film.findAll(query = filter, page = page, size = FILMS_PAGE_LEN)
-    Ok(views.html.list(page, sort, filter, films))
+  def list(page: Long = 1, sort: String = "", filter: String = "", year: String = "2012") = Action {
+    val films = Film.findAll(query = filter, year = year, page = page, size = FILMS_PAGE_LEN)
+    Ok(views.html.list(page, sort, filter, year, films))
   }
 
   def show(id: String) = Action {

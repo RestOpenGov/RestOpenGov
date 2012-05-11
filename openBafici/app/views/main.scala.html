@@ -60,7 +60,8 @@ $(document).ready(function(){
      var filter = $(".filterText").val();
      var page = 1;
      var sort = "";
-     var url = "/films?page="+page+"&sort="+sort+"&filter="+filter;
+     var year = $(".yearText:checked").val();
+     var url = "/films?page="+page+"&sort="+sort+"&filter="+filter+"&year="+year;
      
      window.location= url;
    });

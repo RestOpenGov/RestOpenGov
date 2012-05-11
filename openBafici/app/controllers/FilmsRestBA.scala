@@ -14,9 +14,9 @@ object FilmsRestBA extends Controller {
     Ok(views.html.index())
   }
 
-  def list(page: Long = 1, sort: String = "", filter: String = "") = Action {
+  def list(page: Long = 1, sort: String = "", filter: String = "", year: String = "") = Action {
 
-    Ok(views.html.list(page, sort, filter, Seq[Film]()))
+    Ok(views.html.list(page, sort, filter, year, Seq[Film]()))
     
     val client = new ar.com.restba.DefaultRestBAClient("http://zenithsistemas.com:9200")
     val connection = client.fetchConnectionRestBaAsJson(filter, page)
@@ -57,7 +57,7 @@ object FilmsRestBA extends Controller {
       
     }
         
-    Ok(views.html.list(page, sort, filter, l.asInstanceOf[Seq[Film]] ))
+    Ok(views.html.list(page, sort, filter, year, l.asInstanceOf[Seq[Film]] ))
   }
 
   def show(id: String) = Action {
