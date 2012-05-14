@@ -1,0 +1,84 @@
+@(title: String)(scoreBlock: Html)(content: Html)
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>@title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" /> 
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap-responsive.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+    <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <script src="@routes.Assets.at("javascripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("javascripts/bootstrap.min.js")" type="text/javascript"></script>
+  </head>
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <div class="row-fluid pagination-centered">
+            <a class="brand" href="@routes.Films.home()">Play Bafici</a>
+          </div>
+          <div class="row-fluid pagination-centered">
+            @scoreBlock
+          </div>
+        </div>
+      </div>
+    </div>
+	<div class="row-fluid visible-desktop" style="height:60px;">
+	</div>
+    <div class="container-fluid">
+    	 <div class="row-fluid">
+      		<div class="span1 visible-desktop"></div>	
+      			<div class="span10 pagination-centered">
+      				@content
+      			</div>
+    	 	<div class="span1"></div>
+    	 </div>
+    	 <hr/>   
+		<footer class="row-fluid">
+			<p class="pagination-centered">
+				<a href="https://github.com/PlayArgentina/openBafici" target="_blank">OpenBafici on GitHub</a>
+				 - 
+				<a href="https://github.com/Nardoz/RestOpenGov/wiki/Hackaton" target="_blank">RestOpenGov.org</a>
+			</p>
+		</footer>
+    </div> 
+  </body>
+</html>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+  window.scrollTo(0, 1);
+
+  $('#langSelector a').on("click",function(){
+    var lang = $(this).attr('rel');
+    $('#langSelector a').removeClass('active');
+    $(this).addClass('active');
+    
+    $('.activeLang').removeClass('activeLang');
+    $('.'+lang).addClass('activeLang');
+  });
+  
+  $('.filmItem').on('click', function() {
+    window.location.href = $('a', this).attr('href');
+  });
+
+  $("#search").on("submit",function(e){
+     e.preventDefault();
+
+     var filter = $(".filterText").val();
+     var page = 1;
+     var sort = "";
+     var year = $(".yearText:checked").val();
+     var url = "/films?page="+page+"&sort="+sort+"&filter="+filter+"&year="+year;
+     
+     window.location= url;
+   });
+}); 
+</script>

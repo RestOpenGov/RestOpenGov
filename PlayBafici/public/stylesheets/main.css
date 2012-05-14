@@ -1,0 +1,178 @@
+   body {
+      background: #009fd9 url(../images/flechita.png)  -30% top no-repeat !important;
+      color: #FFF !important;
+    }
+    
+    .quiz {
+      background: rgba(225,225,225,0.9);
+      border-radius: 4px;
+    }
+    
+    .quiz h3 {
+      color: #D43331;
+      text-align: center;
+      padding: 1.2em 0.7em;
+      border-bottom: rgba(46,119,147,0.2) 1px solid;
+      margin: 0;
+    }
+    
+    .quiz ul li {
+      color: #000;
+      list-style: none;
+      padding: 0.8em 2.2em;
+      border-bottom: rgba(46,119,147,0.2) 1px solid;
+      font-size: 18px;
+      background: url(../images/select_inactive.png) no-repeat 0.7em 15px;
+      position: relative;
+      cursor: pointer;
+    }
+    
+    
+    .quiz ul li.mal span {
+      background: url(../images/mal.png) no-repeat 0 0;
+      display: block;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      right: 0.8em;
+      top: 1em;
+    }
+    
+    .quiz ul li.bien span {
+      background: url(../images/check.png) no-repeat 0 0;
+      display: block;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      right: 0.8em;
+      top: 1em;
+     
+    }
+    
+    
+    
+    .quiz ul li.active {
+      background: url(../images/select_active.png) no-repeat 0.7em 15px rgba(225,225,225,0.8);
+      color: #2a9421;
+      font-weight: bold;
+    }
+    
+  .for-points {
+    position: relative;
+  }    
+    .for-points h2 {
+      background: #d43331;
+      padding: 0.3em;
+      margin: 0;
+      border-radius: 4px
+    }
+    
+    ul {
+      margin: 0!important;
+    }
+    ul .thumbnail {
+      border: 0 none;
+      padding: 0;
+      margin: 0.5em 0;
+    }
+    
+    ul .thumbnail img {
+      width: 100%;
+    }
+    .thumbnails > li {
+    float: none;
+    margin-bottom: 0;
+    margin-left: 0;
+    }
+    
+    h1 {
+      background: url(../images/logo.png) no-repeat top center;
+      text-indent: -999999px;
+      min-height: 90px;
+      margin-top: 0.3em;
+    }
+    .fork {
+      text-align: right;
+      font-weight: bold;
+      text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
+     
+      padding-top: 0.6em;
+    }
+    
+    .fork a {
+       color: #FFF;
+    }
+    .post-quiz {
+      padding: 1em;
+    }
+    .quiz button {
+      width: 100%;
+      font-weight: bold!important;
+      text-align: left;
+    }
+    
+    .help {
+      margin-top: 1em;
+      font-size: 16px;
+      color: #000;
+    
+    }
+    .help h4 {
+      font-weight: normal;
+      font-size: 16px;
+    }
+    .help strong {
+      color: #D43331;
+    }
+    
+    .pista {
+      font-weight: bold;
+      margin-top: 2em;
+      font-size: 12px;
+      
+    }
+    
+    .pista img {
+      float: left;
+      margin-right: 1em;
+    }
+    
+    .pista div {
+      margin-top: 1em;
+    }
+    
+    .for-points  h4{
+      text-align: right;
+    position: absolute;
+    right: 0.4em;
+    top: 0.4em;
+    line-height: 15px;
+    font-size: 28px;
+      }
+      
+      .for-points  h4 span {
+         display: block;
+         font-size: 13px;
+        }
+
+
+    #titleBafici{
+      position: relative;
+    text-align: center;
+    z-index: 100;
+    background-color:black;
+    padding:10px;
+    margin-top: 10px;
+    }
+
+
+    #next {
+      width: 100% !important;
+      display: block;
+      padding: 9px 0;
+      text-align: center;
+    }
+
+    #next:hover { text-decoration:none }
+
+      
