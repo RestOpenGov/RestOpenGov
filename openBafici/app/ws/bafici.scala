@@ -17,6 +17,8 @@ object Bafici {
 
   val endpoint = isNull(application.configuration.getString("bafici.endpoint"), "")  
 
+  val defaultYear = isNull(application.configuration.getString("bafici.year"), "2012")
+
   private def getJson(url: String): JsValue = {
     Logger.info("about to run: '%s'".format(url))
     WS.url(url).get().await.get.json
@@ -32,15 +34,36 @@ object Bafici {
 
   // endpoint: bafici.endpoint="http://zenithsistemas.com:9200/gcba/bafici/"
   // http://zenithsistemas.com:9200/gcba/bafici/_search?q=synopsis_es:'buenos%20aires'&from=1&size=4&fields=title
-  def query(query: String = "", from: Long = 0, size: Int = 10): JsValue = {
+  def query(query: String = "", from: Long = 0, size: Int = 10, year: String = ""): JsValue = {
+
+    val q = buildQuery(query, year)
 
     val url = endpoint + "_search?" +
       "from=" + from + "&size=" + size + 
       "&fields=" + fields + 
-      (if (query != "") "&q=" + URLEncoder.encode(query, "UTF-8") else "")
+      (if (q != "") "&q=" + URLEncoder.encode(q, "UTF-8") else "")
 
     (getJson(url) \ "hits" \ "hits").as[JsValue]
 
+  }
+
+  def count(query: String = "", year: String = ""): Long = {
+    val q = buildQuery(query, year)
+
+    val url = endpoint + "_search?" +
+      "from=0&size=1" + 
+      "&fields=id" + fields + 
+      (if (q != "") "&q=" + URLEncoder.encode(q, "UTF-8") else "")
+
+    (getJson(url) \ "hits" \ "total").as[Long]
+  }
+
+  private def buildQuery(query: String = "", year: String = ""):String = {
+    "" + (
+      if (year!="") "_id:bafici%s-films-* AND ".format(year.takeRight(2)) else ""
+    ) + (
+      if (query!="") query  + " AND " else ""
+    ).stripSuffix(" AND ")
   }
 
 }

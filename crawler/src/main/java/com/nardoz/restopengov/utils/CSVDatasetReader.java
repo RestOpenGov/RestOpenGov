@@ -1,8 +1,8 @@
 package com.nardoz.restopengov.utils;
 
 import au.com.bytecode.opencsv.CSVReader;
-import com.glaforge.i18n.io.SmartEncodingInputStream;
 import com.google.gson.Gson;
+import com.ibm.icu.text.CharsetDetector;
 import com.nardoz.restopengov.Crawler;
 import com.nardoz.restopengov.models.MetadataResource;
 
@@ -46,13 +46,13 @@ public class CSVDatasetReader implements IDatasetReader {
 
     public IDatasetReaderResult read(InputStream stream) throws Exception {
 
-        SmartEncodingInputStream smart = new SmartEncodingInputStream(stream);
+        CharsetDetector detector = new CharsetDetector();
+        detector.setText(new BufferedInputStream(stream));
 
-        CSVReader reader = new CSVReader(new InputStreamReader(smart), separator);
+        CSVReader reader = new CSVReader(detector.detect().getReader(), separator);
 
         String[] keys = reader.readNext();
         String[] nextLine;
-
 
         callback.onStart();
 

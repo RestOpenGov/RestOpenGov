@@ -10,7 +10,7 @@
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
     <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="@routes.Assets.at("javascripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
     <script src="@routes.Assets.at("javascripts/bootstrap.min.js")" type="text/javascript"></script>
   </head>
@@ -56,11 +56,18 @@ $(document).ready(function(){
     $('.'+lang).addClass('activeLang');
   });
   
-  $(".buscar").on("click",function(e){
+  $('.filmItem').on('click', function() {
+    window.location.href = $('a', this).attr('href');
+  });
+
+  $("#search").on("submit",function(e){
+     e.preventDefault();
+
      var filter = $(".filterText").val();
      var page = 1;
      var sort = "";
-     var url = "/films?page="+page+"&sort="+sort+"&filter="+filter;
+     var year = $(".yearText:checked").val();
+     var url = "/films?page="+page+"&sort="+sort+"&filter="+filter+"&year="+year;
      
      window.location= url;
    });
