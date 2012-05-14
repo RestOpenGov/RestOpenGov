@@ -1,0 +1,21 @@
+logs
+project/project
+project/target
+
+#target #commented for deploying to openshift
+
+tmp
+.history
+dist
+.classpath
+.project
+.settings
+
+#sublime files
+*.sublime*
+
+#idea
+.idea/
+openbafici.iml
+logs
+project
