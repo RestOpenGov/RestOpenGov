@@ -25,7 +25,7 @@ adentro del tag < repositories > poner:
 	
 	  <repository>
 	    <id>RestOpenGov</id>
-	    <url>http://maven.restopengov.org/nexus/content/repositories/RestOpenGov</url>
+	    <url>http://maven.melendez.com.ar:8081/nexus/content/repositories/RestOpenGov</url>
 	  </repository>
 	  
 <b>Si no queres usar maven</b> tambien te podes descargar la libreria con sus dependencias de github
