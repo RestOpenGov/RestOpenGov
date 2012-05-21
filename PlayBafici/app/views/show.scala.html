@@ -1,4 +1,6 @@
-@(film: Film, score: Int = 10, options: Seq[Film] = Seq[Film]())
+@(film: Film, score: Int = 0, options: Seq[Film] = Seq[Film]())
+
+@import helper.form
 
 @main("PlayBafici") {
 	
@@ -16,17 +18,20 @@
 
 	<hr/>
 
-    <div class="quiz">
-      <h3>¿Cómo se llama la película?</h3>
-      <ul>
-		@for(film:Film <- options){
-			@renderOption(film.id,film.title)
-		}
-      </ul>
-      <div class="post-quiz">
-			<a id="next" class="btn-large btw btn-danger disabled" style="display:none;width:100% !important;" href="javascript:;">Siguiente &rarr;</a>
-      </div>
+  <div class="quiz">
+    <h3>¿Cómo se llama la película?</h3>
+    <ul>
+	@for(film: Film <- options){
+		@renderOption(film.id,film.title)
+	}
+    </ul>
+    <div class="post-quiz">
+    <form action="@routes.Films.filmsForGame().url" method="post">
+  	  <input type="hidden" id="points" name="points" value="0"/>
+      <input type="submit" id="next" class="btn-large btw btn-danger disabled" style="display:none;width:100% !important;" href="javascript:;" value="Siguiente &rarr;" />
+    </form>
     </div>
+  </div>
 
 }
 
@@ -38,15 +43,15 @@
 	$('.option').bind('click',function(){
 		$('.option').unbind('click');
 		var correct = '@film.id';
-		var puntaje = 0;
+		var points = 0;
 		var msg = 'Incorrecto!';
 		
 		if($(this).attr('id')==correct){
-			puntaje = 10;
+			points = 10;
 			msg = 'Correcto!';
 		}
 
-		$('#score').html(parseInt($('#score').html()) + puntaje);
+		$('#score').html(parseInt($('#score').html()) + points);
 
 		$('.option').each(function(i,e){
 			if($(e).attr('id')==correct){
@@ -57,8 +62,7 @@
 		});
 
 		$('#msg').html(msg);
-		//$('#scoreValue').val(puntaje);
-		$('#next').attr('href','/game/'+puntaje)
+    $('#points').val(points);
 		$('#next').show();
 	});
 

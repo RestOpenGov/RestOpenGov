@@ -6,7 +6,15 @@ import play.api.mvc._
 import play.api.libs.ws.WS
 import play.api.libs.json.Json
 
+import play.api.data.Form
+import play.api.data.Forms.number
+import play.api.data.Forms.optional
+
 import models.Film
+
+import play.Logger
+
+import scala.util.Random
 
 object Films extends Controller {
 
@@ -16,25 +24,19 @@ object Films extends Controller {
     Ok(views.html.index())
   }
 
-  def filmsForGame(points: Int) = Action { request =>
+  def filmsForGame() = Action { implicit request =>
     
-    request.session.get("counter").map { counter =>  
-      val films = Film.findByRandom();
-      val index =  scala.util.Random.nextInt(films.size);
-      val winnerFilm = films(index);
+    val points = Form("points" -> optional(number)).bindFromRequest.get.getOrElse(0)
 
-      val sum = counter.toInt + points 
-      Ok(views.html.show(winnerFilm, sum, films)).withSession("counter" -> sum.toString) 
-    
-    }.getOrElse {
-      val films = Film.findByRandom();
-      val index =  scala.util.Random.nextInt(films.size);
-      val winnerFilm = films(index);
+    val score = request.session.get("score").map { score =>
+      score.toInt + points 
+    }.getOrElse(points)
 
-      Ok(views.html.show(winnerFilm, 0, films)).withSession(
-         "counter" -> "0"
-      )
-    }
+    val films = Film.findByRandom();
+    val winnerFilm = films(Random.nextInt(films.size));
+
+    Ok(views.html.show(winnerFilm, score, films)).withSession("score" -> score.toString) 
+
   }
 
 }

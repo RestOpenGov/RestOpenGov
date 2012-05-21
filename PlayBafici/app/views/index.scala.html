@@ -11,14 +11,14 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
     <script type="text/javascript" src="@routes.Assets.at("javascripts/RestOpenGov.js")"></script>
     <script type="text/javascript" src="@routes.Assets.at("javascripts/intro.js")"></script>
-    @analytics()
+    @tags.analytics()
 </head>
 <body id="intro">
     <div id="titleBafici">
         <h1>Play Bafici</h1>
         <p>Adiviná el título de las películas del Festival de Cine de Buenos Aires en tu celular</p>
-        <a href="@routes.Films.filmsForGame(0)" class="btn btn-large visible-desktop btn-warning">Jugar Ya!</a>
-        <a href="@routes.Films.filmsForGame(0)" class="btn btn-large hidden-desktop btn-warning">Jugar Ya!</a>
+        <a href="@routes.Films.filmsForGame()" class="btn btn-large visible-desktop btn-warning">Jugar Ya!</a>
+        <a href="@routes.Films.filmsForGame()" class="btn btn-large hidden-desktop btn-warning">Jugar Ya!</a>
     </div>
     <div id="screen" class="navbar-fixed-top"></div>
     <div id="container"></div>
