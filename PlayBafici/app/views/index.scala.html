@@ -1,7 +1,9 @@
+@()(implicit lang: Lang)
+
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-ar">
 <head>
-    <title>OpenBafici</title>
+    <title>PlayBafici</title>
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.css")">
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap-responsive.css")">
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
@@ -16,7 +18,12 @@
 <body id="intro">
     <div id="titleBafici">
         <h1>Play Bafici</h1>
-        <p>Adiviná el título de las películas del Festival de Cine de Buenos Aires en tu celular</p>
+        <p>@Messages("index.title")(Lang("es"))</p>
+        <p>@Messages("index.title")(Lang("es-ar"))</p>
+        <p>@Messages("index.title")(lang)</p>
+        <p>@Messages("index.title")</p>
+        <p>@lang.code, @lang.language, @lang.country</p>
+        <p>@lang</p>
         <a href="@routes.Films.filmsForGame()" class="btn btn-large visible-desktop btn-warning">Jugar Ya!</a>
         <a href="@routes.Films.filmsForGame()" class="btn btn-large hidden-desktop btn-warning">Jugar Ya!</a>
     </div>
