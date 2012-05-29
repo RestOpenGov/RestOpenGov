@@ -33,26 +33,32 @@ object Film {
   
   // endpoint: bafici.endpoint="http://zenithsistemas.com:9200/gcba/bafici/"
   // http://zenithsistemas.com:9200/gcba/bafici/_search?q=synopsis_es:'buenos%20aires'&from=1&size=4&fields=title
-  def findAll(query: String = "", year: String = Bafici.defaultYear, page: Long = 1, size: Int = 10): Seq[Film] = {
+  def findAll(filter: String = "", year: String = Bafici.defaultYear, page: Long = 1, size: Int = 10): Seq[Film] = {
     val from = ((page-1) * size)
-    Bafici.query(elasticQuery(query), from, size, year).as[Seq[Film]]
+    Bafici.query(elasticFilter(filter), from, size, year).as[Seq[Film]]
   }
 
-  def count(query: String = "", year: String = Bafici.defaultYear): Long = {
-    Bafici.count(elasticQuery(query), year)
+  def count(filter: String = "", year: String = Bafici.defaultYear): Long = {
+    Bafici.count(elasticFilter(filter), year)
   }
 
-  // ej: b6f980d6-5070-48b7-aeea-41d945b34175-96
-  // fj: b6f980d6-5070-48b7-aeea-41d945b34175-130
+  // ej: bafici12-films-2
+  // fj: bafici12-films-2
   def findById(id: String): Option[Film] = {
     Bafici.queryById(id).asOpt[Film]
   }
 
-  private def elasticQuery(q: String = ""): String = {
+  private def elasticFilter(q: String = ""): String = {
     "id_film:* AND title:* AND title_es:*" + (
       if (q!="") " AND (title:%q OR title_es:%q OR synopsis:%q OR synopsis_es:%q)".replaceAll("%q", q + "*") else ""
     )
+  }
 
+  /*
+  * get count films ramdomly
+  */
+  def findByRandom(count: Int = 3, year: String = Bafici.defaultYear): Seq[Film] = {
+    Bafici.queryByRandom(count, year).as[Seq[Film]]
   }
 
 }

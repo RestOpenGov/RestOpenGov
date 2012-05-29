@@ -4,11 +4,11 @@
 
 # Home page
 GET     /                   controllers.Films.home
-GET     /films              controllers.Films.list(page: Long ?= 1, sort: String ?= "", filter: String ?= "")
+GET     /films              controllers.Films.list(page: Long ?= 1, sort: String ?= "", filter: String ?= "", year: String ?= "2012")
 GET     /film/:id           controllers.Films.show(id: String)
 
 GET     /restba             controllers.FilmsRestBA.home
-GET     /restba/films       controllers.FilmsRestBA.list(page: Long ?= 1, sort: String ?= "", filter: String ?= "")
+GET     /restba/films       controllers.FilmsRestBA.list(page: Long ?= 1, sort: String ?= "", filter: String ?= "", year: String ?= "2012")
 GET     /restba/film/:id    controllers.FilmsRestBA.show(id: String)
 
 GET     /test               controllers.Films.test

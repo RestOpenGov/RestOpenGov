@@ -1,16 +1,18 @@
-@(title: String)(langSelector: Html)(content: Html)
+@(title: String)(scoreBlock: Html)(content: Html)
 
 <!DOCTYPE html>
 
 <html>
   <head>
-  <title>@title</title>
+    <title>@title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" /> 
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.css")">
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap-responsive.css")">
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
     <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <script src="@routes.Assets.at("javascripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
     <script src="@routes.Assets.at("javascripts/bootstrap.min.js")" type="text/javascript"></script>
   </head>
@@ -18,8 +20,12 @@
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container-fluid">
-          <a class="brand" href="@routes.Films.list()">Open Bafici</a>
-          @langSelector
+          <div class="row-fluid pagination-centered">
+            <a class="brand" href="@routes.Films.home()">Play Bafici</a>
+          </div>
+          <div class="row-fluid pagination-centered">
+            @scoreBlock
+          </div>
         </div>
       </div>
     </div>
@@ -47,6 +53,9 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+
+  window.scrollTo(0, 1);
+
   $('#langSelector a').on("click",function(){
     var lang = $(this).attr('rel');
     $('#langSelector a').removeClass('active');
