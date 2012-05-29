@@ -1,0 +1,91 @@
+#!/bin/bash
+
+# Creates a mongodb instance
+
+# Exit on any errors
+set -e
+
+function print_help {
+    echo "Usage: $0 app-name namespace uuid"
+
+    echo "$0 $@" | logger -p local0.notice -t stickshift_mongodb_configure
+    exit 1
+}
+
+while getopts 'd' OPTION
+do
+    case $OPTION in
+        d) set -x
+        ;;
+        ?) print_help
+        ;;
+    esac
+done
+
+
+[ $# -eq 3 ] || print_help
+
+source "/etc/stickshift/stickshift-node.conf"
+source ${CARTRIDGE_BASE_PATH}/abstract/info/lib/util
+CART_INFO_DIR=${CARTRIDGE_BASE_PATH}/embedded/elasticsearch-0.19.4/info
+
+app_type="elasticsearch-0.19.4"
+setup_embedded_configure "$1" $2 $3
+
+source ${CART_INFO_DIR}/lib/util
+
+ELASTICSEARCH_DIR="$APP_HOME/elasticsearch-0.19.4/"
+
+#
+# Detect IP
+. $APP_HOME/.env/OPENSHIFT_INTERNAL_IP
+IP=$OPENSHIFT_INTERNAL_IP
+
+#
+# Create the core of the application
+#
+client_result "nico - r = $ELASTICSEARCH_DIR "
+if [ -d "$ELASTICSEARCH_DIR" ]
+then
+    client_error "Embedded elastic search 0.19.4 is already attached to $application"
+    exit 132
+fi
+mkdir -p "$ELASTICSEARCH_DIR"
+pushd "$ELASTICSEARCH_DIR" > /dev/null
+mkdir -p logs work data conf pid
+sed "s,ELASTICSEARCH_CONF_PATH,$ELASTICSEARCH_DIR/conf," $CART_ETC_DIR/elasticsearch.yml > $ELASTICSEARCH_DIR/conf/elasticsearch.yml
+sed -i "s,ELASTICSEARCH_DATA_PATH,$ELASTICSEARCH_DIR/data," $ELASTICSEARCH_DIR/conf/elasticsearch.yml
+sed -i "s,ELASTICSEARCH_WORK_PATH,$ELASTICSEARCH_DIR/work," $ELASTICSEARCH_DIR/conf/elasticsearch.yml
+sed -i "s,ELASTICSEARCH_LOGS_PATH,$ELASTICSEARCH_DIR/logs," $ELASTICSEARCH_DIR/conf/elasticsearch.yml
+
+popd > /dev/null
+
+#
+# Create simple mongodb start / stop script
+#
+ln -s $CART_INFO_DIR/bin/elasticsearch_ctl.sh $ELASTICSEARCH_DIR/${application}_elasticsearch_ctl.sh
+
+#
+# Setup Permissions
+# 
+
+chmod +x "$ELASTICSEARCH_DIR/"*.sh || error "Failed to chmod new application scripts" 122
+chown $user_id.$group_id -R $ELASTICSEARCH_DIR/ || error "Failed to chown new application space.  Please contact support" 123
+# Secure script and root dir (so they can't chown the script"
+chown root.root "$ELASTICSEARCH_DIR" "$ELASTICSEARCH_DIR"/*.sh
+observe_setup_var_lib_dir "$ELASTICSEARCH_DIR"
+
+client_result "Trying to start elastic search"
+start_elasticsearch
+
+# Generate a password with no o's O's or 0's
+password=$(generate_password)
+
+#
+# Setup Environment Variables
+#
+#echo "export OPENSHIFT_NOSQL_DB_MONGODB_20_EMBEDDED_TYPE='mongodb-2.0'" > $APP_HOME/.env/OPENSHIFT_NOSQL_DB_MONGODB_20_EMBEDDED_TYPE
+
+
+client_result ""
+client_result "Elastic Search added.  Please make note of these credentials:"
