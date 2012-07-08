@@ -36,6 +36,12 @@ public class ResourceFetcher extends UntypedActor {
                 }
             }
 
+            getSelf().tell(resource.url);
+
+        } else if(message instanceof String) {
+
+            String url = (String) message;
+
             ElasticDatasetReaderResult callback = new ElasticDatasetReaderResult(resource, client);
 
             try {
@@ -50,6 +56,7 @@ public class ResourceFetcher extends UntypedActor {
                 Crawler.logger.error(e.getMessage());
                 e.printStackTrace();
             }
+
 
         } else {
             unhandled(message);

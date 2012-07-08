@@ -89,6 +89,8 @@ public class Crawler {
             List<String> list = new ArrayList<String>(Arrays.asList(args));
             list.remove(0);
             datasetListFetcher.tell(list);
+        } else if(args[0].equals("fetch-url") && args.length > 1) {
+            resourceFetcher.tell(args[1]);
         } else {
             System.out.println("Command not recognized");
             system.shutdown();

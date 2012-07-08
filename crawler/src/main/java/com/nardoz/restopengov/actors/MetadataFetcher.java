@@ -18,7 +18,7 @@ public class MetadataFetcher extends UntypedActor {
             ActorRef resourceFetcher = getContext().actorFor("/user/resourceFetcher");
             ActorRef zipResourceFetcher = getContext().actorFor("/user/zipResourceFetcher");
 
-            String url = ConfigFactory.load().getString("restopengov.dataset-list") + message;
+            String url = (String) message;
 
             try {
                 String response = new Resty().text(url).toString();

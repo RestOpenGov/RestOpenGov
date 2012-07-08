@@ -63,7 +63,8 @@ public class DatasetListFetcher extends UntypedActor {
             ActorRef metadataFetcher = getContext().actorFor("/user/metadataFetcher");
 
             for (String dataset : datasetList) {
-                metadataFetcher.tell(dataset, getSelf());
+                String url = ConfigFactory.load().getString("restopengov.dataset-list") + dataset;
+                metadataFetcher.tell(url, getSelf());
             }
 
             getContext().stop(getSelf());
