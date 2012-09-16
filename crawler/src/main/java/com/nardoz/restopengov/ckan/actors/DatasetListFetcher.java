@@ -1,4 +1,4 @@
-package com.nardoz.restopengov.actors;
+package com.nardoz.restopengov.ckan.actors;
 
 import akka.actor.ActorRef;
 import akka.actor.UntypedActor;
@@ -60,7 +60,7 @@ public class DatasetListFetcher extends UntypedActor {
 
             List<String> datasetList = (List<String>) message;
 
-            ActorRef metadataFetcher = getContext().actorFor("/user/metadataFetcher");
+            ActorRef metadataFetcher = getContext().actorFor("/user/ckanMetadataFetcher");
 
             for (String dataset : datasetList) {
                 String url = ConfigFactory.load().getString("restopengov.dataset-list") + dataset;

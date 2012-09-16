@@ -1,12 +1,12 @@
-package com.nardoz.restopengov.actors;
+package com.nardoz.restopengov.ckan.actors;
 
 import akka.actor.ActorRef;
 import akka.actor.UntypedActor;
 import com.nardoz.restopengov.Crawler;
-import com.nardoz.restopengov.models.MetadataResource;
-import com.nardoz.restopengov.utils.DatasetReader;
-import com.nardoz.restopengov.utils.ElasticDatasetReaderResult;
-import com.nardoz.restopengov.utils.IDatasetReader;
+import com.nardoz.restopengov.ckan.models.MetadataResource;
+import com.nardoz.restopengov.ckan.utils.DatasetReader;
+import com.nardoz.restopengov.ckan.utils.ElasticDatasetReaderResult;
+import com.nardoz.restopengov.ckan.utils.IResourceFormatReader;
 import com.typesafe.config.ConfigFactory;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.client.Client;
@@ -82,7 +82,7 @@ public class ZipResourceFetcher extends UntypedActor {
 
                     ElasticDatasetReaderResult callback = new ElasticDatasetReaderResult(resource, client);
 
-                    IDatasetReader datasetReader = DatasetReader.factory(resource, callback);
+                    IResourceFormatReader datasetReader = DatasetReader.read(resource, callback);
 
                     if(datasetReader != null) {
                         datasetReader.readFromFile("tmp/" + entry.getName());

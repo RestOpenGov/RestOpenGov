@@ -1,8 +1,10 @@
-package com.nardoz.restopengov.utils;
+package com.nardoz.restopengov.ckan.utils;
+
+import com.nardoz.restopengov.utils.ICSVFetcherResult;
 
 import java.util.ArrayList;
 import java.util.List;
-public class DatasetReaderResult implements IDatasetReaderResult {
+public class DatasetReaderResult implements ICSVFetcherResult {
 
     private List<String> jsonList = new ArrayList<String>();
 
@@ -10,17 +12,14 @@ public class DatasetReaderResult implements IDatasetReaderResult {
         return jsonList;
     }
 
-    @Override
     public void onStart() {
 
     }
 
-    @Override
     public void add(String id, String json) {
         jsonList.add(json);
     }
 
-    @Override
     public void onEnd() {
 
     }

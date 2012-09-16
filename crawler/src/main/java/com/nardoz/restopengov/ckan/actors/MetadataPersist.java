@@ -1,9 +1,9 @@
-package com.nardoz.restopengov.actors;
+package com.nardoz.restopengov.ckan.actors;
 
 import akka.actor.UntypedActor;
 import com.google.gson.Gson;
 import com.nardoz.restopengov.Crawler;
-import com.nardoz.restopengov.models.Metadata;
+import com.nardoz.restopengov.ckan.models.Metadata;
 import com.nardoz.restopengov.utils.DateChecker;
 import com.typesafe.config.ConfigFactory;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;

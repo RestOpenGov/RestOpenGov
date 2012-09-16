@@ -1,6 +1,7 @@
-package com.nardoz.restopengov.utils;
+package com.nardoz.restopengov.ckan.utils;
 
-import com.nardoz.restopengov.models.MetadataResource;
+import com.nardoz.restopengov.ckan.models.MetadataResource;
+import com.nardoz.restopengov.utils.ICSVFetcherResult;
 
 public class DatasetReader {
 
@@ -8,7 +9,7 @@ public class DatasetReader {
         "csv"
     };
 
-    public static IDatasetReader factory(MetadataResource resource, IDatasetReaderResult callback) throws Exception {
+    public static IResourceFormatReader read(MetadataResource resource, ICSVFetcherResult callback) throws Exception {
 
         if(resource.format.toLowerCase().matches("csv")) {
             return new CSVDatasetReader(resource, callback);

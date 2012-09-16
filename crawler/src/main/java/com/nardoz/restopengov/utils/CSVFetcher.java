@@ -1,10 +1,10 @@
 package com.nardoz.restopengov.utils;
 
+
 import au.com.bytecode.opencsv.CSVReader;
 import com.google.gson.Gson;
 import com.ibm.icu.text.CharsetDetector;
 import com.nardoz.restopengov.Crawler;
-import com.nardoz.restopengov.models.MetadataResource;
 
 import java.io.*;
 import java.net.URL;
@@ -13,43 +13,41 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
 
-public class CSVDatasetReader implements IDatasetReader {
+public class CSVFetcher implements IFormatReader {
 
-    private MetadataResource resource;
-    private IDatasetReaderResult callback;
+    private ICSVFetcherResult callback;
     private Gson gson = new Gson();
     private char separator = ',';
 
-    public CSVDatasetReader(MetadataResource resource) {
-        this(resource, new DatasetReaderResult());
+    public CSVFetcher() {
+
     }
 
-    public CSVDatasetReader(MetadataResource resource, IDatasetReaderResult callback) {
-        this.resource = resource;
+    public CSVFetcher(ICSVFetcherResult callback) {
         this.callback = callback;
     }
 
-    public IDatasetReaderResult readFromResourceURL() throws Exception {
+    public ICSVFetcherResult readFromURL(String sourceURL) throws Exception {
 
-        URL url = new URL(resource.url.replace("https", "http"));
+        URL url = new URL(sourceURL.replace("https", "http"));
         separator = detectSeparator(url.openStream());
 
         return read(url.openStream());
     }
 
-    public IDatasetReaderResult readFromFile(String path) throws Exception {
+    public ICSVFetcherResult readFromFile(String path) throws Exception {
 
         separator = detectSeparator(new FileInputStream(path));
 
         return read(new FileInputStream(path));
     }
 
-    public IDatasetReaderResult read(InputStream stream) throws Exception {
+    public ICSVFetcherResult read(InputStream stream) throws Exception {
 
         CharsetDetector detector = new CharsetDetector();
         detector.setText(new BufferedInputStream(stream));
 
-        CSVReader reader = new CSVReader(detector.detect().getReader(), separator);
+        CSVReader reader = new au.com.bytecode.opencsv.CSVReader(detector.detect().getReader(), separator);
 
         String[] keys = reader.readNext();
         String[] nextLine;
@@ -117,5 +115,6 @@ public class CSVDatasetReader implements IDatasetReader {
 
         return gson.toJson(result);
     }
+
 
 }

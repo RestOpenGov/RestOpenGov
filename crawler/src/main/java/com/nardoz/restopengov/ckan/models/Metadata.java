@@ -1,4 +1,4 @@
-package com.nardoz.restopengov.models;
+package com.nardoz.restopengov.ckan.models;
 
 import java.io.Serializable;
 import java.util.List;

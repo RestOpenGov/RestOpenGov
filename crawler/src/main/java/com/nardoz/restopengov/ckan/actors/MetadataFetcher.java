@@ -1,11 +1,10 @@
-package com.nardoz.restopengov.actors;
+package com.nardoz.restopengov.ckan.actors;
 
 import akka.actor.ActorRef;
 import akka.actor.UntypedActor;
 import com.google.gson.Gson;
-import com.nardoz.restopengov.models.Metadata;
-import com.nardoz.restopengov.models.MetadataResource;
-import com.typesafe.config.ConfigFactory;
+import com.nardoz.restopengov.ckan.models.Metadata;
+import com.nardoz.restopengov.ckan.models.MetadataResource;
 import us.monoid.web.Resty;
 
 public class MetadataFetcher extends UntypedActor {
