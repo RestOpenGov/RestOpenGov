@@ -22,24 +22,30 @@ Para crear el proyecto para Eclipse ejecutar ```mvn eclipse:eclipse``` o ```mvn 
 
 3. Correr Elasticsearch:
 ```
-../tools/elasticsearch-0.19.2/bin/elasticsearch
+../tools/elasticsearch-0.19.9/bin/elasticsearch
 ```
 
 4. Ejecutar el crawler:
 ```
-mvn exec:java -Dexec.args="fetch-all"
+mvn exec:java -Dexec.args="ckan fetch-all"
 ```
 
 5. Verlo en acción:
 Abrir un explorador y navegar a ```http://localhost:9200/_plugin/head/```.
 
 
-El crawler tiene 3 modos de ejecución por CLI:
+El crawler tiene dos modos de ejecución por CLI. Uno es para trabajar con CKAN y otro como standalone:
 
+CKAN:
 ```
-list
-fetch-all
-fetch <dataset1 dataset2 dataset3 ...>
+ckan list
+ckan fetch-all
+ckan fetch <dataset1 dataset2 dataset3 ...>
+```
+
+Standalone:
+```
+standalone fetch-url <url>
 ```
 
 ### Configuración
@@ -52,7 +58,7 @@ En lo que respecta al crawler, podemos definir el entrypoint (actualmente sólo 
 Por otro lado, se puede setear el nombre del índice que va a utilizar el crawler y la cantidad máxima de elementos a indexar enviados en un sólo bulk.
 ```
 restopengov {
-    dataset-list = "http://data.buenosaires.gob.ar/api/rest/dataset/"
+    ckan-rest-api = "http://data.buenosaires.gob.ar/api/rest/dataset/"
     index = "gcba"
     max-per-bulk = 500
 }
