@@ -47,7 +47,7 @@ public class CSVFetcher implements IFormatReader {
         CharsetDetector detector = new CharsetDetector();
         detector.setText(new BufferedInputStream(stream));
 
-        CSVReader reader = new au.com.bytecode.opencsv.CSVReader(detector.detect().getReader(), separator);
+        CSVReader reader = new CSVReader(detector.detect().getReader(), separator);
 
         String[] keys = reader.readNext();
         String[] nextLine;

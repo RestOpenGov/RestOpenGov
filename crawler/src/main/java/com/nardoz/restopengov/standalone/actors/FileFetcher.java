@@ -1,5 +1,6 @@
 package com.nardoz.restopengov.standalone.actors;
 
+import akka.actor.PoisonPill;
 import akka.actor.UntypedActor;
 import com.nardoz.restopengov.Crawler;
 import com.nardoz.restopengov.standalone.models.RemoteFile;
@@ -37,6 +38,8 @@ public class FileFetcher extends UntypedActor {
                 Crawler.logger.error(e.getMessage());
                 e.printStackTrace();
             }
+
+            getContext().system().shutdown();
 
         } else {
             unhandled(message);
