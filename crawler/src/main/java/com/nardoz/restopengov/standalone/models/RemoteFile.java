@@ -18,9 +18,11 @@ public class RemoteFile {
             e.printStackTrace();
         }
 
+        String[] tmp = url.split("\\.");
+
         type = this.url.getHost().replaceAll("\\.", "-");
         id = url.substring(url.lastIndexOf('/') + 1, url.lastIndexOf('.'));
-        format = url.split("\\.")[url.lastIndexOf('.')];
+        format = tmp[tmp.length - 1];
 
     }
 }

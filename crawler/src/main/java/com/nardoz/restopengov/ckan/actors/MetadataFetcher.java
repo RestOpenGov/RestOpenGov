@@ -13,9 +13,9 @@ public class MetadataFetcher extends UntypedActor {
 
         if(message instanceof String) {
 
-            ActorRef metadataPersist = getContext().actorFor("/user/metadataPersist");
-            ActorRef resourceFetcher = getContext().actorFor("/user/resourceFetcher");
-            ActorRef zipResourceFetcher = getContext().actorFor("/user/zipResourceFetcher");
+            ActorRef metadataPersist = getContext().actorFor("/user/ckanMetadataPersist");
+            ActorRef resourceFetcher = getContext().actorFor("/user/ckanResourceFetcher");
+            ActorRef zipResourceFetcher = getContext().actorFor("/user/ckanZipResourceFetcher");
 
             String url = (String) message;
 

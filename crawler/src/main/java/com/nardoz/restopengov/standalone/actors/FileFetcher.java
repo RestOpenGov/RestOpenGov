@@ -38,6 +38,8 @@ public class FileFetcher extends UntypedActor {
                 e.printStackTrace();
             }
 
+        } else {
+            unhandled(message);
         }
     }
 

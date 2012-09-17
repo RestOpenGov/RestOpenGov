@@ -22,7 +22,7 @@ public class DatasetListFetcher extends UntypedActor {
 
         if(message instanceof ListAll) {
 
-            final String url = ConfigFactory.load().getString("restopengov.dataset-list");
+            final String url = ConfigFactory.load().getString("restopengov.ckan-rest-api");
 
             try {
                 String response = new Resty().text(url).toString();
@@ -42,7 +42,7 @@ public class DatasetListFetcher extends UntypedActor {
 
         } else if(message instanceof FetchAll) {
 
-            final String url = ConfigFactory.load().getString("restopengov.dataset-list");
+            final String url = ConfigFactory.load().getString("restopengov.ckan-rest-api");
 
             try {
                 String response = new Resty().text(url).toString();
@@ -63,7 +63,7 @@ public class DatasetListFetcher extends UntypedActor {
             ActorRef metadataFetcher = getContext().actorFor("/user/ckanMetadataFetcher");
 
             for (String dataset : datasetList) {
-                String url = ConfigFactory.load().getString("restopengov.dataset-list") + dataset;
+                String url = ConfigFactory.load().getString("restopengov.ckan-rest-api") + dataset;
                 metadataFetcher.tell(url, getSelf());
             }
 
