@@ -26,7 +26,7 @@ public class FileReader {
         boolean result = false;
 
         for(String fmt : handledFormats) {
-            if(format == fmt) {
+            if(format.equals(fmt)) {
                 result = true;
                 break;
             }
