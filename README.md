@@ -17,7 +17,7 @@ API java que brinda acceso programático a la información expuesta por el Gobie
 
 ## Aplicaciones de ejemplo
 
-#### [RestOpenGov.js](https://github.com/Nardoz/RestOpenGov/tree/master/RestOpenGov.js)
+#### [RestOpenGov.js](https://github.com/RestOpenGov/RestOpenGov/tree/master/RestOpenGov.js)
 Es un simple cliente de RestOpenGov escrito en Javascript. Permite explorar los datos y realizar búsquedas.
 
 #### [openBafici](https://openbafici-rog.rhcloud.com/) 
@@ -28,9 +28,9 @@ Tutorial paso a paso que que muestra cómo utilizar el servicio de restOpenGov, 
 
 
 ## Comunidad
-* [Wiki](https://github.com/Nardoz/RestOpenGov/wiki)
+* [Wiki](https://github.com/RestOpenGov/RestOpenGov/wiki)
 * [Mailing List](http://groups.google.com/group/restopengov)
-* [Issue Tracking](https://github.com/Nardoz/RestOpenGov/issues)
+* [Issue Tracking](https://github.com/RestOpenGov/RestOpenGov/issues)
 * [Seguinos en twitter](https://twitter.com/#!/RestOpenGov)
 
 ## Autores
