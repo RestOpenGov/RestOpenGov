@@ -20,9 +20,14 @@ public class RemoteFile {
 
         String[] tmp = url.split("\\.");
 
-        type = this.url.getHost().replaceAll("\\.", "-");
-        id = url.substring(url.lastIndexOf('/') + 1, url.lastIndexOf('.'));
         format = tmp[tmp.length - 1];
+        id = url.substring(url.lastIndexOf('/') + 1, url.lastIndexOf('.'));
+
+        if(url.contains("file://")) {
+            type = id;
+        } else {
+            type = this.url.getHost().replaceAll("\\.", "-");
+        }
 
     }
 }
