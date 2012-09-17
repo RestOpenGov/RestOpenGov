@@ -1,6 +1,5 @@
 package com.nardoz.restopengov.standalone.actors;
 
-import akka.actor.PoisonPill;
 import akka.actor.UntypedActor;
 import com.nardoz.restopengov.Crawler;
 import com.nardoz.restopengov.standalone.models.RemoteFile;

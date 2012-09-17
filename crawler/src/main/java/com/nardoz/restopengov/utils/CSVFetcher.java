@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 
 public class CSVFetcher implements IFormatReader {
 
-    private ICSVFetcherResult callback;
+    protected ICSVFetcherResult callback;
     private Gson gson = new Gson();
     private char separator = ',';
 

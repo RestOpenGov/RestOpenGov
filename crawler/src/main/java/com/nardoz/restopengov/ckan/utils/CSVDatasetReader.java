@@ -8,7 +8,6 @@ import com.nardoz.restopengov.utils.IFormatReader;
 public class CSVDatasetReader extends CSVFetcher implements IFormatReader, IResourceFormatReader {
 
     private MetadataResource resource;
-    private ICSVFetcherResult callback;
 
     public CSVDatasetReader(MetadataResource resource) {
         this(resource, new DatasetReaderResult());

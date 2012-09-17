@@ -59,7 +59,8 @@ public class CkanActorHandler {
         else if(args[1].equals("fetch") && args.length > 2) {
             List<String> list = new ArrayList<String>(Arrays.asList(args));
             list.remove(0);
-            list.remove(1);
+            list.remove(0);
+
             datasetListFetcher.tell(list);
         }
         else {
