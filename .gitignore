@@ -20,3 +20,6 @@ logs/*
 *.iws
 *.iml
 
+# Crawler
+crawler/tmp/*
+tools/elasticsearch-0.19.9/data
