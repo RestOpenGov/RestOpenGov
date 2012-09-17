@@ -22,7 +22,7 @@ public class Crawler {
             System.out.println("USAGE: crawler [command] <args>");
             System.out.println("Available commands:\n");
             System.out.println("Standalone commands:");
-            System.out.println("standalone fetch-url <url>\n");
+            System.out.println("standalone fetch-url <url>  Fetches a single file\n");
             System.out.println("CKAN commands:");
             System.out.println("ckan list                   Lists all datasets");
             System.out.println("ckan fetch-all              Fetches all datasets");
