@@ -1,0 +1,19 @@
+fuente de datos:
+
+http://www.mecon.gov.ar/onp/html/
+
+visualizaciones a usar:
+
+http://philogb.github.com/jit/demos.html
+
+http://philogb.github.com/jit/static/v20/Jit/Examples/Sunburst/example2.html
+
+http://philogb.github.com/jit/static/v20/Jit/Examples/Treemap/example1.html
+
+http://philogb.github.com/jit/static/v20/Jit/Examples/Icicle/example1.html
+
+http://philogb.github.com/jit/static/v20/Jit/Examples/Icicle/example2.html
+
+http://philogb.github.com/jit/static/v20/Jit/Examples/Spacetree/example1.html
+
+
