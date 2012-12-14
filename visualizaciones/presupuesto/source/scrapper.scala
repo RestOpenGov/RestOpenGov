@@ -31,7 +31,9 @@ object Scrapper {
       }
     }
 
-    val out = rows.map(_.toCSV).mkString("\n")
+    val out = 
+      "cuenta,subcuenta,valor\n" +
+      rows.map(_.toCSV).mkString("\n")
 
     write("./" + serie + ".csv", out)
     
@@ -39,7 +41,7 @@ object Scrapper {
 
   case class Row(cuenta: String, subcuenta: String, valor: String) {
     def toCSV: String = {
-      "%s,%s,%s".format(cuenta, subcuenta, valor)
+      """"%s","%s","%s"""".format(cuenta, subcuenta, valor)
     }
   }
 
