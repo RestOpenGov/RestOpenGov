@@ -11,9 +11,10 @@ object Scrapper {
 
     val lines = fromFile("./" + serie + ".txt").mkString.lines.toList
 
-    val (nums1, texts1) = lines.partition( _.matches("""[0-9\ ,\.]+"""))
+    // separate cuentas and subcuentas from valores
+    val (nums1, texts1) = lines.partition { isNum _ }
 
-    // only keep first num
+    // only keep first value, get rid of the rest of the values
     val nums2 = nums1.map ( _.split(" ")(0))
 
     // drop firt element: Total gasto
