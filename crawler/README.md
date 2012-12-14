@@ -55,13 +55,27 @@ src/main/java/resources/application.conf
 ```
 
 En lo que respecta al crawler, podemos definir el entrypoint (actualmente sólo soporta uno) de la API REST de metadatos de CKAN (la que contiene el listado de datasets disponibles).
-Por otro lado, se puede setear el nombre del índice que va a utilizar el crawler y la cantidad máxima de elementos a indexar enviados en un sólo bulk.
+
+También se puede configurar cantidad máxima de elementos a indexar enviados en un sólo bulk.
+
 ```
 restopengov {
     ckan-rest-api = "http://data.buenosaires.gob.ar/api/rest/dataset/"
     index = "gcba"
     max-per-bulk = 500
 }
+```
+
+Por otro lado, se puede setear el nombre del índice que va a utilizar el crawler (en este ejemplo gcba), si bien actualmente el servicio no se encargará de crearlo automáticamente. La manera más fácil de hacerlo es siguiendo esta guía: http://www.elasticsearch.org/guide/reference/api/admin-indices-create-index.html
+
+```
+$ curl -XPUT 'http://localhost:9200/gcba/'
+
+$ curl -XPUT 'http://localhost:9200/gcba/' -d '
+index :
+    number_of_shards : 3
+    number_of_replicas : 2
+'
 ```
 
 Más detalles de cómo configurar Akka aquí:
