@@ -1,0 +1,87 @@
+presentacion de RestOpenGov
+
+Presentación 1: API vs DataSet
+
+1. ¿Qué es una api?
+- explicar la direferencia entre una interfaz de usuario y una API
+
+mostrar ejemplo de UI: http://mymemory.translated.net
+
+http://mymemory.translated.net/s.php?q=hello+friends&sl=Autodetect&tl=es-ES
+
+mostrar ejemplo de API
+
+http://mymemory.translated.net/api/get?q=Hello World!&langpair=en|es
+
+--
+
+2. ¿Qué es un dataset?
+- explicar la diferencia entre un dataset y un api
+
+cuadro mostrando las diferencias
+
+usar como ejemplo los datos del presupuesto
+
+--
+
+3. RestOpenGov
+
+intro: explicar por qué desarrollamos RestOpenGov
+
+http://prezi.com/ibkjbzreltte/rest-open-gov/
+
+(vamos a modificar la presentación para hacer más genérica)
+
+mostrar PlayBafici (una app)
+mostrar autoViz y presupuesto (visualizaciones)
+
+--
+
+4. ¿Y si no tenemos ni DataSet ni API? (scrapping)
+
+- mostrar "en vivo" como tomamos la data del presupuesto, la scrapeamos (para que vean que es una cagada hacerte hacer scrap), la metemos en RestOpenGov (eso ya lo tendriamos listo), y la consultamos con la interfase web de elastic y mediante el web service
+
+- scrapping: bajar los datos, transformarlos, guardarlos -> dataset
+- dataset, lo subimos a RestOpenGov -> api
+- api -> visualizacion
+
+- mostrar la visualizacion (oh!!!)
+
+- mostrar el web service: 
+
+ejemplo: evolución del gasto en 
+
+http://elastic.restopengov.org/apn/presupuesto/_search?q=subcuenta:técnica&sort=anio
+
+--
+
+5. Diferencia entre visualizaciones y aplicaciones
+
+distintos destinatarios: developers / periodistas
+todo llegan en definitiva al ciudadano (usuario final)
+
+ejemplo de aplicación: ideasBA
+
+mostramos una interacción con la aplicación:
+
+Ingresar idea:
+
+- Título: Wifi y parrilla libre para los participantes del foro
+
+- Texto: Wifi y parrilla libre en el edificio de Gestión Pública, en san martin y rivadavia, justo frente a la catedral...  
+
+mostrar la api de armadillo:
+
+- http://ideasba.org/api/categorize?input=Wifi y parrilla libre en el edificio de Gestión Pública, en san martin y rivadavia, justo frente a la catedral
+
+explicar que ideasBA consume a su vez la api de calles de gcba
+
+reforzar la diferencia entre DataSet y API
+
+6. Mostrar el mismo dataset de presupuesto funcionando en una máquina virtual en ckan
+
+mostrar la maquina andando
+el dataset
+el uso de la api
+
+-- FIN --
