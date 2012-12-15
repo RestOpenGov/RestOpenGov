@@ -4,10 +4,10 @@ object Scrapper {
 
   def main(args: Array[String]) = {
     println(args(0))
-    serieToCSV(args(0))
+    serieToCSV(args(0), args(1))
   }
 
-  def serieToCSV(serie: String): Unit = {
+  def serieToCSV(serie: String, anio: String): Unit = {
 
     val lines = fromFile("./" + serie + ".txt").mkString.lines.toList
 
@@ -28,21 +28,21 @@ object Scrapper {
       if (isLevel1(texts(index))) {
         cuenta = texts(index)
       } else {
-        rows = rows :+ Row(cuenta, texts(index), nums(index))
+        rows = rows :+ Row(anio, cuenta, texts(index), nums(index))
       }
     }
 
     val out = 
-      "cuenta,subcuenta,valor\n" +
+      "anio,cuenta,subcuenta,valor\n" +
       rows.map(_.toCSV).mkString("\n")
 
     write("./" + serie + ".csv", out)
     
   }
 
-  case class Row(cuenta: String, subcuenta: String, valor: String) {
+  case class Row(anio: String, cuenta: String, subcuenta: String, valor: String) {
     def toCSV: String = {
-      """"%s","%s","%s"""".format(cuenta, subcuenta, valor)
+      """"%s","%s","%s","%s"""".format(anio, cuenta, subcuenta, valor)
     }
   }
 
