@@ -4,6 +4,33 @@ http://www.mecon.gov.ar/onp/html/
 
 visualizaciones a usar:
 
+main
+
+reparto anio a anio por cuenta
+
+http://philogb.github.com/jit/static/v20/Jit/Examples/BarChart/example1.html
+
+
+
+
+navego todos los anios, luego por cuenta, y por subcuenta
+
+http://philogb.github.com/jit/static/v20/Jit/Examples/Icicle/example1.html#
+
+
+todos los anios (slice and dice)
+
+http://philogb.github.com/jit/static/v20/Jit/Examples/Treemap/example1.html#
+
+--
+
+composing visualizations: http://philogb.github.com/jit/static/v20/Jit/Examples/Other/example3.html
+
+!!
+
+--
+
+
 http://philogb.github.com/jit/demos.html
 
 http://philogb.github.com/jit/static/v20/Jit/Examples/Sunburst/example2.html
