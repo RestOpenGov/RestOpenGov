@@ -3,7 +3,7 @@ presentacion de RestOpenGov
 Presentación 1: API vs DataSet
 
 1. ¿Qué es una api?
-- explicar la direferencia entre una interfaz de usuario y una API
+- diferencia entre una interfaz de usuario y una API
 
 mostrar ejemplo de UI: http://mymemory.translated.net
 
