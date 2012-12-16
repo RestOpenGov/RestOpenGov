@@ -1,46 +1,50 @@
 
 var RestOpenGov = function(args) {
-	
-	var defaultArgs = { 
-		entryPointURL: "http://elastic.restopengov.org/",
-		dataSource: "gcba"
-	};
 
-	args = $.extend(defaultArgs, args); 
+  var defaultArgs = { 
+    entryPointURL: "http://elastic.restopengov.org/",
+    dataSource: "gcba"
+  };
 
-	var url = args.entryPointURL + args.dataSource;
+  args = $.extend(defaultArgs, args); 
 
-	this.search = function(params, callback) {
-	    
-	    var defaultParams = { 
-            dataset: 'metadata',
-            query: '*:*',
-    		limit: 100,
-    		from: 0
-    	};
+  var url = args.entryPointURL + args.dataSource;
 
-    	params = $.extend(defaultParams, params);
+  this.search = function(params, callback, context) {
 
-		if(params.query.length == 0) {
-			params.query = "*:*";
-		}
+    var defaultParams = { 
+      dataset: 'metadata',
+      query: '*:*',
+      limit: 100,
+      from: 0
+    };
 
-        $.getJSON(url + "/" + params.dataset + "/_search", { q: params.query, from: params.from, size: params.limit }, function(obj) {
-            var result = obj.hits.hits;
+    params = $.extend(defaultParams, params);
 
-            for(var i in result) {
-                result[i].resourceURL = url + "/" + params.dataset + "/" + result[i]._id;
-            }
+    if(params.query.length == 0) {
+      params.query = "*:*";
+    }
 
-            callback(result);
-        });
+    $.getJSON(url + "/" + params.dataset + "/_search", { q: params.query, from: params.from, size: params.limit }, function(obj) {
+      var result = obj.hits.hits;
 
-	};
+      for(var i in result) {
+        result[i].resourceURL = url + "/" + params.dataset + "/" + result[i]._id;
+      }
+
+      if (context) {
+        callback.call(context, result)
+      } else {
+        callback(result);
+      }
+    });
+
+  };
 
 };
 
 jQuery.extend({
-   postJSON: function( url, data, callback) {
-      return jQuery.post(url, data, callback, "json");
-   }
+  postJSON: function( url, data, callback) {
+    return jQuery.post(url, data, callback, "json");
+  }
 });
