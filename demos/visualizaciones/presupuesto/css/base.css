@@ -1,7 +1,7 @@
 #infovis {
     position:relative;
     /*width:100%; responsive*/ 
-    height:2000px;
+    height:500px;
     margin:auto;
     overflow:hidden;
 }
