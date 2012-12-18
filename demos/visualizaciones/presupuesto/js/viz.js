@@ -20,7 +20,7 @@ Viz.prototype = (function() {
         //whether to add animations
         animate: true,
         //horizontal or vertical barcharts
-        orientation: 'vertical',
+        orientation: 'horizontal',
         //bars separation
         barsOffset: 10,
         //visualization offset
