@@ -24,5 +24,8 @@ logs/*
 crawler/tmp/*
 tools/elasticsearch-0.19.9/data
 
+# Sublime files
+*.sublime*
+
 # do not commit certificates
 *.pem
