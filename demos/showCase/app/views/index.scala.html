@@ -2,17 +2,87 @@
 
 @main("Welcome to Play 2.0") {
 
-  <h1>Aplicaciones</h1>
+<div class="container">
+  <div class="content">
+    <div class="title">
+      <h1>Aplicaciones</h1>
+      <hr />
+    </div> 
+    <div class="data">
+      <div class="span5">
+        <strong>ideasBa</strong> 
+        <p>
+          IdeasBA es un sitio que permite a los ciudadanos compartir sus ideas, quejas, preguntas y propuestas para mejorar nuestra ciudad.
+        </p>
+        <p>
+          Ganadora de una <a href="http://digital.buenosaires.gob.ar/conoce-a-las-aplicaciones-ganadoras-de-buenos-aires-apps/">Mención especial en Buenos Aires Apps</a>.
+        </p>
 
-  <a href="http://ideasba.org">ideasBA</a><br />
-  <a href="http://playbafici.com.ar/">playBafici</a><br />
-  <a href="http://openbafici.com.ar/films">openBafici</a><br />
+          <a href="http://ideasba.org" class="btn btn-large btn-info">Ver Demo</a>
+        
+      </div>
+      <div class="span5">
+        <strong>playBafici</strong> 
+        <p>
+          Adiviná el título de las películas del Festival de Cine de Buenos Aires en tu celular.
+        </p>
+        <p>
+          Ganadora de una <a href="http://digital.buenosaires.gob.ar/restopengov-y-playbafici-mencion-especial-en-bahackaton/">Mención especial en #BAHACKATON</a>.
+        </p>
 
-  <a href="/restopengov.js/demos/index.html">javascript demo</a><br />
+        <a ref="http://playbafici.com.ar" class="btn btn-large btn-info">Ver Demo</a>
+      
+      </div>
+      <div class="clear"> </div>
+      <div class="span5">
+        <strong>openBafici</strong> 
+        <p>
+          Aplicación de ejemplo hecha con Play Framework para mostrar el uso de la API de RestOpenGov.
+        </p>
+        <a href="http://openbafici.com.ar/films"   class="btn btn-large btn-info">Ver Demo</a>
+        
+      </div>
+      <div class="span5">
+        <strong>javascript</strong> 
+        <p>
+          Aplicaciones de ejemplo hechas en javascript puro utilizando la API de RestOpenGov. Ni siquiera hace falta un servidor web para usarla.
+        </p>
+        <a href="/restopengov.js/demos/index.html"  class="btn btn-large btn-info">Ver Demo</a>
+      </div>
+   </div>
+  </div>
 
-  <h1>Visualizaciones</h1>
-
-  <a href="/presupuesto/index.html">presupuesto</a><br />
-  <a href="/autoViz/index.html">autoViz</a>
-
+  <div class="clear"> </div>
+  <div class="content">
+    <div class="title">
+      <h1>Visualizaciones</h1>
+      <hr /> 
+    </div>
+    <div class="data">
+      
+        <div class="span5">
+        <strong>presupuesto</strong> 
+        <p>
+          Visualización hecha sobre los datos estadísticos del presupuesto nacional del 2007 al 2011, accediendo a través de la API de RestOpenGov.
+        </p>
+        <a href="/presupuesto/index.html"  class="btn btn-large btn-info">Ver Demo</a>
+      </div>
+      <div class="span5">
+        <strong>autoViz</strong> 
+        <p>
+          Visualización de cantidad autos matriculados en Argentina utilizando la API de RestOpenGov.
+        </p>
+        <a href="/autoViz/index.html" class="btn btn-large btn-info">Ver Demo</a><br />
+      </div>
+    </div> 
+  </div>
+  
+</div>
+<div class="container content center"> 
+  <p class="source">
+      <a target="_blank" href="http://restopengov.org/">
+    <img src="http://restopengov.org/wp-content/uploads/2012/05/powered.png">
+    </a>
+  </p>
+  </div> 
 }
