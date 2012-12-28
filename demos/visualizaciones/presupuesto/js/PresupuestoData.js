@@ -55,6 +55,9 @@ var PresupuestoData = function(options) {
 
   this.processDataRing = function(data) {
     var temp = {},temp2 = [],json={};
+    var anio;
+// console.log();
+
     $(data).each(function(i,e){
 
         //cuenta
@@ -64,7 +67,7 @@ var PresupuestoData = function(options) {
                 id:e._source.cuenta,
                 name:e._source.cuenta,
                 data:{
-                   "$color": "#EED0B0", 
+                   "$color": '#'+Math.floor(Math.random()*16777215).toString(16), 
                    "$angularWidth": 50000, 
                    "size": 0.0
                 },
@@ -78,7 +81,7 @@ var PresupuestoData = function(options) {
                 id:e._source.subcuenta,
                 name:e._source.subcuenta,
                 data:{
-                   "$color": "#AEA9F8", 
+                   "$color": temp[e._source.cuenta].data['$color'], 
                    "$angularWidth": e._source.valor.replace(".","").replace(",",""), 
                    "size": parseFloat(e._source.valor.replace(".","").replace(",","."))
                 }
