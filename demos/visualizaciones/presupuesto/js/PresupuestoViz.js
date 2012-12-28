@@ -5,6 +5,7 @@ var PresupuestoViz = function(options) {
 
   this.retrieveByAnio = function() {
     this.conn.search({}, function(data){
+          console.log(data);
       this._dispatchEvent(this._dataByAnio(data), 'retrieveByAnioComplete');
     }, this);
   }

@@ -58,13 +58,41 @@
     </div>
 
     <div class="container">
-      <p>Explicar el proceso que hicimos para obtener la data y luego los links a los ejemplos:</p>
-        <ul>
-          <li><a href="bars.html">Gráfico de Barras</a></li>
-          <li><a href="ring.html">Gráfico de Anillos</a></li> 
-        </ul>
+      <div id="loaderContainer">
+        <!-- loader here! -->
+      </div>
     </div>
 
-  
+    <div class="container">
+        <p id="legendContainer" style="text-align:center;">
+          <!-- legends here! -->
+        </p>
+    </div>
+
+    <div id="infoContainer" class="container" style="display:none;">
+      <div id="infovis-ring"></div>
+    </div>
+
+    <div class="container well" style="text-align: center;">
+      <p class="source">Fuente: <a target="_blank" href="http://www.mecon.gov.ar/onp/html/">MECON - Secretaría de Hacienda - Oficina Nacional de Presupuesto</a>. Código en <a target="_blank" href="https://github.com/RestOpenGov/RestOpenGov/tree/master/visualizaciones/presupuesto">Github</a></p>
+      <p class="source"><a href="http://restopengov.org/" target="_blank"><img src="http://restopengov.org/wp-content/uploads/2012/05/powered.png" /></a></p>
+    </div>
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/lib/jquery-1.8.0.min.js"></script>
+    <script src="js/lib/lodash.min.js"></script>
+    <script src="js/lib/jit.min.js"></script>
+    <script src="js/lib/bootstrap.min.js"></script>
+    <script src="js/lib/numeral.min.js"></script>
+
+    <script src="js/RestOpenGov.js"></script>
+    <script src="js/PresupuestoData.js"></script>
+    <script src="js/PresupuestoVizRing.js"></script>
+
+    <script src="js/vizRing.js"></script>
+    <script src="js/loader.js"></script>
+
+    <script src="js/mainRing.js"></script>
   </body>
 </html>

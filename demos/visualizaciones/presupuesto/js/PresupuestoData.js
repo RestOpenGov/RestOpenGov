@@ -34,7 +34,17 @@ var PresupuestoData = function(options) {
     if (query!='') searchParams.query = query.substring(5);
 
     this.restOpenGov.search(searchParams, function(rawData) {
-      var data = this.processData(rawData);
+      var data;
+
+      switch(searchParams.graph){
+        case 'ring':
+          data = this.processDataRing(rawData);
+        break;
+        default:
+          data = this.processData(rawData);
+        break;
+      }
+
       if (context) {
         callback.call(context, data);
       } else {
@@ -42,6 +52,59 @@ var PresupuestoData = function(options) {
       }
     }, this);
   };
+
+  this.processDataRing = function(data) {
+    var temp = {},temp2 = [],json={};
+    var anio;
+    $(data).each(function(i,e){
+        //cuenta
+        if(!temp[e._source.cuenta]){
+            anio = e._source.anio;
+            temp[e._source.cuenta] = {
+                id:e._source.cuenta,
+                name:e._source.cuenta,
+                total:0.0,
+                data:{
+                   "description": "test", 
+                   "$color": "#EED0B0", 
+                   "days": 1, 
+                   "$angularWidth": 1000, 
+                   "size": 186221
+                },
+                children : []
+            }       
+        }
+        
+        temp[e._source.cuenta].total += parseFloat(e._source.valor.replace(".","").replace(",","."));
+        
+        var c = {
+                id:e._source.subcuenta,
+                name:e._source.subcuenta,
+                total: parseFloat(e._source.valor.replace(".","").replace(",",".")),
+                data:{
+                   "description": "test", 
+                   "$color": "#AEA9F8", 
+                   "days": 1, 
+                   "$angularWidth": 20, 
+                   "size": 300
+                }
+        };
+        temp[e._source.cuenta].children.push(c);        
+             
+    });
+        
+    $.each(temp, function(key, value) { 
+      temp2.push(value);
+    });
+        
+    json = {
+            id:anio,
+            name:anio,
+            children : temp2                   
+    };      
+
+    return json;
+  }
 
   // procesa la informacion "cruda" de RestOpenGov
   // y retorna la informacion del presupuesto segun la siguiente estructura:

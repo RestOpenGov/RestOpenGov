@@ -12,9 +12,11 @@ Loader.prototype = (function() {
     constructor: Loader,
     open: function() {
       $('#loaderContainer').html(loaderHtml);
+      $('#legendContainer').html('Buscando información para generar el gráfico.');
     },
     close: function() {
       $('#loaderContainer').html('');
+      $('#legendContainer').html('');
     }
   };
 })();

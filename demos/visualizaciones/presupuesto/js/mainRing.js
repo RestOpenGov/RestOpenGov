@@ -37,11 +37,12 @@ jQuery(document).ready(function(){
     LOADER.open();
 
     anio = $('#anio').val();
-    marca = $('#marca').val();
+
+    anio = '2011';
 
     //Listener to retrieve Async info
     $(presupuestoViz).on('retrieveByAnioComplete', renderByAnio);
-    presupuestoViz.retrieveByAnio();
+    presupuestoViz.retrieveByAnio(anio);
   }
 
   //load complete callback
