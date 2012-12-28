@@ -55,38 +55,32 @@ var PresupuestoData = function(options) {
 
   this.processDataRing = function(data) {
     var temp = {},temp2 = [],json={};
-    var anio;
     $(data).each(function(i,e){
+
         //cuenta
         if(!temp[e._source.cuenta]){
             anio = e._source.anio;
             temp[e._source.cuenta] = {
                 id:e._source.cuenta,
                 name:e._source.cuenta,
-                total:0.0,
                 data:{
-                   "description": "test", 
                    "$color": "#EED0B0", 
-                   "days": 1, 
-                   "$angularWidth": 1000, 
-                   "size": 186221
+                   "$angularWidth": 50000, 
+                   "size": 0.0
                 },
                 children : []
             }       
         }
         
-        temp[e._source.cuenta].total += parseFloat(e._source.valor.replace(".","").replace(",","."));
-        
+        temp[e._source.cuenta].data.size += parseFloat(e._source.valor.replace(".","").replace(",","."));
+
         var c = {
                 id:e._source.subcuenta,
                 name:e._source.subcuenta,
-                total: parseFloat(e._source.valor.replace(".","").replace(",",".")),
                 data:{
-                   "description": "test", 
                    "$color": "#AEA9F8", 
-                   "days": 1, 
-                   "$angularWidth": 20, 
-                   "size": 300
+                   "$angularWidth": e._source.valor.replace(".","").replace(",",""), 
+                   "size": parseFloat(e._source.valor.replace(".","").replace(",","."))
                 }
         };
         temp[e._source.cuenta].children.push(c);        

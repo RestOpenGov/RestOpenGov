@@ -47,11 +47,9 @@ Viz.prototype = (function() {
             onShow: function(tip, node) {
               var html = "<div class=\"tip-title\">" + node.name + "</div>"; 
               var data = node.data;
-              if("days" in data) {
-                html += "<b>Last modified:</b> " + data.days + " days ago";
-              }
+
               if("size" in data) {
-                html += "<br /><b>File size:</b> " + Math.round(data.size / 1024) + "KB";
+                html += "<b>Presupuesto:</b> $ " + parseFloat(data.size).toFixed(2);
               }
               tip.innerHTML = html;
             }
@@ -64,16 +62,10 @@ Viz.prototype = (function() {
               //Build detailed information about the file/folder
               //and place it in the right column.
               var html = "<h4>" + node.name + "</h4>", data = node.data;
-              if("days" in data) {
-                html += "<b>Last modified:</b> " + data.days + " days ago";
-              }
               if("size" in data) {
-                html += "<br /><br /><b>File size:</b> " + Math.round(data.size / 1024) + "KB";
+                html += "<b>Presupuesto:</b> $ " + parseFloat(data.size).toFixed(2);
               }
-              if("description" in data) {
-                html += "<br /><br /><b>Last commit was:</b><br /><pre>" + data.description + "</pre>";
-              }
-              //$jit.id('inner-details').innerHTML = html;
+              $jit.id('inner-details').innerHTML = html;
               //hide tip
               _ringChart.tips.hide();
               //rotate
