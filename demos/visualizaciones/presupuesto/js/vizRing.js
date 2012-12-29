@@ -25,6 +25,7 @@ Viz.prototype = (function() {
             overridable: true,
             type: useGradients? 'gradient-multipie' : 'multipie'
           },
+          interpolation:'polar',
           //Select canvas labels
           //'HTML', 'SVG' and 'Native' are possible options
           Label: {
@@ -45,12 +46,13 @@ Viz.prototype = (function() {
           Tips: {
             enable: true,
             onShow: function(tip, node) {
-              var html = "<div class=\"tip-title\">" + node.name + "</div>"; 
+              var html = "<div class='tip-custom'><div class=\"tip-title\">" + node.name + "</div>"; 
               var data = node.data;
 
               if("size" in data) {
                 html += "<b>Presupuesto:</b> $ " + parseFloat(data.size).toFixed(2);
               }
+              html += '</div>';
               tip.innerHTML = html;
             }
           },
@@ -61,10 +63,19 @@ Viz.prototype = (function() {
               if(!node) return;
               //Build detailed information about the file/folder
               //and place it in the right column.
-              var html = "<h4>" + node.name + "</h4>", data = node.data;
+              var html = "<h4>" 
+
+              if("$color" in node.styles) {
+                html +='<div class=\'query-color\' style=\'background-color:'
+                + node.styles['$color'] +'\'>&nbsp;</div>';
+              }
+
+              html+= node.name + "</h4>", data = node.data;
+
               if("size" in data) {
                 html += "<b>Presupuesto:</b> $ " + parseFloat(data.size).toFixed(2);
               }
+
               $jit.id('inner-details').innerHTML = html;
               //hide tip
               _ringChart.tips.hide();

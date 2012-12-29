@@ -23,22 +23,32 @@ jQuery(document).ready(function(){
       VIZ = new Viz(),
       initialized = false;
 
-  $("#form").submit(function(e) {
+  $("#anio-selector").on('change',function(e) {
     initLoad();
-    e.preventDefault();
-    return false;
   });
 
+  var legendContainer = $('#labelContainer');
+  var listItems = [];
+
+  $.each(presupuestoViz.conn.COLORS,function(i,e){
+
+      listItems.push('<div class=\'query-color\' style=\'background-color:'
+      + e +'\'>&nbsp;</div>' + i); 
+  });
+  legendContainer.html('<li>' + listItems.join('</li><li>') + '</li>');
+
   function initLoad() {
+
+    $('#infovis-ring').html('');
 
     $('#infoContainer').show();
 
     //loader on
     LOADER.open();
 
-    anio = $('#anio').val();
+    anio = $('#anio-selector').val();
 
-    anio = '2011';
+    //anio = '2011';
 
     //Listener to retrieve Async info
     $(presupuestoViz).on('retrieveByAnioComplete', renderByAnio);

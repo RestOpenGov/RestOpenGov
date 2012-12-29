@@ -11,6 +11,14 @@ var PresupuestoData = function(options) {
 
   this.restOpenGov = new RestOpenGov(this.config);
 
+  this.COLORS = {
+        '1 - ADMINISTRACION GUBERNAMENTAL' : '#e60042',
+        '2 - SERVICIOS DE DEFENSA Y SEGURIDAD':'#ff7600',
+        '3 - SERVICIOS SOCIALES':'#62e200',
+        '4 - SERVICIOS ECONOMICOS':'#7309aa',
+        '5 - DEUDA PUBLICA':'#ffddee'
+      };
+
   this.search = function(options, callback, context) {
 
     var defaultOptions = {
@@ -56,7 +64,7 @@ var PresupuestoData = function(options) {
   this.processDataRing = function(data) {
     var temp = {},temp2 = [],json={};
     var anio;
-// console.log();
+    var instance = this;
 
     $(data).each(function(i,e){
 
@@ -67,8 +75,8 @@ var PresupuestoData = function(options) {
                 id:e._source.cuenta,
                 name:e._source.cuenta,
                 data:{
-                   "$color": '#'+Math.floor(Math.random()*16777215).toString(16), 
-                   "$angularWidth": 50000, 
+                   "$color": instance.COLORS[e._source.cuenta], 
+                   "$angularWidth": 0, 
                    "size": 0.0
                 },
                 children : []
@@ -77,6 +85,8 @@ var PresupuestoData = function(options) {
         
         temp[e._source.cuenta].data.size += parseFloat(e._source.valor.replace(".","").replace(",","."));
 
+        temp[e._source.cuenta].data['$angularWidth'] += parseFloat(e._source.valor.replace(".","").replace(",","."));
+        
         var c = {
                 id:e._source.subcuenta,
                 name:e._source.subcuenta,

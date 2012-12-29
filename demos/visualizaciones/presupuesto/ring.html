@@ -58,24 +58,47 @@
     </div>
 
     <div class="container">
-      <div id="loaderContainer">
-        <!-- loader here! -->
-      </div>
+
+        <div class="container span4">
+            <label>Seleccione un año para ver visualización</label>
+            <select id="anio-selector">
+              <option value='2011'>2011</option>
+              <option value='2010'>2010</option>  
+              <option value='2009'>2009</option>
+              <option value='2008'>2008</option>
+              <option value='2007'>2007</option>                  
+            </select>
+          </form>
+        </div>
+
+        <div class="container span4">
+          <div id="labelContainer">
+            <!-- loader here! -->
+          </div>
+        </div>
+
+        <div class="span3">
+          <p>Detalle:</p>
+          <div id="inner-details">
+          </div>
+        </div>
+
     </div>
 
     <div class="container">
-        <p id="legendContainer" style="text-align:center;">
+      <div id="loaderContainer">
+        <!-- loader here! -->
+      </div>
+      <p id="legendContainer" style="text-align:center;">
           <!-- legends here! -->
-        </p>
+      </p>
     </div>
 
     <div id="infoContainer" class="container" style="display:none;">
       <div id="infovis-ring"></div>
     </div>
 
-    <div id="inner-details" style="position:absolute;top:50px;right:0px;">
 
-    </div>
 
     <div class="container well" style="text-align: center;">
       <p class="source">Fuente: <a target="_blank" href="http://www.mecon.gov.ar/onp/html/">MECON - Secretaría de Hacienda - Oficina Nacional de Presupuesto</a>. Código en <a target="_blank" href="https://github.com/RestOpenGov/RestOpenGov/tree/master/visualizaciones/presupuesto">Github</a></p>
