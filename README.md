@@ -27,7 +27,7 @@ Una aplicación web mobile, desarrollada con restOpenGov, Play Framework 2.0 y S
 Tutorial paso a paso que que muestra cómo utilizar el servicio de restOpenGov, creando una aplicación Play 2.0 desde cero y poniéndola en línea en Openshift. Consultá el [tutorial](https://github.com/Nardoz/RestOpenGov/blob/master/playdemo/README.md)
 
 ## Primeros pasos
-Para comenzar a utilizar una instalación de RestOpenGov hemos preparado [este tutorial](https://github.com/RestOpenGov/RestOpenGov/wiki/Hackaton).
+Para comenzar a utilizar una instalación de RestOpenGov hemos preparado [este tutorial](https://github.com/RestOpenGov/RestOpenGov/wiki/Primeros-pasos).
 
 ## Comunidad
 * [Wiki](https://github.com/RestOpenGov/RestOpenGov/wiki)
