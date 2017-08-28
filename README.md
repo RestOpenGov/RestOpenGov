@@ -1,3 +1,5 @@
+Atención: El proyecto se encuentra deprecado. Consultas al slack de #nardoz http://www.nardoz.com/
+
 RestOpenGov
 ===========
 
